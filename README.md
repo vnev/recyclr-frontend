@@ -1,6 +1,6 @@
 ## recyclr frontend
 
-Backend Project for **CS 407 Fall 2018**
+Frontend Project for **CS 407 Fall 2018**
 
 
 ### Members
