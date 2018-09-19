@@ -1,9 +1,16 @@
 import React from 'react';
 import Navigation from './Navigation.jsx';
+import AuthPage from './Authentication.jsx';
+import {Switch} from 'react-router-dom';
+import createBrowserHistorty from 'history/createBrowserHistory';
+import {Route, Router, browserHistory} from 'react-router';
 
+const history = createBrowserHistorty();
 export default class App extends React.Component {
   render() {
     return (
+      <Router history={history}>
+        <div>
       <div className="container-fluid">
         <div className="row">
           <div className="col">
@@ -12,11 +19,17 @@ export default class App extends React.Component {
         </div>
         <div className="row">
           <div className="col">
-            <h5>Time to <a href="https://facebook.github.io/react/">React</a>.</h5>
+          <Switch>
+            <Route exact path={'/'} Component={AuthPage}/>
+            <Route path={'/auth'} component={AuthPage}/>
+          </Switch>
           </div>
         </div>
         
       </div>
+      
+      </div>
+      </Router>
     );
   }
 }
