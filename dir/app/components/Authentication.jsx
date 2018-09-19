@@ -11,7 +11,7 @@ export default class AuthPage extends React.Component {
         return(
             <div className="row align-items-center">
                 <div className="col-8 offset-2">
-                    <div className="card text-center">
+                    <div className="card authCard text-center">
                         <div className="card-header">
                             <ul className="nav nav-pills justify-content-center">
                                 <li className="nav-item">
@@ -27,18 +27,19 @@ export default class AuthPage extends React.Component {
                             <form>
                                 <div className="form-row">
                                     <div className="col-6">
-                                       <input type="text" className="form-control" placeholder="Fisrt Name"></input>
+                                       <input type="text" className="form-control authInput" placeholder="Fisrt Name"></input>
                                     </div>
                                     <div className="col-6">
-                                        <input type="text" className="form-control" placeholder="Last Name"></input>
+                                        <input type="text" className="form-control authInput" placeholder="Last Name"></input>
                                     </div>
                                 </div>
-                                <input type="text" className="form-control" placeholder="Email Address"></input>
-                                <input type="password" className="form-control"placeholder="Password"></input>
-                                <select className="form-control">
+                                <input type="text" className="form-control authInput" placeholder="Email Address"></input>
+                                <input type="password" className="form-control authInput" placeholder="Password"></input>
+                                <select className="form-control authSelect">
                                     <option value="Recyclr">Recyclr</option>
                                     <option value="Business">Business</option>
                                 </select>
+                                <button className="btn btn-primary authButton">GET STARTED</button>
                             </form>
                         </div>
                     </div>

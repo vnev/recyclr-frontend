@@ -1,0 +1,19 @@
+.authCard {
+    background-color: black;
+    color: white;
+}
+.authInput {
+    margin-bottom: 20px;
+    border-radius: 0%;
+    color: white;
+    background-color: black;
+}
+.authSelect {
+    
+}
+.authButton {
+    width: 100%;
+    margin-top: 50px;
+    height: 80px;
+    
+}

@@ -3,9 +3,10 @@ import Navigation from './Navigation.jsx';
 import AuthPage from './Authentication.jsx';
 import {Switch} from 'react-router-dom';
 import createBrowserHistorty from 'history/createBrowserHistory';
-import {Route, Router, browserHistory} from 'react-router';
+import {Route, Router} from 'react-router';
 
 const history = createBrowserHistorty();
+
 export default class App extends React.Component {
   render() {
     return (
