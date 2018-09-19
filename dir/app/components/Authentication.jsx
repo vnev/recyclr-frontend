@@ -14,11 +14,11 @@ export default class AuthPage extends React.Component {
                     <div className="card authCard text-center">
                         <div className="card-header">
                             <ul className="nav nav-pills justify-content-center">
-                                <li className="nav-item">
-                                    <a className="nav-link active" data-toggle="pill">Sign In</a>                                   
+                                <li className="nav-item ">
+                                    <a className="nav-link authNav active" data-toggle="pill">Sign In</a>                                   
                                 </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" data-toggle="pill">Sign Up</a>                                   
+                                <li className="nav-item ">
+                                    <a className="nav-link authNav" data-toggle="pill">Sign Up</a>                                   
                                 </li>
                             </ul>
                         </div>

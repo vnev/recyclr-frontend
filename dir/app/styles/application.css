@@ -1,15 +1,32 @@
+html, body {
+    height: 100%;
+}
+.row {
+    display: flex;
+}
+
 .authCard {
+    
     background-color: black;
     color: white;
+    
+}
+.authNav {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 .authInput {
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
     border-radius: 0%;
     color: white;
     background-color: black;
 }
 .authSelect {
-    
+    margin-top: 25px; 
+    color: black;
 }
 .authButton {
     width: 100%;
