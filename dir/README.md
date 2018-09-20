@@ -11,7 +11,7 @@ Clone this repo manually or use `brunch new dir -s brunch/with-react`
 * Install (if you don't have them):
     * [Node.js](http://nodejs.org): `brew install node` on OS X
     * [Brunch](http://brunch.io): `npm install -g brunch`
-    * [Moment.js] Needed for time and date parsing `npm install moment --save`
+    * [Moment.js](https://momentjs.com/) Needed for time and date parsing `npm install moment --save`
     * Brunch plugins and app dependencies: `npm install`
 * Run:
     * `npm start` — watches the project with continuous rebuild. This will also launch HTTP server with [pushState](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history).
