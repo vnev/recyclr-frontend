@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 import React from 'react'
 import GoogleLogin from 'react-google-login';
-=======
 import React, { Component } from 'react'
->>>>>>> 9d48f2b75c23d6e6040a235fde181055e2e0d34b
 
 export default class AuthPage extends Component {
     constructor(props) {
