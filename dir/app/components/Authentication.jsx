@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-export default class AuthPage extends React.Component {
+export default class AuthPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
