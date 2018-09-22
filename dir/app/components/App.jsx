@@ -13,7 +13,7 @@ export default class App extends React.Component {
     return (
       <Router history={history}>
         <div>
-      <div className="container-fluid">
+      <div id="appBase" className="container-fluid">
         <div className="row">
           <div className="col">
             <Navigation></Navigation>
