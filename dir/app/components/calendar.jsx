@@ -16,7 +16,7 @@ const Day = ({ i, w, d, className, ...props }) => {
   return <td className={cls} {...props}>{i}</td>;
 };
 
-export default class Calendar extends React.Component {
+export default class Calendar extends Component {
   selectDate = (i, w) => {
     const prevMonth = w === 0 && i > 7;
     const nextMonth = w >= 4 && i <= 14;

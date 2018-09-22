@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Navigation from './Navigation.jsx';
 import AuthPage from './Authentication.jsx';
 import Settings from './Settings.jsx';
@@ -8,7 +8,7 @@ import {Route, Router} from 'react-router';
 
 const history = createBrowserHistorty();
 
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
     return (
       <Router history={history}>
