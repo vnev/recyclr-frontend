@@ -8,9 +8,18 @@ export default class Admin extends React.Component {
         };
     }
 
+    banUser() {
+        //Add functionality and figure out what
+    }
+
     render() {
         return(
-          <div></div>  
+            <div className="row align-content-left ">
+                <div className="col">
+                    <h3 className="title">Admin Tools </h3>
+                    <button className="btn btn-primary banButton" onClick={this.banUser}>Ban User</button>
+                </div>
+            </div>
         );
     }
 
