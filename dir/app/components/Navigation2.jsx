@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 export default class Navigation2 extends Component {
     render() {
         return(
-            <nav className="navbar navbar-inverse">
+            <nav className="navbar">
                 <div className="container-fluid">
                     <div className="navbar-header">
                         <Link className="nav-brand" to="/">Recyclr</Link>
