@@ -21,10 +21,11 @@ export default class listItem extends React.Component {
                     <div className="col-4 text-right">
                         <p>User1</p>
                         <button className="btn btn-primary">Freeze listing</button>
+                        <button className="btn btn-secondary">Select Pickup date</button>
                     </div>
                 </div>
             </div>
-            
+
         );
     }
 }

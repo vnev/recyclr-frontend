@@ -27,6 +27,9 @@ export default class Navigation extends Component {
                     <NavItem>
                         <Link to="/auth">Log In</Link>
                     </NavItem>
+                    <NavItem>
+                        <Link to="/calendar">Calendar</Link>
+                    </NavItem>
                 </Nav>
             </Navbar>
         );

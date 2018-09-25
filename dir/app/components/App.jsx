@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navigation from './Navigation.jsx';
 import AuthPage from './Authentication.jsx';
 import Settings from './Settings.jsx';
+import Calendar from './Calendar.jsx';
 import listItem from './listingItem.jsx';
 import AdminPage from './Admin.jsx';
 import {Switch} from 'react-router-dom';
@@ -29,12 +30,13 @@ export default class App extends Component {
             <Route path={'/settings'} component={Settings}/>
             <Route path={'/listingItem'} component={listItem}/>
             <Route path={'/admin'} component={AdminPage}/>
+            <Route path={'/calendar'} component={Calendar}/>
           </Switch>
           </div>
         </div>
-        
+
       </div>
-      
+
       </div>
       </Router>
     );
