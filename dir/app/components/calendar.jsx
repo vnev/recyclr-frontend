@@ -1,94 +1,130 @@
-import moment from 'moment';
-import React, { Component } from 'react';
-import cx from 'classnames';
-import range from 'lodash/range';
-import chunk from 'lodash/chunk';
+/*FOR BACKEND:
+NEEDS CONFIRM DATE BUTTON THAT WILL ATTACH SELECTED DATE TO LISTING,
+EITHER FOR REQUESTED OR AVAILABLE PICKUP*/
 
-const Day = ({ i, w, d, className, ...props }) => {
-  const prevMonth = w === 0 && i > 7;
-  const nextMonth = w >= 4 && i <= 14;
-  const cls = cx({
-    'prev-month': prevMonth,
-    'next-month': nextMonth,
-    'current-day': !prevMonth && !nextMonth && i === d
-  });
+/*FRONTEND WORK TODO: CALENDAR NEEDS TO SCROLL MONTHS, ALSO WILL MOVE TO BUTTON ON
+LISTINGITEM, INSTEAD OF NAV MENU*/
 
-  return <td className={cls} {...props}>{i}</td>;
-};
+import React from "react";
+import dateFns from "date-fns";
 
-export default class Calendar extends Component {
-  selectDate = (i, w) => {
-    const prevMonth = w === 0 && i > 7;
-    const nextMonth = w >= 4 && i <= 14;
-    const m = this.props.moment;
+class Calendar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    currentMonth: new Date(),
+    selectedDate: new Date()
+  }
+}
 
-    if (prevMonth) m.subtract(1, 'month');
-    if (nextMonth) m.add(1, 'month');
-
-    m.date(i);
-
-    this.props.onChange(m);
-  };
-
-  prevMonth = e => {
-    e.preventDefault();
-    this.props.onChange(this.props.moment.subtract(1, 'month'));
-  };
-
-  nextMonth = e => {
-    e.preventDefault();
-    this.props.onChange(this.props.moment.add(1, 'month'));
-  };
-
-  render() {
-    const m = this.props.moment;
-    const d = m.date();
-    const d1 = m.clone().subtract(1, 'month').endOf('month').date();
-    const d2 = m.clone().date(1).day();
-    const d3 = m.clone().endOf('month').date();
-    const days = [].concat(
-      range(d1 - d2 + 1, d1 + 1),
-      range(1, d3 + 1),
-      range(1, 42 - d3 - d2 + 1)
-    );
-    const weeks = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  renderHeader() {
+    const dateFormat = "MMMM YYYY";
 
     return (
-      <div className={cx('m-calendar', this.props.className)}>
-        <div className="toolbar">
-          <button type="button" className="prev-month" onClick={this.prevMonth}>
-            <i className={this.props.prevMonthIcon} />
-          </button>
-          <span className="current-date">{m.format('MMMM YYYY')}</span>
-          <button type="button" className="next-month" onClick={this.nextMonth}>
-            <i className={this.props.nextMonthIcon} />
-          </button>
+      <div className="header row flex-middle">
+        <div className="col col-start">
+          <div className="icon" onClick={this.prevMonth}>
+            PREV
+          </div>
         </div>
+        <div className="col col-center">
+          <span>{dateFns.format(this.state.currentMonth, dateFormat)}</span>
+        </div>
+        <div className="col col-end" onClick={this.nextMonth}>
+          <div className="icon">NEXT</div>
+        </div>
+      </div>
+    );
+  }
 
-        <table>
-          <thead>
-            <tr>
-              {weeks.map((w, i) => <td key={i}>{w}</td>)}
-            </tr>
-          </thead>
+  renderDays() {
+    const dateFormat = "dddd";
+    const days = [];
 
-          <tbody>
-            {chunk(days, 7).map((row, w) =>
-              <tr key={w}>
-                {row.map(i =>
-                  <Day
-                    key={i}
-                    i={i}
-                    d={d}
-                    w={w}
-                    onClick={() => this.selectDate(i, w)}
-                  />
-                )}
-              </tr>
-            )}
-          </tbody>
-        </table>
+    let startDate = dateFns.startOfWeek(this.state.currentMonth);
+
+    for (let i = 0; i < 7; i++) {
+      days.push(
+        <div className="col col-center" key={i}>
+          {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
+        </div>
+      );
+    }
+
+    return <div className="days row">{days}</div>;
+  }
+
+  renderCells() {
+    const { currentMonth, selectedDate } = this.state;
+    const monthStart = dateFns.startOfMonth(currentMonth);
+    const monthEnd = dateFns.endOfMonth(monthStart);
+    const startDate = dateFns.startOfWeek(monthStart);
+    const endDate = dateFns.endOfWeek(monthEnd);
+
+    const dateFormat = "D";
+    const rows = [];
+
+    let days = [];
+    let day = startDate;
+    let formattedDate = "";
+
+    while (day <= endDate) {
+      for (let i = 0; i < 7; i++) {
+        formattedDate = dateFns.format(day, dateFormat);
+        const cloneDay = day;
+        days.push(
+          <div
+            className={`col cell ${
+              !dateFns.isSameMonth(day, monthStart)
+                ? "disabled"
+                : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
+            }`}
+            key={day}
+            onClick={() => this.onDateClick(dateFns.parse(cloneDay))}
+          >
+            <span className="number">{formattedDate}</span>
+            <span className="bg">{formattedDate}</span>
+          </div>
+        );
+        day = dateFns.addDays(day, 1);
+      }
+      rows.push(
+        <div className="row" key={day}>
+          {days}
+        </div>
+      );
+      days = [];
+    }
+    return <div className="body">{rows}</div>;
+  }
+
+  onDateClick(day) {
+    this.setState({
+      selectedDate: day
+    });
+  }
+
+  nextMonth() {
+    this.setState({
+      currentMonth: dateFns.addMonths(this.state.currentMonth, 1)
+    });
+  }
+
+  prevMonth() {
+    this.setState({
+      currentMonth: dateFns.subMonths(this.state.currentMonth, 1)
+    });
+  }
+
+  render() {
+    return (
+      <div className="calendar">
+        {this.renderHeader()}
+        {this.renderDays()}
+        {this.renderCells()}
       </div>
     );
   }
 }
+
+export default Calendar;
