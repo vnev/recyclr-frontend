@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Navigation from './Navigation.jsx';
 import AuthPage from './Authentication.jsx';
 import Settings from './Settings.jsx';
-import Calendar from './Calendar.jsx';
+import Calendar from './calendar.jsx';
 import listItem from './listingItem.jsx';
 import AdminPage from './Admin.jsx';
 import {Switch} from 'react-router-dom';
