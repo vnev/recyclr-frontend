@@ -42,6 +42,11 @@ listingRow {
 
 .banButton {
     width: 25%;
-    margin-top: 50px;
+    margin-top: 10px;
     height: 50px;
+}
+.banInput {
+    margin-top: 20px;
+    width: 25%;
+    border-radius: 0%;
 }

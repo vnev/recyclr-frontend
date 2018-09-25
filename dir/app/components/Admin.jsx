@@ -4,12 +4,17 @@ export default class Admin extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            userToBan: "",
         };
+
+        this.banUser = this.banUser.bind(this);
     }
 
     banUser() {
-        //Add functionality and figure out what
+        this.setState({
+            userToBan: event.target.value,
+        })
+        //Add functionality to send username to back end
     }
 
     render() {
@@ -17,7 +22,13 @@ export default class Admin extends React.Component {
             <div className="row align-content-left ">
                 <div className="col">
                     <h3 className="title">Admin Tools </h3>
-                    <button className="btn btn-primary banButton" onClick={this.banUser}>Ban User</button>
+                    <h6 className="banUser">Ban a user</h6>
+
+                    <form>
+                        <input type="text" className="form-control banInput" placeholder="example: bob@recyclr.xyz" value={this.state.userToBan} onChange={this.banUser}></input>
+                        <button className="btn btn-primary banButton" onClick={this.banUser}>Ban User</button>
+                    </form>
+                    
                 </div>
             </div>
         );
