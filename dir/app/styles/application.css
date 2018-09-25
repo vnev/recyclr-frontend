@@ -45,13 +45,11 @@ listingRow {
     margin-top: 10px;
     height: 50px;
 }
-<<<<<<< HEAD
 .banInput {
     margin-top: 20px;
     width: 25%;
     border-radius: 0%;
 }
-=======
 
 /* FONT IMPORTS */
 
@@ -285,4 +283,4 @@ main {
   flex-basis: calc(100%/7);
   width: calc(100%/7);
 }
->>>>>>> cea2983a65536844f13b371e77f8dafabadf10cd
+
