@@ -5,12 +5,10 @@ import {Link} from 'react-router-dom';
 export default class Navigation2 extends Component {
     render() {
         return(
-            <nav className="navbar">
-                <div className="container-fluid">
-                    <div className="navbar-header">
-                        <Link className="nav-brand" to="/">Recyclr</Link>
-                    </div>
-                    <ul className="nav navbar-nav">
+            <div className="container-fluid">
+                <nav className="navbar">
+                    <Link className="nav-brand" to="/">Recyclr</Link>
+                    <ul className="navbar-nav">
                         <li className="nav-item">
                             <Link className="nav-link" to="/admin">Admin</Link>
                         </li>
@@ -24,8 +22,8 @@ export default class Navigation2 extends Component {
                             <Link className="nav-link" to="/auth">Log In</Link>
                         </li>
                     </ul>
-                </div>
-            </nav>
+                </nav>
+            </div>
         );
     }
 }
