@@ -1,5 +1,6 @@
 import GoogleLogin from 'react-google-login';
 import React, { Component } from 'react'
+import history from './history.js'
 
 export default class AuthPage extends Component {
     constructor(props) {
@@ -11,6 +12,7 @@ export default class AuthPage extends Component {
             firstname: "",
             lastname: "", 
             accountType: "",
+            alert: false,
         };
         //this.toggleAuthForm = toggleAuthForm.bind(this);
         this.emailHandle = this.emailHandle.bind(this);
@@ -18,9 +20,7 @@ export default class AuthPage extends Component {
         this.firstHandle = this.firstHandle.bind(this);
         this.lastHandle = this.lastHandle.bind(this);
         this.typeHandle = this.typeHandle.bind(this);
-    }
-    toggleAuthForm() {
-        this.setState({signinTog: !signinTog});
+        
     }
     emailHandle(event) {
         this.setState({
@@ -50,23 +50,50 @@ export default class AuthPage extends Component {
     signin() {
         console.log(this.state.email);
         console.log(this.state.password);
+        window.sessionStorage.setItem();
+        history.push('/');
     }
     signup() {
-
+        window.sessionStorage.setItem();
+        history.push('/');
+        
+    }
+    GoogSuccess(responce) {
+        console.log(responce);
+        window.sessionStorage.setItem();
+        history.push('/');
+        
+    }
+    GoogFail(responce) {
+        console.log("Failed");
+        console.log(responce);
+        this.setState({alert: true});
     }
     render() {
+        let alert;
+        if (this.state.alert == true) {
+            alert = <div className="alert alert-danger alert-dismissible" role="alert">
+            An error has occured. Please try again
+            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
         let bodyContent;
         if (this.state.signinTog == true) {
             bodyContent = <div className="card-body">
             <h3 className="card-title">Sign In</h3>
-            
+            <GoogleLogin
+                clientId = "803477624114-06eoah5tl9to667e88cbelgbm0q6msso.apps.googleusercontent.com"
+                buttonText = "Sign In with Google"
+                className = "btn btn-secondary"
+                onSuccess={() => this.GoogSuccess}
+                onFailure={() => this.GoogFail}
+                /> 
             <form>
                 <input type="text" className="form-control authInput" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
                 <input type="password" className="form-control authInput" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
-                <GoogleLogin
-                buttonText = "Sign In with Google"
-                className = "btn btn-secondary"
-            />    
+                   
                 <button className="btn btn-primary authButton" onClick={this.signin}>Log In</button>
             </form>
         </div>;
@@ -74,7 +101,13 @@ export default class AuthPage extends Component {
         else {
             bodyContent = <div className="card-body">
             <h3 className="card-title">Sign Up for Free</h3>
-            
+            <GoogleLogin
+                clientId = "803477624114-06eoah5tl9to667e88cbelgbm0q6msso.apps.googleusercontent.com"
+                buttonText = "Sign Up with Google"
+                className = "btn btn-secondary"
+                onSuccess={() => this.GoogSuccess}
+                onFailure={() => this.GoogFail}
+                />
             <form>
                 <div className="form-row">
                     <div className="col-6">
@@ -90,10 +123,7 @@ export default class AuthPage extends Component {
                     <option value="Recyclr">Recyclr</option>
                     <option value="Business">Business</option>
                 </select>
-                <GoogleLogin
-                buttonText = "Sign Up with Google"
-                className = "btn btn-secondary"
-            />
+                
                 <button className="btn btn-primary authButton" onClick={this.signup}>GET STARTED</button>
             </form>
         </div>;
@@ -112,6 +142,7 @@ export default class AuthPage extends Component {
                                 </li>
                             </ul>
                         </div>
+                        {alert}
                         {bodyContent}
                     </div>
                 </div>

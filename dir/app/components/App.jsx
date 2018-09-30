@@ -6,10 +6,10 @@ import Calendar from './calendar.jsx';
 import listItem from './listingItem.jsx';
 import AdminPage from './Admin.jsx';
 import {Switch} from 'react-router-dom';
-import createBrowserHistorty from 'history/createBrowserHistory';
+import history from './history.js';
 import {Route, Router} from 'react-router';
 
-const history = createBrowserHistorty();
+
 
 export default class App extends Component {
   render() {
@@ -17,9 +17,11 @@ export default class App extends Component {
       <Router history={history}>
         <div>
       <div id="appBase" className="container-fluid">
-        <div className="row">
-          <div className="col">
-            <Navigation></Navigation>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-12">
+              <Navigation></Navigation>
+            </div>
           </div>
         </div>
         <div className="row">

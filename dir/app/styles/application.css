@@ -1,7 +1,5 @@
-html, body {
+/* html, body {
 
-
-}
 #appBase {
     width: 100%;
 
@@ -51,7 +49,6 @@ listingRow {
     border-radius: 0%;
 }
 
-/* FONT IMPORTS */
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
@@ -75,7 +72,6 @@ listingRow {
 }
 
 
-/* VARIABLES */
 
 :root {
   --main-color: #1a8fff;
@@ -87,7 +83,6 @@ listingRow {
 }
 
 
-/* GENERAL */
 
 * {
   box-sizing: border-box;
@@ -130,7 +125,6 @@ main {
 }
 
 
-/* GRID */
 
 .row {
   margin: 0;
@@ -167,7 +161,6 @@ main {
 }
 
 
-/* Calendar */
 
 .calendar {
   display: block;
@@ -283,4 +276,4 @@ main {
   flex-basis: calc(100%/7);
   width: calc(100%/7);
 }
-
+ */
