@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Navigation from './Navigation.jsx';
 import AuthPage from './Authentication.jsx';
 import Settings from './Settings.jsx';
-import Calendar from './calendar.jsx';
+import Calendar from './Calendar.jsx';
+import Progress from './Progress.jsx';
 import listItem from './listingItem.jsx';
 import AdminPage from './Admin.jsx';
 import {Switch} from 'react-router-dom';
@@ -30,7 +31,8 @@ export default class App extends Component {
             <Route path={'/settings'} component={Settings}/>
             <Route path={'/listingItem'} component={listItem}/>
             <Route path={'/admin'} component={AdminPage}/>
-            <Route path={'/calendar'} component={Calendar}/>
+            <Route path={'/choose_date'} component={Calendar}/>
+            <Route path={'/progress'} component={Progress}/>
           </Switch>
           </div>
         </div>

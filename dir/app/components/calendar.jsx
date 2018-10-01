@@ -23,14 +23,14 @@ class Calendar extends React.Component {
     return (
       <div className="header row flex-middle">
         <div className="col col-start">
-          <div className="icon" onClick={this.prevMonth}>
+          <div className="icon" onClick={() => this.prevMonth}>
             PREV
           </div>
         </div>
         <div className="col col-center">
           <span>{dateFns.format(this.state.currentMonth, dateFormat)}</span>
         </div>
-        <div className="col col-end" onClick={this.nextMonth}>
+        <div className="col col-end" onClick={() => this.nextMonth}>
           <div className="icon">NEXT</div>
         </div>
       </div>
@@ -38,7 +38,7 @@ class Calendar extends React.Component {
   }
 
   renderDays() {
-    const dateFormat = "dddd";
+    const dateFormat = "ddd";
     const days = [];
 
     let startDate = dateFns.startOfWeek(this.state.currentMonth);
@@ -106,7 +106,8 @@ class Calendar extends React.Component {
 
   nextMonth() {
     this.setState({
-      currentMonth: dateFns.addMonths(this.state.currentMonth, 1)
+      currentMonth: dateFns.addMonths(this.state.currentMonth, 1),
+      selectedDate: this.state.selectedDate + 1
     });
   }
 
