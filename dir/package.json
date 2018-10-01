@@ -43,6 +43,7 @@
     "moment": "^2.10.6"
   },
   "jest": {
+    "verbose" : true, 
     "setupTestFrameworkScriptFile": "<rootDir>/__tests__/Setup/test-setup.js",
     "testPathIgnorePatterns": ["<rootDir>/__tests__/Setup/"]
   }

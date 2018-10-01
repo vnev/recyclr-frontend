@@ -58,7 +58,7 @@ export default class AuthPage extends Component {
         let bodyContent;
         if (this.state.signinTog == true) {
             bodyContent = <div className="card-body">
-            <h3 className="card-title">Sign In</h3>
+            <h3 id="signinHeading" className="card-title">Sign In</h3>
             
             <form>
                 <input type="text" className="form-control authInput" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
@@ -73,7 +73,7 @@ export default class AuthPage extends Component {
         }
         else {
             bodyContent = <div className="card-body">
-            <h3 className="card-title">Sign Up for Free</h3>
+            <h3 id="signUpHeading" className="card-title">Sign Up for Free</h3>
             
             <form>
                 <div className="form-row">
@@ -93,6 +93,7 @@ export default class AuthPage extends Component {
                 <GoogleLogin
                 buttonText = "Sign Up with Google"
                 className = "btn btn-secondary"
+                id="googleBtn"
             />
                 <button className="btn btn-primary authButton" onClick={this.signup}>GET STARTED</button>
             </form>
