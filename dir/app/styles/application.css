@@ -175,6 +175,7 @@ main {
   width: 50%;
   background: var(--neutral-color);
   border: 1px solid var(--border-color);
+  float: left;
 }
 
 .calendar .header {
@@ -283,4 +284,3 @@ main {
   flex-basis: calc(100%/7);
   width: calc(100%/7);
 }
-
