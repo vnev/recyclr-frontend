@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
 import history from './history.js';
 import Axios from 'axios';
+import urls  from './Urls.js';
 
 export default class AuthPage extends React.Component {
     constructor(props) {
@@ -76,7 +77,7 @@ export default class AuthPage extends React.Component {
         //Axios.post("http://localhost:8080/user", newObj, {
         //    headers: {'Access-Control-Allow-Origin': '*'},
         //});
-        Axios.get("http://localhost:8080/user/1").then(function(result) {
+        Axios.get(`${urls.remote}/user/1`).then(function(result) {
             console.log(result);
         })
         //window.sessionStorage.setItem('personObj', newObj);

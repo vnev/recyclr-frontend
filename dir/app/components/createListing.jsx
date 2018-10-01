@@ -1,12 +1,13 @@
 import React from 'react'
 import Axios from 'axios';
+import urls from './Urls.js';
 
 export default class createListing extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             matType: '',
-            matWeight: '',
+            matWeight: 0.0,
         };
         this.typeHandler = this.typeHandler.bind(this);
         this.weightHandler = this.weightHandler.bind(this);
@@ -24,11 +25,14 @@ export default class createListing extends React.Component {
     }
     createNewListing() {
         let newObj = {
+            title: "test",
+            description: "more test",
             material_type: this.state.matType,
-            materal_weight: this.state.matWeight,
-            user_id: '1',
+            material_weight: this.state.matWeight,
+            user_id: 1,
+            img_hash: 'sdfsd',
         }
-        Axios.post("http://localhost:8080/listing", newObj).then(function(result) {
+        Axios.post(`${urls.remote}/listing`, newObj).then(function(result) {
             console.log(result);
         });
     }
