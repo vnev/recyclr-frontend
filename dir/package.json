@@ -10,7 +10,9 @@
     "build": "brunch build --production"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "classnames": "^2.2.0",
+    "cors": "^2.8.4",
     "date-fns": "^1.29.0",
     "history": "^4.7.2",
     "lodash": "^4.17.4",

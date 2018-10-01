@@ -1,25 +1,29 @@
-import GoogleLogin from 'react-google-login';
-import React, { Component } from 'react'
-import history from './history.js'
 
-export default class AuthPage extends Component {
+import React, { Component } from 'react';
+import GoogleLogin from 'react-google-login';
+import history from './history.js';
+import Axios from 'axios';
+
+export default class AuthPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             signinTog: true,
             email: "",
             password: "",
-            firstname: "",
-            lastname: "", 
+            address: "",
+            username: "",
             accountType: "",
             alert: false,
         };
         //this.toggleAuthForm = toggleAuthForm.bind(this);
         this.emailHandle = this.emailHandle.bind(this);
         this.passwordHandle = this.passwordHandle.bind(this);
-        this.firstHandle = this.firstHandle.bind(this);
-        this.lastHandle = this.lastHandle.bind(this);
+        this.userHandle = this.userHandle.bind(this);
+        this.addressHandle = this.addressHandle.bind(this);
+        this.passwordHandle = this.passwordHandle.bind(this);
         this.typeHandle = this.typeHandle.bind(this);
+        this.signup = this.signup.bind(this);
         
     }
     emailHandle(event) {
@@ -32,9 +36,9 @@ export default class AuthPage extends Component {
           password: event.target.value,
         });
     }
-    firstHandle(event) {
+    userHandle(event) {
         this.setState({
-          firstname: event.target.value,
+          username: event.target.value,
         });
     }
     lastHandle(event) {
@@ -47,6 +51,11 @@ export default class AuthPage extends Component {
             accountType: event.target.value,
         });
     }
+    addressHandle(event) {
+        this.setState({
+            address: event.target.value,
+        });
+    }
     signin() {
         console.log(this.state.email);
         console.log(this.state.password);
@@ -54,8 +63,24 @@ export default class AuthPage extends Component {
         history.push('/');
     }
     signup() {
-        window.sessionStorage.setItem();
-        history.push('/');
+        let temp = false;
+        if (this.state.accountType === "Business") {
+            temp = true;
+        }
+        let newObj = {
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password,
+            is_company: temp,
+        }
+        //Axios.post("http://localhost:8080/user", newObj, {
+        //    headers: {'Access-Control-Allow-Origin': '*'},
+        //});
+        Axios.get("http://localhost:8080/user/1").then(function(result) {
+            console.log(result);
+        })
+        //window.sessionStorage.setItem('personObj', newObj);
+        //console.log('made a user!!!!');
         
     }
     GoogSuccess(responce) {
@@ -110,13 +135,11 @@ export default class AuthPage extends Component {
                 />
             <form>
                 <div className="form-row">
-                    <div className="col-6">
-                       <input type="text" className="form-control authInput" placeholder="Fisrt Name" value={this.state.firstname}></input>
-                    </div>
-                    <div className="col-6">
-                        <input type="text" className="form-control authInput" placeholder="Last Name" value={this.state.lastname}></input>
+                    <div className="col-12">
+                       <input type="text" className="form-control authInput" placeholder="Username" value={this.state.firstname} onChange={this.userHandle}></input>
                     </div>
                 </div>
+                <input type="text" className="form-control authInput" placeholder="Address" value={this.state.address} onChange={this.addressHandle}></input>
                 <input type="text" className="form-control authInput" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
                 <input type="password" className="form-control authInput" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
                 <select className="form-control authSelect" value={this.state.accountType} onChange={this.typeHandle}>
@@ -124,8 +147,9 @@ export default class AuthPage extends Component {
                     <option value="Business">Business</option>
                 </select>
                 
-                <button className="btn btn-primary authButton" onClick={this.signup}>GET STARTED</button>
+                
             </form>
+            <button className="btn btn-primary authButton" onClick={this.signup}>GET STARTED</button>
         </div>;
         }
         return(
