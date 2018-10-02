@@ -66,13 +66,13 @@ export default class Settings extends Component {
 
     render() {
         return(
-            <div className="card align-content-left" >    
-                <div className="card-body" id="contain-settings"> 
+            <div className="card align-content-left" id="contain-settings">    
+                <div className="card-body"> 
 
                     <h1 className="card-title">Settings</h1>
                     <p>This page allows you to adjust profile and account settings.</p>
 
-                    <div className="card-body">
+                    <div className="card-body" id="change-username">
                         <h5 className="card-text">Change Your Account Username</h5>
                         <form>
                             <input type="text" className="form-control formInput" placeholder="example: recyclingman1" value={this.state.newUsername} onChange={this.usernameHandle}></input>
@@ -80,7 +80,7 @@ export default class Settings extends Component {
                         </form>
                     </div>
 
-                    <div className="card-body">
+                    <div className="card-body" id="change-email">
                         <h5 className="card-text">Change Your Account Email</h5>
                         <form className="banuser">
                             <input type="email" className="form-control formInput" placeholder="example: recyclingman1@gmail.com" value={this.state.newEmail} onChange={this.emailHandle}></input>
@@ -88,7 +88,7 @@ export default class Settings extends Component {
                         </form>
                     </div>
 
-                    <div className="card-body">
+                    <div className="card-body" id="delete-account">
                         <h5 className="card-text">Delete Your Account</h5>
                         <form>
                             <button className="btn btn-danger formButton" onClick={this.deleteAccount}>Delete Account</button>
