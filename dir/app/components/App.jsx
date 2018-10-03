@@ -3,6 +3,9 @@ import Navigation from './Navigation.jsx';
 import AuthPage from './Authentication.jsx';
 import Settings from './Settings.jsx';
 import Calendar from './Calendar.jsx';
+import listItem from './listingItem.jsx';
+import AdminPage from './Admin.jsx';
+import Payment from './Stripe.jsx';
 import Progress from './Progress.jsx';
 import listItem from './listingItem.jsx';
 import AdminPage from './Admin.jsx';
@@ -40,6 +43,7 @@ export default class App extends React.Component {
 
             <Route path={'/createListing'} component={createListing}/>
             <Route path={'/calendar'} component={Calendar}/>
+            <Route path={'/payment'} component={Payment}/>
 
             <Route path={'/choose_date'} component={Calendar}/>
             <Route path={'/progress'} component={Progress}/>
@@ -49,7 +53,7 @@ export default class App extends React.Component {
         </div>
 
       </div>
-
+      
       </div>
       </Router>
     );

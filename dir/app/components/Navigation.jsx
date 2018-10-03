@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 
 export default class Navigation extends React.Component {
     render() {
+        const isSignedIn = this.state.isSignedIn;
         return(
 
             <div className="navbar navbar-expand-lg navbar-light bg-light">

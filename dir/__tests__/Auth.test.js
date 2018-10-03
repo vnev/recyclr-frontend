@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Auth from '../app/components/Authentication.jsx';
 
+//Will have to be adjusted once final code for this is complete
+
 describe('Tests for the Authentication components', () => {
 
     it('Authentication page renders correctly', () => {

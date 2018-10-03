@@ -58,6 +58,7 @@ export default class AuthPage extends React.Component {
         });
     }
     signin() {
+        localStorage.setItem('name', this.state.email);
 
         history.push('/');
     }
