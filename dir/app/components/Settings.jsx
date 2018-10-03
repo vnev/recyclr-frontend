@@ -32,13 +32,14 @@ export default class Settings extends React.Component {
         console.log("__newUsername: " + this.state.newUsername);
 
         let requestObject = {
+            user_id: window.localStorage.user.user_id,
             name: this.state.newUsername,
         }
         
         // need request url ex
-        /*Axios.get(`${urls.remote}/user/1`).then(function(result) {
+        Axios.put(`${urls.remote}/user/${window.localStorage.user.user_id}`, {headers: {'Authentication': window.localStorage.token}}, requestObject).then(function(result) {
             console.log(result);
-        })*/
+        })
 
     }
 
@@ -46,13 +47,14 @@ export default class Settings extends React.Component {
         console.log("__newEmail: " + this.state.newEmail);
         
         let requestObject = {
+            user_id: window.localStorage.user.user_id,
             email: this.state.newEmail,
         }
 
         // need request url ex
-        /*Axios.get(`${urls.remote}/user/1`).then(function(result) {
+        Axios.put(`${urls.remote}/user/${window.localStorage.user.user_id}`, {headers: {'Authentication': window.localStorage.token}}, requestObject).then(function(result) {
             console.log(result);
-        })*/
+        })
     }
 
     deleteAccount() {
