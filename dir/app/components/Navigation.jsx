@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 export default class Navigation extends React.Component {
     render() {
         return(
+
             <div className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="navbar-brand">
                     <Link to="/">Recyclr</Link>
@@ -37,6 +38,7 @@ export default class Navigation extends React.Component {
                     </ul>
                 </div>
             </div>
+
         );
     }
 }

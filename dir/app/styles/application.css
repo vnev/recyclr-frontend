@@ -48,6 +48,16 @@ listingRow {
     width: 25%;
     border-radius: 0%;
 }
+.formButton {
+  width: 40%;
+  margin-top: 10px;
+  height: 50px;
+}
+.formInput {
+  width: 40%;
+  margin-top: 20px;
+  border-radius: 0%;
+}
 
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
@@ -168,6 +178,7 @@ main {
   width: 50%;
   background: var(--neutral-color);
   border: 1px solid var(--border-color);
+  float: left;
 }
 
 .calendar .header {
@@ -276,4 +287,6 @@ main {
   flex-basis: calc(100%/7);
   width: calc(100%/7);
 }
+
  */
+

@@ -2,7 +2,8 @@ import React from 'react';
 import Navigation from './Navigation.jsx';
 import AuthPage from './Authentication.jsx';
 import Settings from './Settings.jsx';
-import Calendar from './calendar.jsx';
+import Calendar from './Calendar.jsx';
+import Progress from './Progress.jsx';
 import listItem from './listingItem.jsx';
 import AdminPage from './Admin.jsx';
 import createListing from './createListing.jsx';
@@ -30,14 +31,19 @@ export default class App extends React.Component {
         <div className="row">
           <div className="col">
           <Switch>
-            <Route exact path={'/'} Component={AuthPage}/>
+            <Route exact path={'/'} component={AuthPage}/>
             <Route path={'/auth'} component={AuthPage}/>
             <Route path={'/settings'} component={Settings}/>
             <Route path={'/listingItem'} component={listItem}/>
             <Route path={'/listings'} component={Listings}/>
             <Route path={'/admin'} component={AdminPage}/>
+
             <Route path={'/createListing'} component={createListing}/>
             <Route path={'/calendar'} component={Calendar}/>
+
+            <Route path={'/choose_date'} component={Calendar}/>
+            <Route path={'/progress'} component={Progress}/>
+
           </Switch>
           </div>
         </div>

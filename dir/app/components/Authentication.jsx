@@ -113,6 +113,7 @@ export default class AuthPage extends React.Component {
         let bodyContent;
         if (this.state.signinTog == true) {
             bodyContent = <div className="card-body">
+
             <h3 className="card-title">Sign In</h3>
             <GoogleLogin
                 clientId = "874168937531-8h3f3gnsfpdc650s6nssegtsq1maujpo.apps.googleusercontent.com"
@@ -121,6 +122,10 @@ export default class AuthPage extends React.Component {
                 onSuccess={() => this.GoogSuccessIn}
                 onFailure={() => this.GoogFailIn}
                 /> 
+
+            <h3 id="signinHeading" className="card-title">Sign In</h3>
+            
+
             <form>
                 <input type="text" className="form-control authInput" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
                 <input type="password" className="form-control authInput" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
@@ -131,6 +136,7 @@ export default class AuthPage extends React.Component {
         }
         else {
             bodyContent = <div className="card-body">
+
             <h3 className="card-title">Sign Up for Free</h3>
             <GoogleLogin
                 clientId = "874168937531-8h3f3gnsfpdc650s6nssegtsq1maujpo.apps.googleusercontent.com"
@@ -139,6 +145,10 @@ export default class AuthPage extends React.Component {
                 onSuccess={() => this.GoogSuccessUp}
                 onFailure={() => this.GoogFailUp}
                 />
+
+            <h3 id="signUpHeading" className="card-title">Sign Up for Free</h3>
+            
+
             <form>
                 <div className="form-row">
                     <div className="col-12">
@@ -152,8 +162,17 @@ export default class AuthPage extends React.Component {
                     <option value="Recyclr">Recyclr</option>
                     <option value="Business">Business</option>
                 </select>
+
                 
                 
+
+                <GoogleLogin
+                buttonText = "Sign Up with Google"
+                className = "btn btn-secondary"
+                id="googleBtn"
+            />
+                <button className="btn btn-primary authButton" onClick={this.signup}>GET STARTED</button>
+
             </form>
             <button className="btn btn-primary authButton" onClick={this.signup}>GET STARTED</button>
         </div>;

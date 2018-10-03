@@ -1,4 +1,5 @@
 import React from 'react';
+import {Route} from 'react-router-dom';
 
 export default class listItem extends React.Component {
     constructor(props) {
@@ -22,7 +23,8 @@ export default class listItem extends React.Component {
                     <div className="col-4 text-right">
                         <p>{this.props.userId}</p>
                         <button className="btn btn-primary">Freeze listing</button>
-                        <button className="btn btn-secondary">Select Pickup date</button>
+                        <Route render={({history}) => (
+                          <button className="btn btn-secondary" onClick={() => { history.push('/choose_date') }}>Select Pickup date</button>)}/>
                     </div>
                 </div>
             </div>
