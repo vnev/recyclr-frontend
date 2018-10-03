@@ -52,13 +52,12 @@ listingRow {
     width: 25%;
     border-radius: 0%;
 }
-<<<<<<< HEAD
 .addressInput {
   margin-top: 20px;
   margin-left: 20px;
   width:25%;
   margin-bottom: 10px;
-=======
+}
 .formButton {
   width: 40%;
   margin-top: 10px;
@@ -68,7 +67,6 @@ listingRow {
   width: 40%;
   margin-top: 20px;
   border-radius: 0%;
->>>>>>> 3202df77e043a21286a04fabffc718b93fccf930
 }
 
 
