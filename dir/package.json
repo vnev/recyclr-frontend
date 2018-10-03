@@ -7,13 +7,21 @@
   "repository": "",
   "scripts": {
     "start": "brunch watch --server",
-    "build": "brunch build --production"
+    "build": "brunch build --production",
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^0.18.0",
+
+    "chai": "^4.2.0",
+
     "classnames": "^2.2.0",
     "cors": "^2.8.4",
     "date-fns": "^1.29.0",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-15": "^1.1.0",
+    "enzyme-adapter-react-16": "^1.5.0",
+    "enzyme-to-json": "^3.3.4",
     "history": "^4.7.2",
     "json-loader": "^0.5.7",
     "lodash": "^4.17.4",
@@ -32,10 +40,17 @@
     "babel-preset-latest": "^6",
     "babel-preset-react": "~6.22",
     "brunch": "^2",
+    "chai-enzyme": "^1.0.0-beta.1",
     "clean-css-brunch": "^2",
+    "jest": "^23.6.0",
     "uglify-js-brunch": "^2"
   },
   "peerDependencies": {
     "moment": "^2.10.6"
+  },
+  "jest": {
+    "verbose" : true, 
+    "setupTestFrameworkScriptFile": "<rootDir>/__tests__/Setup/test-setup.js",
+    "testPathIgnorePatterns": ["<rootDir>/__tests__/Setup/"]
   }
 }
