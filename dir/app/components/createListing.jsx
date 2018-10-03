@@ -6,12 +6,27 @@ export default class createListing extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            title: '',
+            description: '',
             matType: '',
             matWeight: 0.0,
+
         };
+        this.titleHandler = this.titleHandler.bind(this);
+        this.descHandler = this.descHandler.bind(this);
         this.typeHandler = this.typeHandler.bind(this);
         this.weightHandler = this.weightHandler.bind(this);
         this.createNewListing = this.createNewListing.bind(this);
+    }
+    titleHandler(event) {
+        this.setState({
+            title: event.target.value
+        });
+    }
+    descHandler(event) {
+        this.setState({
+            description: event.target.value
+        });
     }
     typeHandler(event) {
         this.setState({
@@ -25,12 +40,12 @@ export default class createListing extends React.Component {
     }
     createNewListing() {
         let newObj = {
-            title: "test",
-            description: "more test",
+            title: this.state.title,
+            description: this.state.description,
             material_type: this.state.matType,
             material_weight: this.state.matWeight,
             user_id: 1,
-            img_hash: 'sdfsd',
+            img_hash: '',
         }
         Axios.post(`${urls.remote}/listing`, newObj).then(function(result) {
             console.log(result);
@@ -41,7 +56,14 @@ export default class createListing extends React.Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                        
+                            <div className="form-group">
+                                <label htmlFor="titleIn">Material Type</label>
+                                <input type="text" className="form-control" id="titleIn" value={this.state.title} onChange={this.titleHandler}/>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="descIn">Material Type</label>
+                                <input type="text" className="form-control" id="descIn" value={this.state.description} onChange={this.descHandler}/>
+                            </div>
                             <div className="form-group">
                                 <label htmlFor="matTypeIn">Material Type</label>
                                 <input type="text" className="form-control" id="matTypeIn" value={this.state.matType} onChange={this.typeHandler}/>

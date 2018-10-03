@@ -58,9 +58,7 @@ export default class AuthPage extends React.Component {
         });
     }
     signin() {
-        console.log(this.state.email);
-        console.log(this.state.password);
-        window.sessionStorage.setItem();
+
         history.push('/');
     }
     signup() {
@@ -74,23 +72,30 @@ export default class AuthPage extends React.Component {
             password: this.state.password,
             is_company: temp,
         }
-        //Axios.post("http://localhost:8080/user", newObj, {
-        //    headers: {'Access-Control-Allow-Origin': '*'},
-        //});
-        Axios.get(`${urls.remote}/user/1`).then(function(result) {
-            console.log(result);
-        })
-        //window.sessionStorage.setItem('personObj', newObj);
-        //console.log('made a user!!!!');
         
     }
-    GoogSuccess(responce) {
+    GoogSuccessIn(responce) {
+        console.log(responce);
+        
+        history.push('/');
+        
+    }
+    GoogFailIn(responce) {
+        console.log("Failed");
+        console.log(responce);
+        this.setState({alert: true});
+    }
+    GoogSuccessUp(responce) {
+        let temp = false;
+        if (this.state.accountType === "Business") {
+            temp = true;
+        }
         console.log(responce);
         window.sessionStorage.setItem();
         history.push('/');
         
     }
-    GoogFail(responce) {
+    GoogFailUp(responce) {
         console.log("Failed");
         console.log(responce);
         this.setState({alert: true});
@@ -110,11 +115,11 @@ export default class AuthPage extends React.Component {
             bodyContent = <div className="card-body">
             <h3 className="card-title">Sign In</h3>
             <GoogleLogin
-                clientId = "803477624114-06eoah5tl9to667e88cbelgbm0q6msso.apps.googleusercontent.com"
+                clientId = "874168937531-8h3f3gnsfpdc650s6nssegtsq1maujpo.apps.googleusercontent.com"
                 buttonText = "Sign In with Google"
                 className = "btn btn-secondary"
-                onSuccess={() => this.GoogSuccess}
-                onFailure={() => this.GoogFail}
+                onSuccess={() => this.GoogSuccessIn}
+                onFailure={() => this.GoogFailIn}
                 /> 
             <form>
                 <input type="text" className="form-control authInput" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
@@ -128,11 +133,11 @@ export default class AuthPage extends React.Component {
             bodyContent = <div className="card-body">
             <h3 className="card-title">Sign Up for Free</h3>
             <GoogleLogin
-                clientId = "803477624114-06eoah5tl9to667e88cbelgbm0q6msso.apps.googleusercontent.com"
+                clientId = "874168937531-8h3f3gnsfpdc650s6nssegtsq1maujpo.apps.googleusercontent.com"
                 buttonText = "Sign Up with Google"
                 className = "btn btn-secondary"
-                onSuccess={() => this.GoogSuccess}
-                onFailure={() => this.GoogFail}
+                onSuccess={() => this.GoogSuccessUp}
+                onFailure={() => this.GoogFailUp}
                 />
             <form>
                 <div className="form-row">

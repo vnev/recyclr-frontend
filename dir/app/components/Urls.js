@@ -1,5 +1,5 @@
 const urls = {
-    "remote": "https://corsiscompleteass.herokuapp.com"
+    "remote": "https://www.recyclr.xyz",
 
 };
 
