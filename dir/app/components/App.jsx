@@ -26,7 +26,7 @@ export default class App extends Component {
         <div className="row">
           <div className="col">
           <Switch>
-            <Route exact path={'/'} Component={AuthPage}/>
+            <Route exact path={'/'} component={AuthPage}/>
             <Route path={'/auth'} component={AuthPage}/>
             <Route path={'/settings'} component={Settings}/>
             <Route path={'/listingItem'} component={listItem}/>

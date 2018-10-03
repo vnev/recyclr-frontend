@@ -117,6 +117,7 @@ class Calendar extends React.Component {
   }
 
   render() {
+    const printFormat = "MMMM DD, YYYY";
     return (
       <div>
       <div className="calendar" >
@@ -125,7 +126,7 @@ class Calendar extends React.Component {
         {this.renderCells()}
       </div>
       <div>
-        <h3>Your Selected Date: {}</h3>
+        <h3>Your Selected Date: {dateFns.format(this.state.selectedDate, printFormat)}</h3>
         <button className="submit button">Submit Date</button>
       </div>
     </div>
