@@ -24,6 +24,9 @@ export default class Navigation extends React.Component {
                         <li className="nav-item">
                             <Link className="nav-link" to="/listingItem">Listings</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/progress">My Progress</Link>
+                        </li>
                     </ul>
                     <ul className="navbar-nav my-2 my-lg-0">
                         <li className="nav-item">
@@ -31,9 +34,6 @@ export default class Navigation extends React.Component {
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/auth">Log In</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/calendar">Calendar</Link>
                         </li>
                     </ul>
                 </div>
