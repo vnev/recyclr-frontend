@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import Navigation from './Navigation.jsx';
 import AuthPage from './Authentication.jsx';
 import Settings from './Settings.jsx';
-import Calendar from './calendar.jsx';
+import Calendar from './Calendar.jsx';
 import listItem from './listingItem.jsx';
 import AdminPage from './Admin.jsx';
+import Payment from './Stripe.jsx';
 import {Switch} from 'react-router-dom';
 import createBrowserHistorty from 'history/createBrowserHistory';
 import {Route, Router} from 'react-router';
@@ -31,12 +32,13 @@ export default class App extends Component {
             <Route path={'/listingItem'} component={listItem}/>
             <Route path={'/admin'} component={AdminPage}/>
             <Route path={'/calendar'} component={Calendar}/>
+            <Route path={'/payment'} component={Payment}/>
           </Switch>
           </div>
         </div>
 
       </div>
-
+      
       </div>
       </Router>
     );

@@ -2,6 +2,7 @@
 
 # dependencies
 /dir/node_modules
+/node_modules
 
 
 # testing

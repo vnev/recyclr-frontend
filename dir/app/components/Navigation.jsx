@@ -4,7 +4,15 @@ import { Navbar, Nav, NavItem } from 'react-bootstrap';
 // Styling from https://react-bootstrap.github.io/components/navbar/
 
 export default class Navigation extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isSignedIn: false
+        }
+    }
+
     render() {
+        const isSignedIn = this.state.isSignedIn;
         return(
             <Navbar inverse fluid>
                 <Navbar.Header>

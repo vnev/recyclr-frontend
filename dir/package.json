@@ -26,7 +26,8 @@
     "react-dom": "^15.4",
     "react-google-login": "^3.2.1",
     "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "react-stripe-elements": "^2.0.1"
   },
   "devDependencies": {
     "auto-reload-brunch": "^2",
@@ -43,8 +44,10 @@
     "moment": "^2.10.6"
   },
   "jest": {
-    "verbose" : true, 
+    "verbose": true,
     "setupTestFrameworkScriptFile": "<rootDir>/__tests__/Setup/test-setup.js",
-    "testPathIgnorePatterns": ["<rootDir>/__tests__/Setup/"]
+    "testPathIgnorePatterns": [
+      "<rootDir>/__tests__/Setup/"
+    ]
   }
 }

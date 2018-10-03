@@ -48,6 +48,7 @@ export default class AuthPage extends Component {
         });
     }
     signin() {
+        localStorage.setItem('name', this.state.email);
         console.log(this.state.email);
         console.log(this.state.password);
     }

@@ -40,6 +40,12 @@ listingRow {
 
 }
 
+.paymentBtn {
+  width: 25%;
+  margin-top: 10px;
+  height: 50px;
+}
+
 .banButton {
     width: 25%;
     margin-top: 10px;
@@ -49,6 +55,12 @@ listingRow {
     margin-top: 20px;
     width: 25%;
     border-radius: 0%;
+}
+.addressInput {
+  margin-top: 20px;
+  margin-left: 20px;
+  width:25%;
+  margin-bottom: 10px;
 }
 
 /* FONT IMPORTS */
