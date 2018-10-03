@@ -1,7 +1,5 @@
-html, body {
+/* html, body {
 
-
-}
 #appBase {
     width: 100%;
 
@@ -56,14 +54,25 @@ listingRow {
     width: 25%;
     border-radius: 0%;
 }
+<<<<<<< HEAD
 .addressInput {
   margin-top: 20px;
   margin-left: 20px;
   width:25%;
   margin-bottom: 10px;
+=======
+.formButton {
+  width: 40%;
+  margin-top: 10px;
+  height: 50px;
+}
+.formInput {
+  width: 40%;
+  margin-top: 20px;
+  border-radius: 0%;
+>>>>>>> 3202df77e043a21286a04fabffc718b93fccf930
 }
 
-/* FONT IMPORTS */
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
@@ -87,7 +96,6 @@ listingRow {
 }
 
 
-/* VARIABLES */
 
 :root {
   --main-color: #1a8fff;
@@ -99,7 +107,6 @@ listingRow {
 }
 
 
-/* GENERAL */
 
 * {
   box-sizing: border-box;
@@ -142,7 +149,6 @@ main {
 }
 
 
-/* GRID */
 
 .row {
   margin: 0;
@@ -179,7 +185,6 @@ main {
 }
 
 
-/* Calendar */
 
 .calendar {
   display: block;
@@ -187,6 +192,7 @@ main {
   width: 50%;
   background: var(--neutral-color);
   border: 1px solid var(--border-color);
+  float: left;
 }
 
 .calendar .header {
@@ -295,4 +301,6 @@ main {
   flex-basis: calc(100%/7);
   width: calc(100%/7);
 }
+
+ */
 

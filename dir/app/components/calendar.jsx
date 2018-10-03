@@ -8,7 +8,7 @@ LISTINGITEM, INSTEAD OF NAV MENU*/
 import React from "react";
 import dateFns from "date-fns";
 
-class Calendar extends React.Component {
+export default class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,14 +23,14 @@ class Calendar extends React.Component {
     return (
       <div className="header row flex-middle">
         <div className="col col-start">
-          <div className="icon" onClick={this.prevMonth}>
+          <div className="icon" onClick={() => this.prevMonth(dateFns.subMonths(this.state.currentMonth, 1))}>
             PREV
           </div>
         </div>
         <div className="col col-center">
           <span>{dateFns.format(this.state.currentMonth, dateFormat)}</span>
         </div>
-        <div className="col col-end" onClick={this.nextMonth}>
+        <div className="col col-end" onClick={() => this.nextMonth(dateFns.addMonths(this.state.currentMonth, 1))}>
           <div className="icon">NEXT</div>
         </div>
       </div>
@@ -38,7 +38,7 @@ class Calendar extends React.Component {
   }
 
   renderDays() {
-    const dateFormat = "dddd";
+    const dateFormat = "ddd";
     const days = [];
 
     let startDate = dateFns.startOfWeek(this.state.currentMonth);
@@ -104,27 +104,33 @@ class Calendar extends React.Component {
     });
   }
 
-  nextMonth() {
+  nextMonth(month) {
     this.setState({
-      currentMonth: dateFns.addMonths(this.state.currentMonth, 1)
+      currentMonth: month
     });
   }
 
-  prevMonth() {
+  prevMonth(month) {
     this.setState({
-      currentMonth: dateFns.subMonths(this.state.currentMonth, 1)
+      currentMonth: month
     });
   }
 
   render() {
+    const printFormat = "MMMM DD, YYYY";
     return (
-      <div className="calendar">
+      <div>
+      <div className="calendar" >
         {this.renderHeader()}
         {this.renderDays()}
         {this.renderCells()}
       </div>
+      <div>
+        <h3>Your Selected Date: {dateFns.format(this.state.selectedDate, printFormat)}</h3>
+        <button className="submit button">Submit Date</button>
+      </div>
+    </div>
     );
   }
 }
 
-export default Calendar;
