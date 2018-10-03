@@ -8,7 +8,7 @@ LISTINGITEM, INSTEAD OF NAV MENU*/
 import React from "react";
 import dateFns from "date-fns";
 
-class Calendar extends React.Component {
+export default class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -134,4 +134,3 @@ class Calendar extends React.Component {
   }
 }
 
-export default Calendar;

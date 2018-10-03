@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import Axios from 'axios';
 // import urls  from './Urls.js';
 
-export default class Settings extends Component {
+export default class Settings extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
