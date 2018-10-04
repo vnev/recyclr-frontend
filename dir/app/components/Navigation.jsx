@@ -24,7 +24,7 @@ export default class Navigation extends React.Component {
         let requestObject = {
             user_id: window.localStorage.user.user_id
         }
-        axios.post(`${urls.remote}/user/logout`, {requestObject}).then(function(result) {
+        axios.post(`http://recyclr.xyz/user/logout`, requestObject).then(function(result) {
             console.log(result);
         })
     }
