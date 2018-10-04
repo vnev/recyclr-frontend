@@ -13,6 +13,9 @@ export default class Progress extends Component {
     this.hasShared = this.hasShared.bind(this);
   }
    componentDidMount() {
+     if (window.localStorage.getItem('username') === null) {
+       history.push('/auth');
+     }
     console.log((window.localStorage.getItem('userid')));
     //  console.log(user_id);
       let _this = this;

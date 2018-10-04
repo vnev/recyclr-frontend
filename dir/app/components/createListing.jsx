@@ -3,6 +3,7 @@ import Axios from 'axios';
 import urls from './Urls.js';
 import history from './history.js'
 
+
 export default class createListing extends React.Component {
     constructor(props) {
         super(props);
@@ -39,10 +40,15 @@ export default class createListing extends React.Component {
             matType: event.target.value
         });
     }
+    isNumberic(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    }
     weightHandler(event) {
-        this.setState({
-            matWeight: event.target.value
-        });
+        if (isNumeric(event.target.value)) {
+            this.setState({
+                matWeight: event.target.value
+            });
+        }
     }
     createNewListing() {
         let newObj = {
