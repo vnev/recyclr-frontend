@@ -140,7 +140,7 @@ export default class AuthPage extends React.Component {
         else {
             bodyContent = <div className="card-body">
 
-            <h3 className="card-title">Sign Up for Free</h3>
+            <h3 id="signUpHeading" className="card-title">Sign Up for Free</h3>
 
 
             <form>
