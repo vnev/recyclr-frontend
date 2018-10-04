@@ -3,7 +3,7 @@ import Navigation from './Navigation.jsx';
 import AuthPage from './Authentication.jsx';
 import Settings from './Settings.jsx';
 import Calendar from './calendar.jsx';
-import listItem from './listingItem.jsx';
+import listItem from './listingItem';
 import AdminPage from './Admin.jsx';
 import Payment from './Stripe.jsx';
 import Progress from './Progress.jsx';
@@ -36,7 +36,7 @@ export default class App extends React.Component {
             <Route exact path={'/'} component={AuthPage}/>
             <Route path={'/auth'} component={AuthPage}/>
             <Route path={'/settings'} component={Settings}/>
-            <Route path={'/listingItem'} component={listItem}/>
+           
             <Route path={'/listings'} component={Listings}/>
             <Route path={'/admin'} component={AdminPage}/>
             <Route path={"/googleAuth"} component={GoogleAuth}/>

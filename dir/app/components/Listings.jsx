@@ -1,5 +1,6 @@
 import React from 'react'
-import listItem from './listingItem.jsx'
+import ListingItem from './listingItem'
+import history from './history.js'
 import axios from 'axios'
 
 export default class Listings extends React.Component {
@@ -10,11 +11,15 @@ export default class Listings extends React.Component {
         }
     }
     componentDidMount() {
+        if (window.localStorage.getItem('user') === null) {
+            history.push('/auth');
+        }
+        let _this = this;
         //make get request using stored email/username
-        axios.get("https://localhost:8080/listings")
+        axios.get("http://recyclr.xyz/listings",{headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
         .then(function(result) {
-            this.state.list = result.data;
             console.log(result.data);
+            _this.setState({list: result.data});
         })
         //set list = returned json objects list = results.data
     }
@@ -22,8 +27,8 @@ export default class Listings extends React.Component {
         return(
             <div className="container">
                 <div className="card">
-                    {this.state.list.map((item,index) => {
-                        <listItem></listItem>
+                    {this.state.list.map((item,key) => {
+                        return <ListingItem Item={item}/>
                     })}
                 </div>
             </div>
