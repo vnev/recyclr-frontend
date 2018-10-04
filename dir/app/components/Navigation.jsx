@@ -8,19 +8,16 @@ import history from './history.js'
 export default class Navigation extends React.Component {
     constructor(props) {
         super(props);
-        if(window.localStorage.getItem('userid') != null) {
-            this.state = {
-                isLogedIn: true,
-             };
-        } 
-        else {
-            this.state = {
-                isLogedIn: false,
-            }
+        this.state= {
+            isLogedIn: false,
         }
         
         this.logOut = this.logOut.bind(this);
-    };
+    }
+    componentDidMount() {
+        
+    }
+        
 
     logOut() {
         let requestObject = {
