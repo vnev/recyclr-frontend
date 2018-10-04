@@ -76,6 +76,7 @@ export default class AuthPage extends React.Component {
             }
             window.localStorage.setItem('userid', user.user_id);
             window.localStorage.setItem('username', user.name);
+            console.log(localStorage.getItem('username'));
             window.localStorage.setItem('useremail', user.email);
             window.localStorage.setItem('token', result.data.token);
             history.push('/settings');
