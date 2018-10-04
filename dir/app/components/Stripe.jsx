@@ -7,9 +7,10 @@ export default class RealPaymentPage extends Component {
     render() {
         return (
            
-                    <StripeProvider apiKey="pk_test_12345">
+                    <StripeProvider apiKey="pk_test_YefrdUKAmC13gogEqtTIGDt2">
                              <Payment />
                     </StripeProvider>
+          
             
         );
     }

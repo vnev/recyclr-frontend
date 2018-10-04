@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {injectStripe} from 'react-stripe-elements';
 import CardSection from './CardSection.jsx';
+import Axios from 'axios';
 
  class CheckOutPage extends Component{
 
@@ -15,7 +16,8 @@ import CardSection from './CardSection.jsx';
 
     submitHandle(ev) {
         ev.preventDefault();
-        this.props.stripe.createToken({name : localStorage.getItem('name')}).then(({token}) => {
+        Axios.post(`http://recyclr.xyz/charge`, )
+        this.props.stripe.createToken({name : window.localStorage.setItem('user', user)}).then(({token}) => {
             console.log('__Received Stripe token: ', token);
             console.log('Address', this.state.address);
         });
@@ -29,7 +31,7 @@ import CardSection from './CardSection.jsx';
 
     render() {
         return(
-            <form>
+            <form onSubmit={this.submitHandle}>
                 <h2>Enter in your desired pick up location</h2>
                 <input type="text" className="form-control addressInput" 
                      placeholder="6969 Sharmp way, Shrimp, IN" value={this.state.address} onChange={this.addressHandle}>
@@ -37,7 +39,7 @@ import CardSection from './CardSection.jsx';
                 <CardSection />
                 <div className="row align-content-left">
                     <div className="col-3">
-                         <button className="btn btn-primary paymentBtn" onClick={this.submitHandle}>Confirm</button>
+                         <button className="btn btn-primary paymentBtn">Confirm</button>
                     </div>
                 </div>
             </form>
