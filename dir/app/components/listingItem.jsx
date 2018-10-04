@@ -26,6 +26,7 @@ export default class ListingItem extends React.Component {
                         <button className="btn btn-primary">Freeze listing</button>
                         
                           <button className="btn btn-secondary" onClick={() => { history.push('/choose_date') }}>Select Pickup date</button>
+                          <button className="btn btn-primary" onClick={()=> {history.push('/Payment.jsx')} }>Payment</button>
                     </div>
                 </div>
             </div>

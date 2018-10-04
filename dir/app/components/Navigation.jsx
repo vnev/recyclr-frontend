@@ -64,7 +64,7 @@ export default class Navigation extends React.Component {
                             <Link className="nav-link" to="/admin">Admin</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/listingItem">Listings</Link>
+                            <Link className="nav-link" to="/listings">Listings</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/progress">My Progress</Link>
