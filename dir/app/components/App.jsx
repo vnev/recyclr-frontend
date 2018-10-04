@@ -42,7 +42,7 @@ export default class App extends React.Component {
             <Route path={'/calendar'} component={Calendar}/>
             <Route path={'/payment'} component={Payment}/>
 
-            <Route path={'/choose_date'} component={Calendar}/>
+            <Route path={'/choose_date/:id'} component={Calendar}/>
             <Route path={'/progress'} component={Progress}/>
 
           </Switch>

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
+import history from './history.js';
 
 export default class ListingItem extends React.Component {
     constructor(props) {
@@ -25,7 +26,7 @@ export default class ListingItem extends React.Component {
                         <p>{this.props.Item.userId}</p>
                         <button className="btn btn-primary">Freeze listing</button>
                         
-                          <button className="btn btn-secondary" onClick={() => { history.push('/choose_date') }}>Select Pickup date</button>
+                          <button className="btn btn-secondary" onClick={() => { history.push('/choose_date/' + this.props.Item.listing_id) }}>Select Pickup date</button>
                     </div>
                 </div>
             </div>

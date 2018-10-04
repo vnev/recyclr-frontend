@@ -7,14 +7,16 @@ LISTINGITEM, INSTEAD OF NAV MENU*/
 
 import React from "react";
 import dateFns from "date-fns";
+import axios from 'axios';
 
 export default class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    currentMonth: new Date(),
-    selectedDate: new Date()
-  }
+      currentMonth: new Date(),
+      selectedDate: new Date()
+    }
+    this.submitDate = this.submitDate.bind(this);
 }
 
   renderHeader() {
@@ -36,7 +38,16 @@ export default class Calendar extends React.Component {
       </div>
     );
   }
-
+  submitDate() {
+    let newObj = {
+      pickup_date_time: this.state.selectedDate,
+    }
+    axios.put('http://recyclr.xyz/listing/update/' +  parseInt(this.props.match.params.id) , newObj, {headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token')}}).then(function(result) {
+      console.log(result);
+    }).catch(function(error) {
+      console.log(error);
+    });
+  }
   renderDays() {
     const dateFormat = "ddd";
     const days = [];
@@ -127,7 +138,7 @@ export default class Calendar extends React.Component {
       </div>
       <div>
         <h3>Your Selected Date: {dateFns.format(this.state.selectedDate, printFormat)}</h3>
-        <button className="submit button">Submit Date</button>
+        <button className="submit button" onClick={this.submitDate}>Submit Date</button>
       </div>
     </div>
     );
