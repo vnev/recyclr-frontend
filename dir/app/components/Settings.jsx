@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Axios from 'axios';
-import history from 'history.js'
+import history from './history.js'
 // import urls  from './Urls.js';
 
 export default class Settings extends React.Component {

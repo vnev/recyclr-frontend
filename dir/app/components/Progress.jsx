@@ -15,10 +15,12 @@ export default class Progress extends Component {
     //  console.log(user_id);
       let _this = this;
       //make get request using stored email/username
-      axios.get(`http://recyclr.xyz/user/progress/${parseInt(window.localStorage.getItem('userid'))}`,{headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
+      axios.get('http://recyclr.xyz/user/progress/' + window.localStorage.getItem('userid'),{headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
       .then(function(result) {
-          console.log(result.data);
+          console.log(result);
           _this.setState({list: result.data});
+      }).catch(function(error) {
+        console.log(error);
       })
       //set list = returned json objects list = results.data
   }
@@ -26,10 +28,11 @@ export default class Progress extends Component {
       return(
         <div>
           <h1>My Recyclr Progress</h1>
-          <h3>Total number of Recyclr listings: {this.state.list.size}</h3>
+          <h3>Total number of Recyclr listings: {this.state.list.length}</h3>
           <FacebookShareButton
           url='http://recyclr.xyz'
-          quote="My Recyclr Progress: Total Number of recycling: 10, Total Number of pcikups: 5">
+          quote="My Recyclr Progress: Total Number of recycling:  {_this.state.list.length}"
+          >
           <FacebookIcon
             size={32}
             square
