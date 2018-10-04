@@ -66,10 +66,11 @@ export default class AuthPage extends React.Component {
             email: this.state.email,
             passwd: this.state.password,
         }
+        let _this = this;
         axios.post(`http://recyclr.xyz/signin`, obj).then(function(result) {
             console.log(result);
             let user = {
-                email: this.state.email,
+                email: _this.state.email,
                 name: result.data.user_name,
                 user_id: result.data.user_id,
             }
@@ -80,7 +81,7 @@ export default class AuthPage extends React.Component {
             history.push('/settings');
         }).catch(function(error) {
             console.log(error);
-            this.setState({alert: true});
+            _this.setState({alert: true});
         });
         
     }
