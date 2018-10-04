@@ -22,10 +22,16 @@ export default class Navigation extends React.Component {
 
     logOut() {
         let requestObject = {
-            user_id: window.localStorage.user.user_id
+            user_id: window.localStorage.getItem('userid')
         }
         axios.post(`http://recyclr.xyz/user/logout`, requestObject).then(function(result) {
             console.log(result);
+            window.localStorage.removeItem('token');
+            window.localStorage.removeItem('userid');
+            window.localStorage.removeItem('username');
+            window.localStorage.removeItem('useremail');
+        }).catch(function(error) {
+            console.log(error);
         })
     }
 
