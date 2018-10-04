@@ -11,11 +11,8 @@
     "test": "jest"
   },
   "dependencies": {
-
     "axios": "^0.18.0",
-
     "chai": "^4.2.0",
-
     "classnames": "^2.2.0",
     "cors": "^2.8.4",
     "date-fns": "^1.29.0",

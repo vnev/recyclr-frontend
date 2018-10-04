@@ -6,7 +6,6 @@ import CheckOut from './CheckOut.jsx';
 export default class PaymentPage extends Component {
     render() {
         return( 
-        
             <Elements> 
                  <CheckOut />
              </Elements>

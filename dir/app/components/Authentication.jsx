@@ -59,6 +59,7 @@ export default class AuthPage extends React.Component {
     }
     signin() {
         localStorage.setItem('name', this.state.email);
+        localStorage.setItem('userID', this.state.username);
 
         history.push('/');
     }
@@ -76,6 +77,8 @@ export default class AuthPage extends React.Component {
         
     }
     GoogSuccessIn(responce) {
+        localStorage.setItem('name', this.state.email);
+        localStorage.setItem('userID', this.state.username);
         console.log(responce);
         
         history.push('/');
@@ -87,6 +90,8 @@ export default class AuthPage extends React.Component {
         this.setState({alert: true});
     }
     GoogSuccessUp(responce) {
+        localStorage.setItem('name', this.state.email);
+        localStorage.setItem('userID', this.state.username);
         let temp = false;
         if (this.state.accountType === "Business") {
             temp = true;
