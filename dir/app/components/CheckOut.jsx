@@ -15,7 +15,7 @@ import CardSection from './CardSection.jsx';
 
     submitHandle(ev) {
         ev.preventDefault();
-        this.props.stripe.createToken({name : localStorage.getItem('bob')}).then(({token}) => {
+        this.props.stripe.createToken({name : localStorage.getItem('name')}).then(({token}) => {
             console.log('__Received Stripe token: ', token);
             console.log('Address', this.state.address);
         });
