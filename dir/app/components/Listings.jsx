@@ -11,7 +11,7 @@ export default class Listings extends React.Component {
         }
     }
     componentDidMount() {
-        if (window.localStorage.getItem('user') === null) {
+        if (window.localStorage.getItem('username') === null) {
             history.push('/auth');
         }
         let _this = this;

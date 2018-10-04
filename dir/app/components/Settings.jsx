@@ -19,7 +19,11 @@ export default class Settings extends React.Component {
         this.changePassword = this.changePassword.bind(this);
         this.deleteAccount = this.deleteAccount.bind(this);
     }
-
+    componentDidMount() {
+        if (window.localStorage.getItem('username') === null) {
+            history.push('/auth');
+        }
+    }
     usernameHandle(event) {
         this.setState({
             newUsername: event.target.value,
