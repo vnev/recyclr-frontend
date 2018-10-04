@@ -28,7 +28,7 @@ export default class AuthPage extends React.Component {
         this.typeHandle = this.typeHandle.bind(this);
         this.signin = this.signin.bind(this);
         this.signup = this.signup.bind(this);
-        
+
     }
     emailHandle(event) {
         this.setState({
@@ -83,7 +83,7 @@ export default class AuthPage extends React.Component {
             console.log(error);
             _this.setState({alert: true});
         });
-        
+
     }
     signup() {
         let newObj = {
@@ -103,11 +103,11 @@ export default class AuthPage extends React.Component {
             console.log(error);
             _this.setState({alert: true});
         });
-        
-        
+
+
     }
-   
-    
+
+
     render() {
         if (this.state.alert == true) {
             alert = <div className="alert alert-danger alert-dismissible" role="alert">
@@ -121,17 +121,17 @@ export default class AuthPage extends React.Component {
         if (this.state.signinTog == true) {
             bodyContent = <div className="card-body">
 
-           
-            
+
+
 
             <h3 id="signinHeading" className="card-title">Sign In</h3>
-            
+
 
             <form>
                 <input type="text" className="form-control authInput" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
                 <input type="password" className="form-control authInput" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
-                   
-                
+
+
             </form>
             <button className="btn btn-primary authButton" onClick={this.signin}>Log In</button>
         </div>;
@@ -140,7 +140,7 @@ export default class AuthPage extends React.Component {
             bodyContent = <div className="card-body">
 
             <h3 className="card-title">Sign Up for Free</h3>
-            
+
 
             <form>
                 <div className="form-row">
@@ -156,10 +156,10 @@ export default class AuthPage extends React.Component {
                     <option value="t">Business</option>
                 </select>
 
-                
-                
 
-                
+
+
+
             </form>
             <button className="btn btn-primary authButton" onClick={this.signup}>GET STARTED</button>
         </div>;
@@ -171,17 +171,17 @@ export default class AuthPage extends React.Component {
                         <div className="card-header">
                             <ul className="nav nav-pills justify-content-center">
                                 <li className="nav-item ">
-                                    <a className="nav-link authNav active" data-toggle="pill" onClick={() => this.setState({signinTog: !this.state.signinTog})}>Sign In</a>                                   
+                                    <a className="nav-link authNav active" data-toggle="pill" onClick={() => this.setState({signinTog: !this.state.signinTog})}>Sign In</a>
                                 </li>
                                 <li className="nav-item ">
-                                    <a className="nav-link authNav" data-toggle="pill" onClick={() => this.setState({signinTog: !this.state.signinTog})}>Sign Up</a>                                   
+                                    <a className="nav-link authNav" data-toggle="pill" onClick={() => this.setState({signinTog: !this.state.signinTog})}>Sign Up</a>
                                 </li>
                             </ul>
                         </div>
                         {alert}
                         {bodyContent}
                         <h2>Or, you can sign in using your <a href="/googleAuth">Google Account</a></h2>
-                        
+
                     </div>
                 </div>
             </div>
