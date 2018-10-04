@@ -7,7 +7,7 @@ import axios from 'axios';
 export default class Navigation extends React.Component {
     constructor(props) {
         super(props);
-        if(localStorage.getItem('name') != null) {
+        if(window.localStorage.getItem('userid') != null) {
             this.state = {
                 isLogedIn: true,
              };
