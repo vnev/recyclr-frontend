@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import history from './history.js'
 // import { Navbar, Nav, NavItem } from 'react-bootstrap';
 // Styling from https://react-bootstrap.github.io/components/navbar/
 
@@ -16,27 +17,43 @@ export default class Navigation extends React.Component {
             this.state = {
                 isLogedIn: false,
             }
-        }
+        
         this.logOut = this.logOut.bind(this);
+    }
+    componentDidMount() {
+        
     }
 
     logOut() {
         let requestObject = {
-            user_id: window.localStorage.getItem('userid')
+            user_id: parseInt(window.localStorage.getItem('userid')),
         }
-        axios.post(`http://recyclr.xyz/user/logout`, requestObject).then(function(result) {
+        axios.post(`http://recyclr.xyz/user/logout`, requestObject, {headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}}).then(function(result) {
             console.log(result);
             window.localStorage.removeItem('token');
             window.localStorage.removeItem('userid');
             window.localStorage.removeItem('username');
             window.localStorage.removeItem('useremail');
+            history.push('/auth');
         }).catch(function(error) {
             console.log(error);
         })
     }
 
     render() {
+        let but;
+            if (window.localStorage.getItem('username') === null) {
+                but =   <li className="nav-item">
+                            <Link className="nav-link" to="/auth">Log In</Link>
+                        </li>
+            }
+            else {
+                but =  <li className="nav-item">
+                            <Link className="nav-link" onClick={this.logOut} to="/auth">Sign Out</Link>
+                        </li>
+            }
         return(
+            
             <div className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="navbar-brand">
                     <Link to="/">Recyclr</Link>
@@ -59,18 +76,7 @@ export default class Navigation extends React.Component {
                         </li>
                     </ul>
                     <ul className="navbar-nav my-2 my-lg-0">
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/settings">Settings</Link>
-                        </li>
-                        {!this.state.isLogedIn ?(
-                             <li className="nav-item">
-                                 <Link className="nav-link" to="/auth">Log In</Link>
-                             </li>
-                        ) : (
-                            <li className="nav-item">
-                                    <Link className="nav-link" onClick={this.logOut} to="/auth">Sign Out</Link>
-                             </li>
-                        )}
+                        {but}
                     </ul>
                 </div>
             </div>

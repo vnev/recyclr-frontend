@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-// import Axios from 'axios';
+import React from 'react';
+import Axios from 'axios';
+import history from './history.js'
 // import urls  from './Urls.js';
 
 export default class Settings extends React.Component {
@@ -7,12 +8,15 @@ export default class Settings extends React.Component {
         super(props);
         this.state = {
             newUsername: "",
-            newEmail: ""
+            newEmail: "",
+            newPass: "",
         };
         this.usernameHandle = this.usernameHandle.bind(this);
         this.emailHandle = this.emailHandle.bind(this);
         this.changeUsername = this.changeUsername.bind(this);
+        this.passHandle = this.passHandle.bind(this);
         this.changeEmail = this.changeEmail.bind(this);
+        this.changePassword = this.changePassword.bind(this);
         this.deleteAccount = this.deleteAccount.bind(this);
     }
 
@@ -27,18 +31,24 @@ export default class Settings extends React.Component {
             newEmail: event.target.value,
         })
     }
+    passHandle(event) {
+        this.setState({
+            newPass: event.target.value,
+        })
+    }
 
     changeUsername() {
         console.log("__newUsername: " + this.state.newUsername);
 
         let requestObject = {
-            user_id: window.localStorage.user.user_id,
             name: this.state.newUsername,
         }
         
         // need request url ex
-        Axios.put(`${urls.remote}/user/${window.localStorage.user.user_id}`, {headers: {'Authentication': window.localStorage.token}}, requestObject).then(function(result) {
+        Axios.put(`http://recyclr.xyz/user/` + window.localStorage.getItem('userid'),  requestObject, {headers: {'Authorization': 'Bearer ' + window.localStorage.getItem('token'),}},).then(function(result) {
             console.log(result);
+        }).then(function(error) {
+            console.log(error);
         })
 
     }
@@ -47,19 +57,39 @@ export default class Settings extends React.Component {
         console.log("__newEmail: " + this.state.newEmail);
         
         let requestObject = {
-            user_id: window.localStorage.user.user_id,
             email: this.state.newEmail,
         }
 
         // need request url ex
-        Axios.put(`${urls.remote}/user/${window.localStorage.user.user_id}`, {headers: {'Authentication': window.localStorage.token}}, requestObject).then(function(result) {
+        Axios.put(`http://recyclr.xyz/user/` + window.localStorage.getItem('userid'),  requestObject, {headers: {'Authorization': 'Bearer ' + window.localStorage.getItem('token')}}).then(function(result) {
             console.log(result);
+        }).then(function(error) {
+            console.log(error);
+        })
+    }
+    changePassword() {
+        let newObj = {
+            passwd: this.state.newPass,
+        }
+        Axios.put('http://recyclr.xyz/user/' + window.localStorage.getItem('userid'), newObj, {headers: {'Authorization': 'Bearer ' + window.localStorage.getItem('token')}}).then(function(result) {
+            console.log(result);
+        }).catch(function(error) {
+            console.log(error);
         })
     }
 
     deleteAccount() {
         console.log("__deleteAccount");
-
+        Axios.get('http://recyclr.xyz/user/' + window.localStorage.getItem('userid') + '/delete').then(function(result) {
+            console.log(result);
+        }).catch(function(error) {
+            console.log(error);
+        });
+        window.localStorage.removeItem('userid');
+        window.localStorage.removeItem('useremail');
+        window.localStorage.removeItem('token');
+        window.localStorage.removeItem('username');
+        history.push('/auth');
         // need request url ex
         /*Axios.get(`${urls.remote}/user/1`).then(function(result) {
             console.log(result);
@@ -76,26 +106,33 @@ export default class Settings extends React.Component {
 
                     <div className="card-body" id="change-username">
                         <h5 className="card-text">Change Your Account Username</h5>
-                        <form>
+                        
                             <input type="text" className="form-control formInput" placeholder="example: recyclingman1" value={this.state.newUsername} onChange={this.usernameHandle}></input>
                             <button className="btn btn-primary formButton" onClick={this.changeUsername}>Change Username</button>
-                        </form>
+                        
                     </div>
 
                     <div className="card-body" id="change-email">
                         <h5 className="card-text">Change Your Account Email</h5>
-                        <form className="banuser">
+                        <div className="banuser">
                             <input type="email" className="form-control formInput" placeholder="example: recyclingman1@gmail.com" value={this.state.newEmail} onChange={this.emailHandle}></input>
                             <button className="btn btn-primary formButton" onClick={this.changeEmail}>Change Email</button>
-                        </form>
+                        </div>
                     </div>
-
+                    <div className="card-body" id="change-password">
+                        <h5 className="card-text">Change Your Account Password</h5>
+                        
+                            <input type="password" className="form-control formInput" placeholder="example: recyclingman1" value={this.state.newPass} onChange={this.passHandle}></input>
+                            <button className="btn btn-primary formButton" onClick={this.changePassword}>Change Password</button>
+                        
+                    </div>
                     <div className="card-body" id="delete-account">
                         <h5 className="card-text">Delete Your Account</h5>
-                        <form>
+                        
                             <button className="btn btn-danger formButton" onClick={this.deleteAccount}>Delete Account</button>
-                        </form>
+                        
                     </div>
+                    
 
                 </div>
             </div>
