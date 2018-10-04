@@ -9,12 +9,25 @@ export default class Admin extends React.Component {
         };
 
         this.banUser = this.banUser.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange(ev) {
+        this.setState({
+            userToBan: ev.target.value,
+        });
     }
 
-    banUser() {
-        this.setState({
-            userToBan: event.target.value,
-        })
+    banUser(event) {
+        console.log(this.state.userToBan)
+        Axios.get('http://recyclr.xyz/user/' + this.state.userToBan + '/delete').then(function(result) {
+            console.log(result);
+        }).catch(function(error) {
+            console.log(error);
+        });
+        window.localStorage.removeItem('userid');
+        window.localStorage.removeItem('useremail');
+        window.localStorage.removeItem('token');
+        window.localStorage.removeItem('username');
     }
 
     render() {
@@ -25,7 +38,7 @@ export default class Admin extends React.Component {
                     <h6 className="banUser">Ban a user</h6>
 
                     <form>
-                        <input type="text" className="form-control banInput" placeholder="example: bob@recyclr.xyz" value={this.state.userToBan} onChange={this.banUser}></input>
+                        <input type="text" className="form-control banInput" placeholder="example: bob@recyclr.xyz" value={this.state.userToBan} onChange={this.handleChange}></input>
                         <button className="btn btn-primary banButton" onClick={this.banUser}>Ban User</button>
                     </form>
                     

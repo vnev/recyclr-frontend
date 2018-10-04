@@ -10,14 +10,12 @@ import Axios from 'axios';
         this.state = {
             address: ""
         }
-        this.submitHandle = this.submitHandle.bind(this);
-        this.addressHandle = this.addressHandle.bind(this);
       }
 
     submitHandle(ev) {
         ev.preventDefault();
         var bodyFormData = new FormData();
-        this.props.stripe.createToken({name : 'bob'}).then(token =>{
+        this.props.stripe.createToken({name : window.localStorage.getItem('userid')}).then(token =>{
             console.log(token);
             console.log(token.id);
             console.log(token.token);
