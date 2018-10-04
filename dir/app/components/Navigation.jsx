@@ -17,6 +17,7 @@ export default class Navigation extends React.Component {
     componentDidMount() {
         
     }
+        
 
     logOut() {
         let requestObject = {

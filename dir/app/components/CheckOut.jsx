@@ -16,26 +16,28 @@ import Axios from 'axios';
 
     submitHandle(ev) {
         ev.preventDefault();
-        Axios.post(`http://recyclr.xyz/charge`, )
-        this.props.stripe.createToken({name : window.localStorage.setItem('user', user)}).then(({token}) => {
-            console.log('__Received Stripe token: ', token);
-            console.log('Address', this.state.address);
-        });
-    }
-
-    addressHandle(ev) {
-        this.setState({
-            address: ev.target.value,
+        var bodyFormData = new FormData();
+        this.props.stripe.createToken({name : 'bob'}).then(token =>{
+            console.log(token);
+            console.log(token.id);
+            console.log(token.token);
+            bodyFormData.set('token', token.token.id);
+            Axios.post(`http://recyclr.xyz/charge`,  bodyFormData ,{headers : {'Content-Type' : 'multipart/form-data'}}).then(function(result) {
+                console.log("Purchase Complete");
+            }).then(function (response) {
+                //handle success
+                console.log(response);
+            })
+            .catch(function (response) {
+                //handle error
+                console.log(response);
+            });
         });
     }
 
     render() {
         return(
             <form onSubmit={this.submitHandle}>
-                <h2>Enter in your desired pick up location</h2>
-                <input type="text" className="form-control addressInput" 
-                     placeholder="6969 Sharmp way, Shrimp, IN" value={this.state.address} onChange={this.addressHandle}>
-                </input>
                 <CardSection />
                 <div className="row align-content-left">
                     <div className="col-3">

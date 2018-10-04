@@ -20,8 +20,4 @@ describe('Tests for the Authentication components', () => {
         expect(wrapper.find('#signUpHeading').exists()).toBe(true);
         expect(wrapper.find('#signinHeading').exists()).toBe(false);
     });
-
-    it('A user is able to sign up', () => {
-
-    });
 });

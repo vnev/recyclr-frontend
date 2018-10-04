@@ -1,4 +1,5 @@
 import React from 'react';
+import Axios from 'axios';
 
 export default class Admin extends React.Component {
     constructor(props) {
@@ -14,7 +15,6 @@ export default class Admin extends React.Component {
         this.setState({
             userToBan: event.target.value,
         })
-        //Add functionality to send username to back end
     }
 
     render() {
