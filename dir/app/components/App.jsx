@@ -3,7 +3,6 @@ import Navigation from './Navigation.jsx';
 import AuthPage from './Authentication.jsx';
 import Settings from './Settings.jsx';
 import Calendar from './calendar.jsx';
-import listItem from './listingItem';
 import AdminPage from './Admin.jsx';
 import Payment from './Stripe.jsx';
 import Progress from './Progress.jsx';
