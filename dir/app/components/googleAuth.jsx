@@ -1,13 +1,13 @@
 
 import React from 'react'
-
+import GoogleLogin from 'react-google-login'
 import history from './history.js'
-import axios from 'axios'
-import urls  from './Urls.js'
+import Axios from 'axios';
+import urls  from './Urls.js';
 
 //TODO change ui
 
-export default class AuthPage extends React.Component {
+export default class GoogleAuth extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,10 +26,14 @@ export default class AuthPage extends React.Component {
         this.addressHandle = this.addressHandle.bind(this);
         this.passwordHandle = this.passwordHandle.bind(this);
         this.typeHandle = this.typeHandle.bind(this);
-        this.signin = this.signin.bind(this);
-        this.signup = this.signup.bind(this);
+        this.GoogFailIn = this.GoogFailIn.bind(this);
+        this.GoogFailUp = this.GoogFailUp.bind(this);
+        this.GoogSuccessIn = this.GoogSuccessIn.bind(this);
+        this.GoogSuccessUp = this.GoogSuccessUp.bind(this);
+       
         
     }
+   
     emailHandle(event) {
         this.setState({
           email: event.target.value,
@@ -61,18 +65,20 @@ export default class AuthPage extends React.Component {
         });
     }
     //{{'Authentication': 'Bearer ' + window.localStorage.token}}
-    signin() {
-        let obj = {
-            email: this.state.email,
+   
+    GoogSuccessIn(responce) {
+        console.log(responce);
+        let newObj = {
+            email: responce.profileObj.email,
             passwd: this.state.password,
         }
-        axios.post(`http://recyclr.xyz/signin`, obj).then(function(result) {
+        Axios.post('http://recyclr.xyz/signin', newObj).then(function(result) {
             console.log(result);
             let user = {
-                email: this.state.email,
                 name: result.data.user_name,
                 user_id: result.data.user_id,
-            }
+                email: responce.profileObj.email, 
+            };
             window.localStorage.setItem('user', user);
             window.localStorage.setItem('token', result.data.token);
             history.push('/settings');
@@ -81,30 +87,38 @@ export default class AuthPage extends React.Component {
             this.setState({alert: true});
         });
         
+        
     }
-    signup() {
+    GoogFailIn(responce) {
+        console.log("Failed");
+        console.log(responce);
+        this.setState({alert: true});
+    }
+    GoogSuccessUp(responce) {
+        console.log(responce);
         let newObj = {
-            address: this.state.address,
-            name: this.state.username,
-            email: this.state.email,
+            email: responce.profileObj.email,
+            name: responce.profileObj.name,
             passwd: this.state.password,
-            is_company: this.state.accountType,
-        }
-        console.log(newObj);
-        //call create user
-        axios.post(`http://recyclr.xyz/user`, newObj).then(function(result) {
+        };
+        Axios.post('http://recyclr.xyz/user', newObj).then(function(result) {
             console.log(result);
             this.setState({signinTog: false});
         }).catch(function(error) {
             console.log(error);
             this.setState({alert: true});
         });
-        
+        //window.sessionStorage.setItem();
+        //history.push('/auth');
         
     }
-   
-    
+    GoogFailUp(responce) {
+        console.log("Failed");
+        console.log(responce);
+        this.setState({alert: true});
+    }
     render() {
+        let alert;
         if (this.state.alert == true) {
             alert = <div className="alert alert-danger alert-dismissible" role="alert">
             An error has occured. Please try again
@@ -119,33 +133,34 @@ export default class AuthPage extends React.Component {
 
            
             
-
             <h3 id="signinHeading" className="card-title">Sign In</h3>
             
 
             <form>
-                <input type="text" className="form-control authInput" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
                 <input type="password" className="form-control authInput" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
                    
-                
             </form>
-            <button className="btn btn-primary authButton" onClick={this.signin}>Log In</button>
+            <GoogleLogin
+                clientId = "874168937531-i135rv9v06a5rkt2sj6c8f12l2tvud2j.apps.googleusercontent.com"
+                buttonText = "Sign In with Google"
+                className = "btn btn-secondary"
+                onSuccess={this.GoogSuccessIn}
+                onFailure={this.GoogFailIn}
+                /> 
+
         </div>;
         }
         else {
             bodyContent = <div className="card-body">
 
             <h3 className="card-title">Sign Up for Free</h3>
+           
+
+            
             
 
             <form>
-                <div className="form-row">
-                    <div className="col-12">
-                       <input type="text" className="form-control authInput" placeholder="Username" value={this.state.firstname} onChange={this.userHandle}></input>
-                    </div>
-                </div>
-                <input type="text" className="form-control authInput" placeholder="Address" value={this.state.address} onChange={this.addressHandle}></input>
-                <input type="text" className="form-control authInput" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
+                <h4>For added security, we would like for you to come up with an additional password for Recyclr</h4>
                 <input type="password" className="form-control authInput" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
                 <select className="form-control authSelect" value={this.state.accountType} onChange={this.typeHandle}>
                     <option value="f">Recyclr</option>
@@ -157,7 +172,13 @@ export default class AuthPage extends React.Component {
 
                 
             </form>
-            <button className="btn btn-primary authButton" onClick={this.signup}>GET STARTED</button>
+            <GoogleLogin
+                clientId = "874168937531-eqlmo921f0k15mqm5rdlp0o2op317eps.apps.googleusercontent.com"
+                buttonText = "Sign In with Google"
+                className = "btn btn-secondary"
+                onSuccess={this.GoogSuccessUp}
+                onFailure={this.GoogFailUp}
+                /> 
         </div>;
         }
         return(
@@ -176,8 +197,6 @@ export default class AuthPage extends React.Component {
                         </div>
                         {alert}
                         {bodyContent}
-                        <h2>Or, you can sign in using your <a href="/googleAuth">Google Account</a></h2>
-                        
                     </div>
                 </div>
             </div>
