@@ -17,12 +17,10 @@ export default class Navigation extends React.Component {
             this.state = {
                 isLogedIn: false,
             }
+        }
         
         this.logOut = this.logOut.bind(this);
-    }
-    componentDidMount() {
-        
-    }
+    };
 
     logOut() {
         let requestObject = {
