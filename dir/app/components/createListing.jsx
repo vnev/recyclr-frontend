@@ -1,6 +1,7 @@
 import React from 'react'
 import Axios from 'axios';
 import urls from './Urls.js';
+import history from './history.js'
 
 export default class createListing extends React.Component {
     constructor(props) {
@@ -23,6 +24,11 @@ export default class createListing extends React.Component {
             title: event.target.value
         });
     }
+    componentDidMount() {
+        if(window.localStorage.getItem('token') === null) {
+            history.push('/auth');
+        }
+    }
     descHandler(event) {
         this.setState({
             description: event.target.value
@@ -43,12 +49,22 @@ export default class createListing extends React.Component {
             title: this.state.title,
             description: this.state.description,
             material_type: this.state.matType,
-            material_weight: this.state.matWeight,
-            user_id: 1,
-            img_hash: '',
+            material_weight: parseFloat(this.state.matWeight),
+            user_id: parseInt(window.localStorage.getItem('userid')),
+            img_hash: '0'
         }
-        Axios.post(`${urls.remote}/listing`, newObj).then(function(result) {
+        console.log(window.localStorage.getItem('userid'));
+        Axios.post(`http://recyclr.xyz/listing`, newObj, {
+            headers: {
+                'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 
+                'Access-Control-Allow-Origin': '*'
+            }},)
+        
+        .then(function(result) {
             console.log(result);
+            //history.push('/listings');
+        }).catch(function(error) {
+            console.log(error);
         });
     }
     render() {
@@ -57,11 +73,11 @@ export default class createListing extends React.Component {
                 <div className="row">
                     <div className="col-md-12">
                             <div className="form-group">
-                                <label htmlFor="titleIn">Material Type</label>
+                                <label htmlFor="titleIn">Title</label>
                                 <input type="text" className="form-control" id="titleIn" value={this.state.title} onChange={this.titleHandler}/>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="descIn">Material Type</label>
+                                <label htmlFor="descIn">Description</label>
                                 <input type="text" className="form-control" id="descIn" value={this.state.description} onChange={this.descHandler}/>
                             </div>
                             <div className="form-group">

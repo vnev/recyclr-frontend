@@ -90,14 +90,15 @@ export default class AuthPage extends React.Component {
             passwd: this.state.password,
             is_company: this.state.accountType,
         }
+        let _this = this;
         console.log(newObj);
         //call create user
         axios.post(`http://recyclr.xyz/user`, newObj).then(function(result) {
             console.log(result);
-            this.setState({signinTog: false});
+            _this.setState({signinTog: false});
         }).catch(function(error) {
             console.log(error);
-            this.setState({alert: true});
+            _this.setState({alert: true});
         });
         
         

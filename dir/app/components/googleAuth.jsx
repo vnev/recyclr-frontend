@@ -79,9 +79,12 @@ export default class GoogleAuth extends React.Component {
                 user_id: result.data.user_id,
                 email: responce.profileObj.email, 
             };
-            window.localStorage.setItem('user', user);
+            window.localStorage.setItem('userid', user.user_id);
+            window.localStorage.setItem('username', user.name);
+            window.localStorage.setItem('useremail', user.email);
             window.localStorage.setItem('token', result.data.token);
-            history.push('/settings');
+            console.log(window.localStorage.getItem('userid'));
+            //history.push('/settings');
         }).catch(function(error) {
             console.log(error);
             this.setState({alert: true});
