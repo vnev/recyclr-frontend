@@ -6,9 +6,13 @@ exports.files = {
       'app.js': /^app/
     }
   },
-  stylesheets: {joinTo: 'app.css'}
+  stylesheets: {joinTo: 'app.css'},
+  watcher: {
+    awaitWriteFinish: true,
+    usePolling: true
+  }
 };
 
 exports.plugins = {
-  babel: {presets: ['latest', 'react']}
+  babel: {presets: ['latest', 'react'], pattern: /.(js|jsx)$/}
 };

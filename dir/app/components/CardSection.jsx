@@ -5,7 +5,7 @@ export default class CardSection extends Component {
     render() {
         return(
             <div className="row align-content-left">
-               <div className="col-3">
+               <div className="col-12">
                     <h3>Card Details</h3>
                     <CardElement style={{base: {fontSize: '18px'}}}/>
                 </div>

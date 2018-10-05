@@ -36,14 +36,16 @@ import Axios from 'axios';
 
     render() {
         return(
+            
             <form onSubmit={this.submitHandle}>
                 <CardSection />
                 <div className="row align-content-left">
-                    <div className="col-3">
+                    <div className="col-12">
                          <button className="btn btn-primary paymentBtn">Confirm</button>
                     </div>
                 </div>
             </form>
+            
         );
     }
 }

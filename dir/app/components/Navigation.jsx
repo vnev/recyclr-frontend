@@ -2,23 +2,17 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import history from './history.js'
-// import { Navbar, Nav, NavItem } from 'react-bootstrap';
-// Styling from https://react-bootstrap.github.io/components/navbar/
+
 
 export default class Navigation extends React.Component {
     constructor(props) {
         super(props);
         this.state= {
             isLogedIn: false,
-        }
+        };
         
         this.logOut = this.logOut.bind(this);
     }
-    componentDidMount() {
-        
-    }
-        
-
     logOut() {
         let requestObject = {
             user_id: parseInt(window.localStorage.getItem('userid')),
@@ -39,19 +33,19 @@ export default class Navigation extends React.Component {
         let but;
             if (window.localStorage.getItem('username') === null) {
                 but =   <li className="nav-item">
-                            <Link className="nav-link" to="/auth">Log In</Link>
+                            <a className="nav-link" href="/auth">Log In</a>
                         </li>
             }
             else {
                 but =  <li className="nav-item">
-                            <Link className="nav-link" onClick={this.logOut} to="/auth">Sign Out</Link>
+                            <a className="nav-link" onClick={this.logOut} href="/auth">Sign Out</a>
                         </li>
             }
         return(
             
             <div className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="navbar-brand">
-                    <Link to="/">Recyclr</Link>
+                    <a href="/">Recyclr</a>
                 </div>
                 
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,13 +55,13 @@ export default class Navigation extends React.Component {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
-                            <Link className="nav-link" to="/admin">Admin</Link>
+                            <a className="nav-link" href="/admin">Admin</a>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/listings">Listings</Link>
+                            <a className="nav-link" href="/listings">Listings</a>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/progress">My Progress</Link>
+                            <a className="nav-link" href="/progress">My Progress</a>
                         </li>
                     </ul>
                     <ul className="navbar-nav my-2 my-lg-0">

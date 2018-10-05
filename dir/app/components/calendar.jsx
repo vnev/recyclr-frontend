@@ -5,9 +5,9 @@ EITHER FOR REQUESTED OR AVAILABLE PICKUP*/
 /*FRONTEND WORK TODO: CALENDAR NEEDS TO SCROLL MONTHS, ALSO WILL MOVE TO BUTTON ON
 LISTINGITEM, INSTEAD OF NAV MENU*/
 
-import React from "react";
-import dateFns from "date-fns";
-import axios from 'axios';
+import React from 'react'
+import dateFns from "date-fns"
+import axios from 'axios'
 
 export default class Calendar extends React.Component {
   constructor(props) {
@@ -42,7 +42,7 @@ export default class Calendar extends React.Component {
     let newObj = {
       pickup_date_time: this.state.selectedDate,
     }
-    axios.put('http://recyclr.xyz/listing/update/' +  parseInt(this.props.match.params.id) , newObj, {headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token')}}).then(function(result) {
+    axios.post('http://recyclr.xyz/listing/' + parseInt(this.props.match.params.id) + '/update', newObj, {headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token')}}).then(function(result) {
       console.log(result);
     }).catch(function(error) {
       console.log(error);

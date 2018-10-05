@@ -1,6 +1,6 @@
 
 import React from 'react'
-import GoogleLogin from 'react-google-login'
+import { GoogleLogin } from 'react-google-login'
 import history from './history.js'
 import Axios from 'axios';
 import urls  from './Urls.js';
@@ -104,12 +104,13 @@ export default class GoogleAuth extends React.Component {
             name: responce.profileObj.name,
             passwd: this.state.password,
         };
+        let _this = this;
         Axios.post('http://recyclr.xyz/user', newObj).then(function(result) {
             console.log(result);
-            this.setState({signinTog: false});
+            _this.setState({signinTog: false});
         }).catch(function(error) {
             console.log(error);
-            this.setState({alert: true});
+            _this.setState({alert: true});
         });
         //window.sessionStorage.setItem();
         //history.push('/auth');

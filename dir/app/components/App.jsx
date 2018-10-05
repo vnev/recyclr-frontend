@@ -8,9 +8,10 @@ import Payment from './Stripe.jsx';
 import Progress from './Progress.jsx';
 import createListing from './createListing.jsx';
 import Listings from './Listings.jsx';
+import GoogleAuth from './googleAuth.jsx';
 import {Switch} from 'react-router-dom';
 import history from './history.js';
-import {Route, Router} from 'react-router';
+import {Route, Router} from 'react-router-dom';
 
 
 
@@ -37,7 +38,7 @@ export default class App extends React.Component {
            
             <Route path={'/listings'} component={Listings}/>
             <Route path={'/admin'} component={AdminPage}/>
-
+            <Route path={'/googleAuth'} component={GoogleAuth}/>
             <Route path={'/createListing'} component={createListing}/>
             <Route path={'/calendar'} component={Calendar}/>
             <Route path={'/payment'} component={Payment}/>
