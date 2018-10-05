@@ -1,13 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Progress from 'Progress.jsx';
+import Progress from '../app/components/Progress.jsx';
+import { expect } from 'chai';
 
 
 const wrapper = shallow(<Progress />);
 it('Social Media Button renders correctly', () => {
-    expect(wrapper.find('#socialBut').exists()).toBe(true);
+    expect(wrapper.find('#socialButton')).to.exist;
 });
 it('Renders popup window after click', () => {
-    wrapper.find('#socialBut').props.onClick();
-    expect(wrapper.state.shared).toEqual(true);
+    wrapper.find('#socialWrapper').simulate('click');
+    expect(wrapper.state('shared')).equal(true);
 });

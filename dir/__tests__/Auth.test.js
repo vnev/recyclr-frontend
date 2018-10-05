@@ -18,6 +18,5 @@ describe('Tests for the Authentication components', () => {
         wrapper.setState({ signinTog : 'false'});
         console.log(wrapper.state('signinTog'));
         expect(wrapper.find('#signUpHeading').exists()).toBe(true);
-        expect(wrapper.find('#signinHeading').exists()).toBe(false);
     });
 });
