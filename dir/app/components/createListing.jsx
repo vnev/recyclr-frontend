@@ -12,6 +12,8 @@ export default class createListing extends React.Component {
             description: '',
             matType: '',
             matWeight: 0.0,
+            file: '',
+            imagePreviewUrl: ''
 
         };
         this.titleHandler = this.titleHandler.bind(this);
@@ -50,22 +52,39 @@ export default class createListing extends React.Component {
             });
         }
     }
+
+  _handleImageChange(e) {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({
+        file: file,
+        imagePreviewUrl: reader.result
+      });
+    }
+
+    reader.readAsDataURL(file)
+  }
     createNewListing() {
         let newObj = {
             title: this.state.title,
             description: this.state.description,
             material_type: this.state.matType,
             material_weight: parseFloat(this.state.matWeight),
+            file: this.state.file,
             user_id: parseInt(window.localStorage.getItem('userid')),
             img_hash: '0'
         }
         console.log(window.localStorage.getItem('userid'));
         Axios.post(`http://recyclr.xyz/listing`, newObj, {
             headers: {
-                'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 
+                'Authorization': 'Bearer ' + window.localStorage.getItem('token'),
                 'Access-Control-Allow-Origin': '*'
             }},)
-        
+
         .then(function(result) {
             console.log(result);
             //history.push('/listings');
@@ -94,7 +113,14 @@ export default class createListing extends React.Component {
                                 <label htmlFor="matWeightIn">Material Weight</label>
                                 <input type="text" className="form-control" id="matWeightIn" value={this.state.matWeight} onChange={this.weightHandler}/>
                             </div>
-                        
+
+                            <div className="previewComponent">
+                              <form onSubmit={(e)=>this._handleSubmit(e)}>
+                                <input className="fileInput"
+                                  type="file"
+                                  onChange={(e)=>this._handleImageChange(e)} />
+                                </form>
+                          </div>
                         <button className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
                     </div>
                 </div>
