@@ -17,6 +17,7 @@ export default class GoogleAuth extends React.Component {
             address: "",
             username: "",
             accountType: "f",
+            address: '',
             alert: false,
         };
         //this.toggleAuthForm = toggleAuthForm.bind(this);
@@ -47,11 +48,6 @@ export default class GoogleAuth extends React.Component {
     userHandle(event) {
         this.setState({
           username: event.target.value,
-        });
-    }
-    lastHandle(event) {
-        this.setState({
-          lastname: event.target.value,
         });
     }
     typeHandle(event) {
@@ -105,6 +101,7 @@ export default class GoogleAuth extends React.Component {
             email: responce.profileObj.email,
             name: responce.profileObj.name,
             passwd: this.state.password,
+            address: this.state.address,
         };
         let _this = this;
         Axios.post('http://recyclr.xyz/user', newObj).then(function(result) {
@@ -166,7 +163,8 @@ export default class GoogleAuth extends React.Component {
             
 
             <form>
-                <h4>For added security, we would like for you to come up with an additional password for Recyclr</h4>
+                <h4>For added security, we would like for you to come up with an additional password for Recyclr, as well as provide an address for your recycling pickups</h4>
+                <input type="text" className="form-control authInput" placeholder="Address" value={this.state.address} onChange={this.addressHandle}></input>
                 <input type="password" className="form-control authInput" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
                 <select className="form-control authSelect" value={this.state.accountType} onChange={this.typeHandle}>
                     <option value="f">Recyclr</option>

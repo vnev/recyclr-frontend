@@ -57,7 +57,8 @@ export default class createListing extends React.Component {
             material_type: this.state.matType,
             material_weight: parseFloat(this.state.matWeight),
             user_id: parseInt(window.localStorage.getItem('userid')),
-            img_hash: '0'
+            img_hash: '0',
+            
         }
         Axios.post(`http://recyclr.xyz/listing`, newObj, {
             headers: {
@@ -93,6 +94,7 @@ export default class createListing extends React.Component {
                                 <label htmlFor="matWeightIn">Material Weight</label>
                                 <input type="text" className="form-control" id="matWeightIn" value={this.state.matWeight} onChange={this.weightHandler}/>
                             </div>
+                           
                         
                         <button className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
                     </div>

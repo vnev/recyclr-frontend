@@ -10,6 +10,7 @@ export default class Listings extends React.Component {
             radius: '5',
             list: [],
             distList: [],
+            userAddr: '',
         }
         this.distHandle = this.distHandle.bind(this);
     }
@@ -22,7 +23,7 @@ export default class Listings extends React.Component {
     updateList() {
         let newList = [];
         for (let i = 0; i < this.state.list.length; i++) {
-            var origin = `${window.localStorage.getItem('zipcode')}`;
+            var origin = `${this.state.userAddr}`;
             var destination = `${this.state.list[i].zipcode}`;
             var service = new google.maps.DistanceMatrixService();
                 service.getDistanceMatrix({
@@ -51,18 +52,46 @@ export default class Listings extends React.Component {
             distList: newList,
         });
     }
+    addAddrs() {
+        let newList = [];
+        for(let i = 0; i < this.state.list.length; i++) {
+            axios.get(`http://recyclr.com/user/${this.state.list[i].user_id}`, {headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
+            .then(function(result) {
+                let newObj = this.state.list[i];
+                newObj.address = result.data.address;
+                newList.push(newObj);
+            })
+        }
+        this.setState({
+            list: newList,
+        });
+    }
     componentDidMount() {
         if (window.localStorage.getItem('username') === null) {
             history.push('/auth');
         }
         let _this = this;
+        axios.get(`http://recyclr.xyz/user/${window.localStorage.getItem('userid')}`, {headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
+        .then(function(result) {
+            console.log(result);
+            if(result.data.is_company === false) {
+                //history.push('/auth');
+            }
+            else {
+                _this.setState({
+                    userAddr: result.data.address,
+                });
+            }
+        });
         //make get request using stored email/username
         axios.get("http://recyclr.xyz/listings",{headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
         .then(function(result) {
             console.log(result.data);
             _this.setState({list: result.data});
+            _this.addAddrs();
             _this.updateList();
         });
+        console.log(_this.state.list);
         //set list = returned json objects list = results.data
     }
     render() {

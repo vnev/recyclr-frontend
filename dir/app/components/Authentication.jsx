@@ -17,6 +17,8 @@ export default class AuthPage extends React.Component {
             address: "",
             username: "",
             accountType: "f",
+            city: '',
+            state: '',
             alert: false,
         };
         //this.toggleAuthForm = toggleAuthForm.bind(this);
@@ -26,6 +28,8 @@ export default class AuthPage extends React.Component {
         this.addressHandle = this.addressHandle.bind(this);
         this.passwordHandle = this.passwordHandle.bind(this);
         this.typeHandle = this.typeHandle.bind(this);
+        this.cityHandle = this.cityHandle.bind(this);
+        this.stateHandle = this.stateHandle.bind(this);
         this.signin = this.signin.bind(this);
         this.signup = this.signup.bind(this);
 
@@ -54,6 +58,16 @@ export default class AuthPage extends React.Component {
         this.setState({
             accountType: event.target.value,
         });
+    }
+    cityHandle(event) {
+        this.setState({
+            city: event.target.value,
+        });
+    }
+    stateHandle(event) {
+        this.setState({
+            state: event.target.value,
+        })
     }
     addressHandle(event) {
         this.setState({
@@ -94,6 +108,8 @@ export default class AuthPage extends React.Component {
             email: this.state.email,
             passwd: this.state.password,
             is_company: this.state.accountType,
+            city: this.state.city,
+            state: this.state.state,
         }
         let _this = this;
         console.log(newObj);
@@ -151,6 +167,8 @@ export default class AuthPage extends React.Component {
                     </div>
                 </div>
                 <input type="text" className="form-control authInput" placeholder="Address" value={this.state.address} onChange={this.addressHandle}></input>
+                <input type="text" className="form-control authInput" placeholder="City" value={this.state.city} onChange={this.cityHandle}></input>
+                <input type="text" className="form-control authInput" placeholder="State" value={this.state.state} onChange={this.stateHandle}></input>
                 <input type="text" className="form-control authInput" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
                 <input type="password" className="form-control authInput" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
                 <select className="form-control authSelect" value={this.state.accountType} onChange={this.typeHandle}>
