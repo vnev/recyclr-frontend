@@ -12,6 +12,7 @@ import GoogleAuth from './googleAuth.jsx';
 import {Switch} from 'react-router-dom';
 import history from './history.js';
 import {Route, Router} from 'react-router-dom';
+import ChatRoom from './ChatRoom.jsx';
 
 
 
@@ -35,7 +36,7 @@ export default class App extends React.Component {
             <Route exact path={'/'} component={AuthPage}/>
             <Route path={'/auth'} component={AuthPage}/>
             <Route path={'/settings'} component={Settings}/>
-           
+            <Route path={'/chat'} component={ChatRoom}/>
             <Route path={'/listings'} component={Listings}/>
             <Route path={'/admin'} component={AdminPage}/>
             <Route path={'/googleAuth'} component={GoogleAuth}/>

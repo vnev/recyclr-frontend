@@ -68,6 +68,7 @@ export default class GoogleAuth extends React.Component {
    
     GoogSuccessIn(responce) {
         console.log(responce);
+        let _this = this;
         let newObj = {
             email: responce.profileObj.email,
             passwd: this.state.password,
@@ -82,12 +83,13 @@ export default class GoogleAuth extends React.Component {
             window.localStorage.setItem('userid', user.user_id);
             window.localStorage.setItem('username', user.name);
             window.localStorage.setItem('useremail', user.email);
+            //window.localStorage.setItem('zipcode', result.data.zipcode)
             window.localStorage.setItem('token', result.data.token);
             console.log(window.localStorage.getItem('userid'));
-            //history.push('/settings');
+            history.push('/settings');
         }).catch(function(error) {
             console.log(error);
-            this.setState({alert: true});
+            _this.setState({alert: true});
         });
         
         

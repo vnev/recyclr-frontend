@@ -59,7 +59,6 @@ export default class createListing extends React.Component {
             user_id: parseInt(window.localStorage.getItem('userid')),
             img_hash: '0'
         }
-        console.log(window.localStorage.getItem('userid'));
         Axios.post(`http://recyclr.xyz/listing`, newObj, {
             headers: {
                 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 
