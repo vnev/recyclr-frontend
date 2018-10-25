@@ -15,6 +15,8 @@ export default class AuthPage extends React.Component {
             email: "",
             password: "",
             address: "",
+            city: "",
+            USstate: "",
             username: "",
             accountType: "f",
             alert: false,
@@ -24,6 +26,8 @@ export default class AuthPage extends React.Component {
         this.passwordHandle = this.passwordHandle.bind(this);
         this.userHandle = this.userHandle.bind(this);
         this.addressHandle = this.addressHandle.bind(this);
+        this.cityHandle = this.cityHandle.bind(this);
+        this.stateHandle = this.stateHandle.bind(this);
         this.passwordHandle = this.passwordHandle.bind(this);
         this.typeHandle = this.typeHandle.bind(this);
         this.signin = this.signin.bind(this);
@@ -60,6 +64,16 @@ export default class AuthPage extends React.Component {
             address: event.target.value,
         });
     }
+    cityHandle(event) {
+        this.setState({
+            city: event.target.value,
+        });
+    }
+    stateHandle(event) {
+        this.setState({
+            USstate: event.target.value,
+        });
+    }
     //{{'Authentication': 'Bearer ' + window.localStorage.token}}
     signin() {
         let obj = {
@@ -89,6 +103,8 @@ export default class AuthPage extends React.Component {
     signup() {
         let newObj = {
             address: this.state.address,
+            city: this.state.city,
+            USState: this.state.USState,
             name: this.state.username,
             email: this.state.email,
             passwd: this.state.password,
@@ -150,6 +166,60 @@ export default class AuthPage extends React.Component {
                     </div>
                 </div>
                 <input type="text" className="form-control authInput" placeholder="Address" value={this.state.address} onChange={this.addressHandle}></input>
+                <input type="text" className="form-control authInput" placeholder="City" value={this.state.city} onChange={this.cityHandle}></input>
+                <select className="form-control authSelect" value={this.state.USState} onChange={this.stateHandle}>
+	                 <option value="AL">Alabama</option>
+	                  <option value="AK">Alaska</option>
+	                   <option value="AZ">Arizona</option>
+	                    <option value="AR">Arkansas</option>
+	                     <option value="CA">California</option>
+	                      <option value="CO">Colorado</option>
+	                       <option value="CT">Connecticut</option>
+	                        <option value="DE">Delaware</option>
+	                         <option value="DC">District Of Columbia</option>
+	                          <option value="FL">Florida</option>
+	                           <option value="GA">Georgia</option>
+	                            <option value="HI">Hawaii</option>
+	                             <option value="ID">Idaho</option>
+	                              <option value="IL">Illinois</option>
+	                               <option value="IN">Indiana</option>
+	                                <option value="IA">Iowa</option>
+	                                 <option value="KS">Kansas</option>
+	                                  <option value="KY">Kentucky</option>
+	                                   <option value="LA">Louisiana</option>
+	                                    <option value="ME">Maine</option>
+	                                     <option value="MD">Maryland</option>
+	                                      <option value="MA">Massachusetts</option>
+	                                       <option value="MI">Michigan</option>
+	                                        <option value="MN">Minnesota</option>
+	                                         <option value="MS">Mississippi</option>
+	                                          <option value="MO">Missouri</option>
+	                                           <option value="MT">Montana</option>
+	                                            <option value="NE">Nebraska</option>
+	                                             <option value="NV">Nevada</option>
+	                                              <option value="NH">New Hampshire</option>
+	                                               <option value="NJ">New Jersey</option>
+	                                                <option value="NM">New Mexico</option>
+	                                                 <option value="NY">New York</option>
+	                                                  <option value="NC">North Carolina</option>
+	                                                   <option value="ND">North Dakota</option>
+	                                                    <option value="OH">Ohio</option>
+	                                                     <option value="OK">Oklahoma</option>
+	                                                      <option value="OR">Oregon</option>
+	                                                       <option value="PA">Pennsylvania</option>
+	                                                        <option value="RI">Rhode Island</option>
+	                                                         <option value="SC">South Carolina</option>
+	                                                          <option value="SD">South Dakota</option>
+	                                                           <option value="TN">Tennessee</option>
+	                                                            <option value="TX">Texas</option>
+	                                                             <option value="UT">Utah</option>
+	                                                              <option value="VT">Vermont</option>
+	                                                               <option value="VA">Virginia</option>
+	                                                                <option value="WA">Washington</option>
+	                                                                 <option value="WV">West Virginia</option>
+	                                                                  <option value="WI">Wisconsin</option>
+	                                                                   <option value="WY">Wyoming</option>
+                                                                   </select>
                 <input type="text" className="form-control authInput" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
                 <input type="password" className="form-control authInput" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
                 <select className="form-control authSelect" value={this.state.accountType} onChange={this.typeHandle}>

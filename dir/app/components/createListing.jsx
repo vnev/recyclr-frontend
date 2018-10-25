@@ -3,6 +3,7 @@ import Axios from 'axios';
 import urls from './Urls.js';
 import history from './history.js'
 
+//uncomment file when database is updated
 
 export default class createListing extends React.Component {
     constructor(props) {
@@ -12,7 +13,8 @@ export default class createListing extends React.Component {
             description: '',
             matType: '',
             matWeight: 0.0,
-            file: '',
+            image: '',
+            zipcode: '',
             imagePreviewUrl: ''
 
         };
@@ -20,7 +22,10 @@ export default class createListing extends React.Component {
         this.descHandler = this.descHandler.bind(this);
         this.typeHandler = this.typeHandler.bind(this);
         this.weightHandler = this.weightHandler.bind(this);
+        this.zipHandler = this.zipHandler.bind(this);
+        this.imageHandler = this.imageHandler.bind(this);
         this.createNewListing = this.createNewListing.bind(this);
+
     }
     titleHandler(event) {
         this.setState({
@@ -46,14 +51,20 @@ export default class createListing extends React.Component {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
     weightHandler(event) {
-        if (isNumeric(event.target.value)) {
+        //if (isNumeric(event.target.value)) {
             this.setState({
                 matWeight: event.target.value
             });
-        }
+        //}
     }
-
-  _handleImageChange(e) {
+    zipHandler(event) {
+      //if (isNumeric(event.target.value)) {
+        this.setState({
+            zipcode: event.target.value
+        });
+      //}
+    }
+  imageHandler(e) {
     e.preventDefault();
 
     let reader = new FileReader();
@@ -61,7 +72,7 @@ export default class createListing extends React.Component {
 
     reader.onloadend = () => {
       this.setState({
-        file: file,
+        image: file,
         imagePreviewUrl: reader.result
       });
     }
@@ -74,9 +85,9 @@ export default class createListing extends React.Component {
             description: this.state.description,
             material_type: this.state.matType,
             material_weight: parseFloat(this.state.matWeight),
-            file: this.state.file,
             user_id: parseInt(window.localStorage.getItem('userid')),
-            img_hash: '0'
+            image: this.state.image,
+            zipcode: parseInt(this.state.zipcode)
         }
         console.log(window.localStorage.getItem('userid'));
         Axios.post(`http://recyclr.xyz/listing`, newObj, {
@@ -110,15 +121,19 @@ export default class createListing extends React.Component {
                                 <input type="text" className="form-control" id="matTypeIn" value={this.state.matType} onChange={this.typeHandler}/>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="matWeightIn">Material Weight</label>
+                                <label htmlFor="matWeightIn">Material Weight (lbs)</label>
                                 <input type="text" className="form-control" id="matWeightIn" value={this.state.matWeight} onChange={this.weightHandler}/>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="zipcodeIn">Zipcode</label>
+                                <input type="text" className="form-control" id="zipcodeIn" value={this.state.zipcode} onChange={this.zipHandler}/>
                             </div>
 
                             <div className="previewComponent">
                               <form onSubmit={(e)=>this._handleSubmit(e)}>
                                 <input className="fileInput"
                                   type="file"
-                                  onChange={(e)=>this._handleImageChange(e)} />
+                                  onChange={(e)=>this.imageHandler(e)} />
                                 </form>
                           </div>
                         <button className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
