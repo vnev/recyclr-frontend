@@ -10,7 +10,7 @@ export default class Navigation extends React.Component {
         this.state= {
             isLogedIn: false,
         };
-        
+
         this.logOut = this.logOut.bind(this);
     }
     logOut() {
@@ -42,12 +42,12 @@ export default class Navigation extends React.Component {
                         </li>
             }
         return(
-            
+
             <div className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="navbar-brand">
                     <a href="/">Recyclr</a>
                 </div>
-                
+
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -59,6 +59,9 @@ export default class Navigation extends React.Component {
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="/listings">Listings</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/createListing">Create a Listing</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="/progress">My Progress</a>

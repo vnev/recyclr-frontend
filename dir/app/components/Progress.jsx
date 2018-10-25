@@ -23,7 +23,7 @@ export default class Progress extends Component {
       //make get request using stored email/username
       axios.get('http://recyclr.xyz/user/progress/' + window.localStorage.getItem('userid'),{headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
       .then(function(result) {
-          console.log(result);
+          console.log(result.data);
           _this.setState({list: result.data});
       }).catch(function(error) {
         console.log(error);
@@ -65,7 +65,9 @@ export default class Progress extends Component {
         <div>
           <h1>My Recyclr Progress</h1>
           <h3>Total number of Recyclr listings: {this.state.list.length}</h3>
-          <h3>Next Recyclr listings goal: {this.calculateIncentive}. You need {this.state.incentiveCheck - this.state.list.length} more listings sold to reach your goal</h3>
+          <h3>Total weight of Recyclr listings: {this.state.list}</h3>
+          
+          <h3>Next Recyclr listings goal: {this.calculateIncentive(), this.state.incentiveCheck}. You need {this.state.incentiveCheck - this.state.list.length} more listings sold to reach your goal.</h3>
           <div id="socialWrapper" onClick={this.hasShared}>
           <FacebookShareButton
             url='http://recyclr.xyz'

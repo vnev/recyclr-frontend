@@ -12,7 +12,7 @@ export default class createListing extends React.Component {
             title: '',
             description: '',
             matType: '',
-            matWeight: 0.0,
+            matWeight: '',
             image: '',
             zipcode: '',
             imagePreviewUrl: ''
@@ -47,22 +47,22 @@ export default class createListing extends React.Component {
             matType: event.target.value
         });
     }
-    isNumberic(n) {
+    isNumeric(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
     weightHandler(event) {
-        //if (isNumeric(event.target.value)) {
+        if (this.isNumeric(event.target.value)) {
             this.setState({
                 matWeight: event.target.value
             });
-        //}
+        }
     }
     zipHandler(event) {
-      //if (isNumeric(event.target.value)) {
+      if (this.isNumeric(event.target.value)) {
         this.setState({
             zipcode: event.target.value
         });
-      //}
+      }
     }
   imageHandler(e) {
     e.preventDefault();
