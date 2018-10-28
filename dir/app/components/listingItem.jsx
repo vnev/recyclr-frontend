@@ -35,7 +35,7 @@ export default class ListingItem extends React.Component {
                     <div className="col-3">
                         <h2>{this.props.Item.title}</h2>
                         <h3>{this.props.Item.description}</h3>
-                        <h3>Zip Code: {this.props.Item.zipcode}</h3>
+                        <h3>Distance: {this.props.Item.distance} miles</h3>
                     </div>
                     <div className="col-3">
                         <h2>Weight: {this.props.Item.material_weight} lbs</h2>

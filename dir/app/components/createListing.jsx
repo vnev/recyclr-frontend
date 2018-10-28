@@ -2,6 +2,7 @@ import React from 'react'
 import Axios from 'axios';
 import urls from './Urls.js';
 import history from './history.js'
+import Autocomplete from 'react-google-autocomplete'
 
 
 export default class createListing extends React.Component {
@@ -94,7 +95,14 @@ export default class createListing extends React.Component {
                                 <label htmlFor="matWeightIn">Material Weight</label>
                                 <input type="text" className="form-control" id="matWeightIn" value={this.state.matWeight} onChange={this.weightHandler}/>
                             </div>
-                           
+                            <div className='form-group'>
+                                <label htmlFor='googAuto'>Pickup Address</label>
+                                <Autocomplete
+                                    onPlaceSelected={(place) => console.log(place)}
+                                    types={['address']}
+                                    componentRestrictions={{country: 'USA'}}
+                                />
+                            </div>
                         
                         <button className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
                     </div>
