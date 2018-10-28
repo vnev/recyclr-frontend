@@ -1,6 +1,8 @@
 import React from 'react'
+import ListingItem from './listingItem.jsx'
+import axios from 'axios'
 
-export default class ChatSelelct extends React.Component {
+export default class ChatSelect extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -9,19 +11,25 @@ export default class ChatSelelct extends React.Component {
         
     }
     componentDidMount() {
-        //send all of the distinct from_user ids
+        //get all listings that a user has frozen
+        let _this = this;
+        axios.get(`http://recyclr.xyz/listing/frozen/${window.localStorage.getItem('userid')}`, {
+            headers: {
+                'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 
+                'Access-Control-Allow-Origin': '*'
+            }})
+        .then(function(result){
+            console.log(result);
+             _this.setState({
+                chatList: result.data,
+        })});
     }
     render() {
+        console.log(this.state.chatList);
         return(
             <div className="container-fluid">
                 {this.state.chatList.map((item, key) => {
-                    return(
-                        <div className="row">
-                            <div className="col-8 offset-2">
-                                <h1><a href="/something">{item.name}</a></h1>
-                            </div>
-                        </div>
-                    );
+                   return <ListingItem Item={item} ButBool={false}/>
                 })}
             </div>
                 

@@ -18,7 +18,14 @@ export default class Listings extends React.Component {
         this.setState({
             radius: event.target.value,
         });
-        this.updateList();
+        this.filterList();
+    }
+    filterList() {
+        let newList = this.state.list.filter((data) => data.distance <= this.state.radius);
+        console.log(newList);
+        this.setState({
+            distList: newList,
+        });
     }
     updateList() {
         let newList = [];
@@ -35,36 +42,20 @@ export default class Listings extends React.Component {
                     avoidTolls: false
                 }, (response, status) => {
                     var distance = response.rows[0].elements[0].distance;
-                    var distance_value = distance.value;
                     var distance_text = distance.text;
                     var miles = distance_text.substring(0, distance_text.length - 3);
-                    console.log(`Length in miles: ${miles}`);
-                    console.log(this.state.radius);
-                   if (miles <= this.state.radius || this.state.radius === '26') {
-                       let temp = this.state.list[i];
-                       temp.distance = miles;
-                       newList.push(temp);
+                    if (miles <= this.state.radius || this.state.radius === '26') {
+                        let temp = this.state.list[i];
+                        temp.distance = miles;
+                        newList.push(temp);
                    }
-                });
-            
+                }); 
         }
-        this.setState({
-            distList: newList,
-        });
-    }
-    addAddrs() {
-        let newList = [];
-        for(let i = 0; i < this.state.list.length; i++) {
-            axios.get(`http://recyclr.com/user/${this.state.list[i].user_id}`, {headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
-            .then(function(result) {
-                let newObj = this.state.list[i];
-                newObj.address = result.data.address;
-                newList.push(newObj);
-            })
-        }
+        console.log(newList);
         this.setState({
             list: newList,
-        });
+        }, this.filterList());
+        
     }
     componentDidMount() {
         if (window.localStorage.getItem('username') === null) {
@@ -79,19 +70,20 @@ export default class Listings extends React.Component {
             }
             else {
                 _this.setState({
-                    userAddr: result.data.address,
+                    userAddr: result.data.city + ' ' + result.data.state,
                 });
             }
+            axios.get("http://recyclr.xyz/listings",{headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
+            .then(function(result) {
+                _this.setState({list: result.data}, () => _this.updateList());
+             
+              
+                console.log(_this.state.list);
+            });
         });
         //make get request using stored email/username
-        axios.get("http://recyclr.xyz/listings",{headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
-        .then(function(result) {
-            console.log(result.data);
-            _this.setState({list: result.data});
-            _this.addAddrs();
-            _this.updateList();
-        });
-        console.log(_this.state.list);
+       
+        
         //set list = returned json objects list = results.data
     }
     render() {
@@ -105,7 +97,7 @@ export default class Listings extends React.Component {
                         <option value='26'>More than 25 Miles</option>
                     </select>
                     {this.state.distList.map((item,key) => {
-                        return <ListingItem Item={item}/>
+                        return <ListingItem Item={item} ButBool={true}/>
                     })}
                 </div>
             </div>

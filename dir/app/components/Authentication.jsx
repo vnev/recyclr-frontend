@@ -114,13 +114,24 @@ export default class AuthPage extends React.Component {
         let _this = this;
         console.log(newObj);
         //call create user
-        axios.post(`http://recyclr.xyz/user`, newObj).then(function(result) {
-            console.log(result);
-            _this.setState({signinTog: false});
-        }).catch(function(error) {
-            console.log(error);
-            _this.setState({alert: true});
-        });
+        if (this.state.is_company === 'f') {
+            axios.post(`http://recyclr.xyz/user`, newObj).then(function(result) {
+                console.log(result);
+                _this.setState({signinTog: false});
+            }).catch(function(error) {
+                console.log(error);
+                _this.setState({alert: true});
+            });
+        }
+        else {
+            axios.post(`http://recyclr.xyz/company`, newObj).then(function(result) {
+                console.log(result);
+                _this.setState({signinTog: false});
+            }).catch(function(error) {
+                console.log(error);
+                _this.setState({alert: true});
+            });
+        }
 
 
     }

@@ -11,6 +11,7 @@ import Listings from './Listings.jsx';
 import GoogleAuth from './googleAuth.jsx';
 import {Switch} from 'react-router-dom';
 import history from './history.js';
+import ChatSelect from './chatSelect.jsx'
 import {Route, Router} from 'react-router-dom';
 import ChatRoom from './ChatRoom.jsx';
 
@@ -43,7 +44,8 @@ export default class App extends React.Component {
             <Route path={'/createListing'} component={createListing}/>
             <Route path={'/calendar'} component={Calendar}/>
             <Route path={'/payment'} component={Payment}/>
-
+            <Route path={'/chatselect'} component={ChatSelect}/>
+            <Route path={'/chatroom/:id'} component={ChatRoom}/>
             <Route path={'/choose_date/:id'} component={Calendar}/>
             <Route path={'/progress'} component={Progress}/>
 
