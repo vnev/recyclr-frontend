@@ -1,38 +1,44 @@
 #appBase {
-    width: 100%;
+  width: 100%;
 
 }
+
 listingRow {
-    margin-top: 15px;
-    margin-bottom: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
+
 .authCard {
 
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 
 }
+
 .authNav {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
+
 .authInput {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    border-radius: 0%;
-    color: white;
-    background-color: black;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-radius: 0%;
+  color: white;
+  background-color: black;
 }
+
 .authSelect {
-    margin-top: 25px;
-    color: black;
+  margin-top: 25px;
+  color: black;
 }
+
 .authButton {
-    width: 100%;
-    margin-top: 50px;
-    height: 80px;
+  width: 100%;
+  margin-top: 50px;
+  height: 80px;
 
 }
 
@@ -43,26 +49,30 @@ listingRow {
 }
 
 .banButton {
-    width: 25%;
-    margin-top: 10px;
-    height: 50px;
-}
-.banInput {
-    margin-top: 20px;
-    width: 25%;
-    border-radius: 0%;
-}
-.addressInput {
-  margin-top: 20px;
-  margin-left: 20px;
-  width:25%;
-  margin-bottom: 10px;
-}
-.formButton {
-  width: 40%;
+  width: 25%;
   margin-top: 10px;
   height: 50px;
 }
+
+.banInput {
+  margin-top: 20px;
+  width: 25%;
+  border-radius: 0%;
+}
+
+.addressInput {
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 25%;
+  margin-bottom: 10px;
+}
+
+.formButton {
+  /* width: 40%; */
+  margin-top: 10px;
+  /* height: 50px; */
+}
+
 .formInput {
   width: 40%;
   margin-top: 20px;
@@ -109,13 +119,13 @@ listingRow {
 }
 
 body {
-    font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-    font-size: 1em;
-    font-weight: 300;
-    line-height: 1.5;
-    color: var(--text-color);
-    background: var(--bg-color);
-    position: relative;
+  font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-size: 1em;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--text-color);
+  background: var(--bg-color);
+  position: relative;
 }
 
 header {
@@ -244,7 +254,7 @@ main {
 
 .calendar .body .selected {
   border-left: 10px solid transparent;
-  border-image: linear-gradient(45deg, #1a8fff 0%,#53cbf1 40%);
+  border-image: linear-gradient(45deg, #1a8fff 0%, #53cbf1 40%);
   border-image-slice: 1;
 }
 
@@ -287,7 +297,8 @@ main {
   letter-spacing: -.07em;
 }
 
-.calendar .body .cell:hover .bg, .calendar .body .selected .bg  {
+.calendar .body .cell:hover .bg,
+.calendar .body .selected .bg {
   opacity: 0.05;
   transition: .5s ease-in;
 }
@@ -298,3 +309,18 @@ main {
   width: calc(100%/7);
 }
 
+.nopad-left {
+  padding-left: 0px;
+}
+
+.nopad-right {
+  padding-right: 0px;
+}
+
+.spongebob-squarepants {
+  border-radius: 0;
+}
+
+.margin-bottom-2 {
+  margin-bottom: 2px;
+}
