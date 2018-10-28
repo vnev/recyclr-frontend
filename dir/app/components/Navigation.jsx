@@ -9,40 +9,15 @@ export default class Navigation extends React.Component {
         super(props);
         this.state= {
             isLogedIn: false,
-            isCompany: 'm',
         };
         
         this.logOut = this.logOut.bind(this);
     }
     getAccType() {
         let _this = this;
-        axios.get(`http://recyclr.xyz/user/${window.localStorage.getItem('userid')}`, {headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token')}})
-            .then(function(result) {
-                if (result.data.is_company) {
-                    _this.setState({
-                        isCompany: 'y',
-                    });
-                }
-                else {
-                    _this.setState({
-                        isCompany: 'n',
-                    });
-                }
-            });
+        
     }
-    componentDidUpdate(prevProps, prevState, shit) {
-        if (window.localStorage.getItem('userid') === null && this.state.isCompany.length === 0) {
-            this.setState({
-                isCompany: 'm'
-            });
-        }
-        else if (window.localStorage.getItem('userid') !== null && this.state.isCompany === 'm') {
-            this.getAccType();
-        }
-        else if (prevState.isCompany !== this.state.isCompany) {
-            this.forceUpdate();
-        }
-    }
+    
     logOut() {
         let requestObject = {
             user_id: parseInt(window.localStorage.getItem('userid')),
@@ -74,7 +49,8 @@ export default class Navigation extends React.Component {
                     </li>
         }
         var view;
-        if (this.state.isCompany === 'y') {
+        console.log(window.localStorage.getItem('is_company'));
+        if (window.localStorage.getItem('is_company') === 'true') {
             view = <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
@@ -90,7 +66,7 @@ export default class Navigation extends React.Component {
                     
             </div>;
         }
-        else if (this.state.isCompany === 'n') {
+        else if (window.localStorage.getItem('is_company') === 'false') {
             view = <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
@@ -109,7 +85,7 @@ export default class Navigation extends React.Component {
                     
             </div>;
         }
-        else if (this.state.isCompany === 'm' || window.localStorage.getItem('userid') === null){
+        else if (window.localStorage.getItem('is_company') === null){
             view = null;
         }
         return(
