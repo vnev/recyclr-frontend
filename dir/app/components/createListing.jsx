@@ -147,6 +147,13 @@ export default class createListing extends React.Component {
                                 />
                             </div>
 
+                            <div className="previewComponent">
+                              <form onSubmit={(e)=>this._handleSubmit(e)}>
+                                <input className="fileInput"
+                                  type="file"
+                                  onChange={(e)=>this.imageHandler(e)} />
+                                </form>
+                          </div>
                         <button className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
                     </div>
                 </div>
