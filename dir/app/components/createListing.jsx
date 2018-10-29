@@ -143,7 +143,7 @@ export default class createListing extends React.Component {
                                 />
                             </div>
                             
-                        <button className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
+                        <button type='submit' className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
                         </form>
                     </div>
                     
