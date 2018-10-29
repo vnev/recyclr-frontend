@@ -12,8 +12,11 @@ export default class ChatSelect extends React.Component {
     }
     componentDidMount() {
         //get all listings that a user has frozen
+        let obj = {
+            is_company: window.localStorage.getItem('is_company') == false ? false : true,
+        }
         let _this = this;
-        axios.get(`http://recyclr.xyz/listing/frozen/${window.localStorage.getItem('userid')}`, {
+        axios.post(`http://recyclr.xyz/listing/frozen/${window.localStorage.getItem('userid')}`, obj, {
             headers: {
                 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 
                 'Access-Control-Allow-Origin': '*'
@@ -22,17 +25,22 @@ export default class ChatSelect extends React.Component {
             console.log(result);
              _this.setState({
                 chatList: result.data,
-        })});
+            })
+        });
     }
     render() {
-        console.log(this.state.chatList);
+        let disp =  <h2>You have no messages</h2>
+                    
+        if (this.state.chatList !== null) {
+            disp =  this.state.chatList.map((item, key) => {
+                        return <ListingItem key={key} Item={item} ButBool={false}/>
+                        })
+                   
+        }
         return(
             <div className="container-fluid">
-                {this.state.chatList.map((item, key) => {
-                   return <ListingItem Item={item} ButBool={false}/>
-                })}
+                {disp}
             </div>
-                
         );
     }
 }

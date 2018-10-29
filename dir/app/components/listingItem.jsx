@@ -17,6 +17,7 @@ export default class ListingItem extends React.Component {
         // TODO: actually add a "created by" name based on per listing, and not just a singular user's name
         let _this = this;
         let userId = this.props.Item.user_id;
+        console.log(this.props.Item);
         Axios.get(`http://recyclr.xyz/user/${userId}`, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
             .then(function (result) {
                 _this.setState({
@@ -25,7 +26,13 @@ export default class ListingItem extends React.Component {
             });
     }
     freezeListing() {
-
+        let obj = {
+            company_id: parseInt(window.localStorage.getItem('userid')),
+        }
+        Axios.post(`http://recyclr.xyz/listing/freeze/${this.props.Item.listing_id}`, obj, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+        .then(function(result) {
+            console.log(result);
+        })
     }
     render() {
         let rightSide;

@@ -107,7 +107,7 @@ export default class AuthPage extends React.Component {
             window.localStorage.setItem('username', user.name);
             window.localStorage.setItem('useremail', user.email);
             window.localStorage.setItem('token', result.data.token);
-            axios.get(`http://recyclr.xyz/user/${window.localStorage.getItem('userid')}`, {headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token')}})
+            axios.get(`http://recyclr.xyz/user/${window.localStorage.getItem('userid')}`, {headers:{'Access-Control-Allow-Origin': '*','Authorization': 'Bearer ' + window.localStorage.getItem('token') }})
             .then(function(result) {
                 window.localStorage.setItem('is_company', result.data.is_company);
                 history.push('/settings');

@@ -15,7 +15,7 @@ export default class createListing extends React.Component {
             matType: '',
             matWeight: '',
             image: '',
-            zipcode: '',
+            address: '',
             imagePreviewUrl: ''
 
         };
@@ -23,7 +23,6 @@ export default class createListing extends React.Component {
         this.descHandler = this.descHandler.bind(this);
         this.typeHandler = this.typeHandler.bind(this);
         this.weightHandler = this.weightHandler.bind(this);
-        this.zipHandler = this.zipHandler.bind(this);
         this.imageHandler = this.imageHandler.bind(this);
         this.createNewListing = this.createNewListing.bind(this);
 
@@ -58,18 +57,12 @@ export default class createListing extends React.Component {
             });
         }
     }
-    zipHandler(event) {
-      if (this.isNumeric(event.target.value)) {
-        this.setState({
-            zipcode: event.target.value
-        });
-      }
-    }
   imageHandler(e) {
     e.preventDefault();
 
     let reader = new FileReader();
     let file = e.target.files[0];
+    console.log(file);
 
     reader.onloadend = () => {
       this.setState({
@@ -80,15 +73,27 @@ export default class createListing extends React.Component {
 
     reader.readAsDataURL(file)
   }
-    createNewListing() {
-        let newObj = {
+    createNewListing(event) {
+        event.preventDefault();
+
+        var form = new FormData();
+        form.append('title', this.state.title);
+        form.append('description', this.state.description);
+        form.append('material_type', this.state.matType);
+        form.append('material_weight', parseFloat(this.state.matWeight));
+        form.append('address', this.state.address);
+        form.append('image', this.state.image);
+        form.append('user_id', parseInt(window.localStorage.getItem('userid')));
+        /*let newObj = {
             title: this.state.title,
             description: this.state.description,
             material_type: this.state.matType,
             material_weight: parseFloat(this.state.matWeight),
+            address: this.state.address,
+            img_hash: this.state.image,
             user_id: parseInt(window.localStorage.getItem('userid')),
-        }
-        Axios.post(`http://recyclr.xyz/listing`, newObj, {
+        }*/
+        Axios.post(`http://recyclr.xyz/listing`, form, {
             headers: {
                 'Authorization': 'Bearer ' + window.localStorage.getItem('token'),
                 'Access-Control-Allow-Origin': '*'
@@ -106,6 +111,14 @@ export default class createListing extends React.Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
+                        <form>
+                            <div className="previewComponent">
+                              
+                                <input className="fileInput"
+                                  type="file"
+                                  onChange={(e)=>this.imageHandler(e)} />
+                                
+                            </div>
                             <div className="form-group">
                                 <label htmlFor="titleIn">Title</label>
                                 <input type="text" className="form-control" id="titleIn" value={this.state.title} onChange={this.titleHandler}/>
@@ -125,15 +138,18 @@ export default class createListing extends React.Component {
                             <div className='form-group'>
                                 <label htmlFor='googAuto'>Pickup Address</label>
                                 <Autocomplete
-                                    onPlaceSelected={(place) => console.log(place)}
+                                    onPlaceSelected={(place) => this.setState({address: place.formatted_address})}
                                     types={['address']}
                                     componentRestrictions={{country: 'USA'}}
                                 />
                             </div>
 
-                        <button className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
+                        <button type='submit' className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
+                        </form>
                     </div>
+                    
                 </div>
+                
             </div>
         );
     }

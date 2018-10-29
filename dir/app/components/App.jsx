@@ -44,7 +44,7 @@ export default class App extends React.Component {
             <Route path={'/createListing'} component={createListing}/>
             <Route path={'/calendar'} component={Calendar}/>
             <Route path={'/payment'} component={Payment}/>
-            <Route path={'/chatselect'} component={ChatSelect}/>
+            <Route path={'/messages'} component={ChatSelect}/>
             <Route path={'/chatroom/:id'} component={ChatRoom}/>
             <Route path={'/choose_date/:id'} component={Calendar}/>
             <Route path={'/progress'} component={Progress}/>

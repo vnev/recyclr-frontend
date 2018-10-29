@@ -13,24 +13,14 @@ export default class Navigation extends React.Component {
 
         this.logOut = this.logOut.bind(this);
     }
-    getAccType() {
-        let _this = this;
-
-    }
-
     logOut() {
         let requestObject = {
             user_id: parseInt(window.localStorage.getItem('userid')),
         }
-        let _this = this;
         axios.post(`http://recyclr.xyz/user/logout`, requestObject, {headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
         .then(function(result) {
             window.localStorage.clear();
-            _this.setState({
-                isCompany: 'm',
-            }, () => {
-                    history.push('/auth')
-                });
+            history.push('/auth');
         }).catch(function(error) {
             console.log(error);
         })
@@ -49,7 +39,6 @@ export default class Navigation extends React.Component {
                     </li>
         }
         var view;
-        console.log(window.localStorage.getItem('is_company'));
         if (window.localStorage.getItem('is_company') === 'true') {
             view = <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
@@ -57,7 +46,7 @@ export default class Navigation extends React.Component {
                             <a className="nav-link" href="/listings">Listings</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/chatselect">Chat</a>
+                            <a className="nav-link" href="/messages">Messages</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="/settings">My Settings</a>
@@ -73,7 +62,7 @@ export default class Navigation extends React.Component {
                             <a className="nav-link" href="/createListing">Create Listing</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/chatselect">Chat</a>
+                            <a className="nav-link" href="/messages">Messages</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="/progress">My Progress</a>
@@ -103,8 +92,6 @@ export default class Navigation extends React.Component {
                         {but}
                 </ul>
                 </div>
-
-
         );
     }
 }
