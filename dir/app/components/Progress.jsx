@@ -9,7 +9,8 @@ export default class Progress extends Component {
     this.state = {
       list: [],
       shared: false,
-      incentiveCheck: ''
+      incentiveCheck: '',
+      totalWeight: 0
     }
     this.hasShared = this.hasShared.bind(this);
   }
@@ -60,14 +61,23 @@ export default class Progress extends Component {
       this.state.incentiveCheck = 500;
     }
   }
+
+  calculateWeight() {
+
+    var i;
+    for(i = 0; i < this.state.list.length; i++) {
+
+      this.state.totalWeight += this.state.list[i].material_weight;
+    }
+  }
     render() {
       return(
         <div>
           <h1>My Recyclr Progress</h1>
-          <h3>Total number of Recyclr listings: {this.state.list.length}</h3>
-          <h3>Total weight of Recyclr listings: {this.state.list}</h3>
+          <h3>Total number of Recyclr listings created: {this.state.list.length}</h3>
+          <h3>Total weight of Recyclr listings: {this.calculateWeight(), this.state.totalWeight} lbs</h3>
 
-          <h3>Next Recyclr listings goal: {this.calculateIncentive(), this.state.incentiveCheck}. You need {this.state.incentiveCheck - this.state.list.length} more listings sold to reach your goal.</h3>
+          <h3>Next Recyclr listings goal: {this.calculateIncentive(), this.state.incentiveCheck}. You need {this.state.list.length} more listings sold to reach your goal.</h3>
           <div id="socialWrapper" onClick={this.hasShared}>
           <FacebookShareButton
             url='http://recyclr.xyz'
