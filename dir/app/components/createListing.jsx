@@ -80,12 +80,28 @@ export default class createListing extends React.Component {
 
     reader.readAsDataURL(file)
   }
+  imageHandler(e) {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({
+        image: file,
+        imagePreviewUrl: reader.result
+      });
+    }
+
+    reader.readAsDataURL(file)
+  }
     createNewListing() {
         let newObj = {
             title: this.state.title,
             description: this.state.description,
             material_type: this.state.matType,
             material_weight: parseFloat(this.state.matWeight),
+            image: this.state.image,
             user_id: parseInt(window.localStorage.getItem('userid')),
         }
         Axios.post(`http://recyclr.xyz/listing`, newObj, {
