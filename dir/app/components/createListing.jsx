@@ -89,8 +89,7 @@ export default class createListing extends React.Component {
             description: this.state.description,
             material_type: this.state.matType,
             material_weight: parseFloat(this.state.matWeight),
-            address: this.state.address,
-            img_hash: this.state.image,
+            image: this.state.image,
             user_id: parseInt(window.localStorage.getItem('userid')),
         }*/
         Axios.post(`http://recyclr.xyz/listing`, form, {
@@ -143,8 +142,8 @@ export default class createListing extends React.Component {
                                     componentRestrictions={{country: 'USA'}}
                                 />
                             </div>
-
-                        <button type='submit' className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
+                            
+                        <button className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
                         </form>
                     </div>
                     
