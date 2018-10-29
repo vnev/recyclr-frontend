@@ -15,6 +15,8 @@ export default class AuthPage extends React.Component {
             email: "",
             password: "",
             address: "",
+            city: "",
+            USstate: "",
             username: "",
             accountType: "f",
             city: '',
@@ -26,6 +28,8 @@ export default class AuthPage extends React.Component {
         this.passwordHandle = this.passwordHandle.bind(this);
         this.userHandle = this.userHandle.bind(this);
         this.addressHandle = this.addressHandle.bind(this);
+        this.cityHandle = this.cityHandle.bind(this);
+        this.stateHandle = this.stateHandle.bind(this);
         this.passwordHandle = this.passwordHandle.bind(this);
         this.typeHandle = this.typeHandle.bind(this);
         this.cityHandle = this.cityHandle.bind(this);
@@ -74,6 +78,16 @@ export default class AuthPage extends React.Component {
             address: event.target.value,
         });
     }
+    cityHandle(event) {
+        this.setState({
+            city: event.target.value,
+        });
+    }
+    stateHandle(event) {
+        this.setState({
+            USstate: event.target.value,
+        });
+    }
     //{{'Authentication': 'Bearer ' + window.localStorage.token}}
     signin() {
         let obj = {
@@ -88,7 +102,7 @@ export default class AuthPage extends React.Component {
                 name: result.data.user_name,
                 user_id: result.data.user_id,
             }
-            
+
             window.localStorage.setItem('userid', user.user_id);
             window.localStorage.setItem('username', user.name);
             window.localStorage.setItem('useremail', user.email);
@@ -98,7 +112,7 @@ export default class AuthPage extends React.Component {
                 window.localStorage.setItem('is_company', result.data.is_company);
                 history.push('/settings');
             });
-            
+
         }).catch(function(error) {
             console.log(error);
             _this.setState({alert: true});
@@ -108,6 +122,8 @@ export default class AuthPage extends React.Component {
     signup() {
         let newObj = {
             address: this.state.address,
+            city: this.state.city,
+            USState: this.state.USState,
             name: this.state.username,
             email: this.state.email,
             passwd: this.state.password,

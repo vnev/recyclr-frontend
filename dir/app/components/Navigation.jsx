@@ -10,14 +10,14 @@ export default class Navigation extends React.Component {
         this.state= {
             isLogedIn: false,
         };
-        
+
         this.logOut = this.logOut.bind(this);
     }
     getAccType() {
         let _this = this;
-        
+
     }
-    
+
     logOut() {
         let requestObject = {
             user_id: parseInt(window.localStorage.getItem('userid')),
@@ -63,7 +63,7 @@ export default class Navigation extends React.Component {
                             <a className="nav-link" href="/settings">My Settings</a>
                         </li>
                     </ul>
-                    
+
             </div>;
         }
         else if (window.localStorage.getItem('is_company') === 'false') {
@@ -82,19 +82,19 @@ export default class Navigation extends React.Component {
                             <a className="nav-link" href="/settings">Settings</a>
                         </li>
                     </ul>
-                    
+
             </div>;
         }
         else if (window.localStorage.getItem('is_company') === null){
             view = null;
         }
         return(
-            
+
             <div className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="navbar-brand">
                     <a href="/">Recyclr</a>
                 </div>
-                
+
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -103,7 +103,7 @@ export default class Navigation extends React.Component {
                         {but}
                 </ul>
                 </div>
-            
+
 
         );
     }

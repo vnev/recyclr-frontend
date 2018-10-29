@@ -4,6 +4,7 @@ import urls from './Urls.js';
 import history from './history.js'
 import Autocomplete from 'react-google-autocomplete'
 
+//uncomment file when database is updated
 
 export default class createListing extends React.Component {
     constructor(props) {
@@ -12,14 +13,20 @@ export default class createListing extends React.Component {
             title: '',
             description: '',
             matType: '',
-            matWeight: 0.0,
+            matWeight: '',
+            image: '',
+            zipcode: '',
+            imagePreviewUrl: ''
 
         };
         this.titleHandler = this.titleHandler.bind(this);
         this.descHandler = this.descHandler.bind(this);
         this.typeHandler = this.typeHandler.bind(this);
         this.weightHandler = this.weightHandler.bind(this);
+        this.zipHandler = this.zipHandler.bind(this);
+        this.imageHandler = this.imageHandler.bind(this);
         this.createNewListing = this.createNewListing.bind(this);
+
     }
     titleHandler(event) {
         this.setState({
@@ -41,16 +48,38 @@ export default class createListing extends React.Component {
             matType: event.target.value
         });
     }
-    isNumberic(n) {
+    isNumeric(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
     weightHandler(event) {
-        if (isNumeric(event.target.value)) {
+        if (this.isNumeric(event.target.value)) {
             this.setState({
                 matWeight: event.target.value
             });
         }
     }
+    zipHandler(event) {
+      if (this.isNumeric(event.target.value)) {
+        this.setState({
+            zipcode: event.target.value
+        });
+      }
+    }
+  imageHandler(e) {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({
+        image: file,
+        imagePreviewUrl: reader.result
+      });
+    }
+
+    reader.readAsDataURL(file)
+  }
     createNewListing() {
         let newObj = {
             title: this.state.title,
@@ -58,15 +87,13 @@ export default class createListing extends React.Component {
             material_type: this.state.matType,
             material_weight: parseFloat(this.state.matWeight),
             user_id: parseInt(window.localStorage.getItem('userid')),
-            img_hash: '0',
-            
         }
         Axios.post(`http://recyclr.xyz/listing`, newObj, {
             headers: {
-                'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 
+                'Authorization': 'Bearer ' + window.localStorage.getItem('token'),
                 'Access-Control-Allow-Origin': '*'
             }},)
-        
+
         .then(function(result) {
             console.log(result);
             //history.push('/listings');
@@ -92,7 +119,7 @@ export default class createListing extends React.Component {
                                 <input type="text" className="form-control" id="matTypeIn" value={this.state.matType} onChange={this.typeHandler}/>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="matWeightIn">Material Weight</label>
+                                <label htmlFor="matWeightIn">Material Weight (lbs)</label>
                                 <input type="text" className="form-control" id="matWeightIn" value={this.state.matWeight} onChange={this.weightHandler}/>
                             </div>
                             <div className='form-group'>
@@ -103,7 +130,7 @@ export default class createListing extends React.Component {
                                     componentRestrictions={{country: 'USA'}}
                                 />
                             </div>
-                        
+
                         <button className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
                     </div>
                 </div>
