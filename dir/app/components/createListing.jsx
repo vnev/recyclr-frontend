@@ -12,7 +12,7 @@ export default class createListing extends React.Component {
         this.state = {
             title: '',
             description: '',
-            matType: '',
+            matType: 'Plastic',
             matWeight: '',
             image: '',
             address: '',
@@ -33,7 +33,7 @@ export default class createListing extends React.Component {
         });
     }
     componentDidMount() {
-        if(window.localStorage.getItem('token') === null) {
+        if(window.localStorage.getItem('token') === null || window.localStorage.getItem('is_company') === 'true') {
             history.push('/auth');
         }
     }
@@ -45,7 +45,8 @@ export default class createListing extends React.Component {
     typeHandler(event) {
         this.setState({
             matType: event.target.value
-        });
+        }, () => console.log(this.state.matType));
+        
     }
     isNumeric(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
@@ -84,14 +85,6 @@ export default class createListing extends React.Component {
         form.append('address', this.state.address);
         form.append('image', this.state.image);
         form.append('user_id', parseInt(window.localStorage.getItem('userid')));
-        /*let newObj = {
-            title: this.state.title,
-            description: this.state.description,
-            material_type: this.state.matType,
-            material_weight: parseFloat(this.state.matWeight),
-            image: this.state.image,
-            user_id: parseInt(window.localStorage.getItem('userid')),
-        }*/
         Axios.post(`http://recyclr.xyz/listing`, form, {
             headers: {
                 'Authorization': 'Bearer ' + window.localStorage.getItem('token'),
@@ -99,8 +92,7 @@ export default class createListing extends React.Component {
             }},)
 
         .then(function(result) {
-            console.log(result);
-            //history.push('/listings');
+            history.push('/payment');
         }).catch(function(error) {
             console.log(error);
         });
@@ -111,9 +103,10 @@ export default class createListing extends React.Component {
                 <div className="row">
                     <div className="col-md-12">
                         <form>
-                            <div className="previewComponent">
-                              
-                                <input className="fileInput"
+                            <div className="form-group">
+                            <label htmlFor="fileIn">Upload a Picture of Materials</label>
+                                <input className="fileInput form-control-file"
+                                    id="fileIn"
                                   type="file"
                                   onChange={(e)=>this.imageHandler(e)} />
                                 
@@ -128,7 +121,15 @@ export default class createListing extends React.Component {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="matTypeIn">Material Type</label>
-                                <input type="text" className="form-control" id="matTypeIn" value={this.state.matType} onChange={this.typeHandler}/>
+                                <select className="form-control" id="matTypeIn" value={this.state.matType} onChange={this.typeHandler}>
+                                    <option value='Plastic'>Plastic</option>
+                                    <option value='Electronics'>Electronics</option>
+                                    <option value='Rubber'>Rubber</option>
+                                    <option value='Textiles'>Textiles</option>
+                                    <option value='Cardboard'>Cardboard</option>
+                                    <option value='Glass'>Glass</option>
+                                    <option value='Metal'>Metal</option>
+                                </select>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="matWeightIn">Material Weight (lbs)</label>
@@ -137,6 +138,7 @@ export default class createListing extends React.Component {
                             <div className='form-group'>
                                 <label htmlFor='googAuto'>Pickup Address</label>
                                 <Autocomplete
+                                    className="form-control"
                                     onPlaceSelected={(place) => this.setState({address: place.formatted_address})}
                                     types={['address']}
                                     componentRestrictions={{country: 'USA'}}

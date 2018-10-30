@@ -83,7 +83,7 @@ export default class Listings extends React.Component {
         });
     }
     componentDidMount() {
-        if (window.localStorage.getItem('username') === null) {
+        if (window.localStorage.getItem('username') === null || window.localStorage.getItem('is_company') === 'false') {
             history.push('/auth');
         }
         let _this = this;

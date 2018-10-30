@@ -1,6 +1,9 @@
 import React from 'react';
 import IndMess from './indMessage.jsx';
-import axios from 'axios'
+import axios from 'axios';
+import history from './history.js';
+import api from './api.js';
+
 
 export default class ChatRoom extends React.Component {
     constructor(props) {
@@ -19,7 +22,9 @@ export default class ChatRoom extends React.Component {
             newMessText: event.target.value,
         });
     }
+   
     sendMess() {
+        let _this = this;
         //send new message, then reload page and fetch the whole list again
         let obj = {
             to_user: this.state.to_user,
@@ -29,19 +34,21 @@ export default class ChatRoom extends React.Component {
 
         }
         console.log(obj);
-        axios.post('http://recyclr.xyz/messages/new', obj ,{headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
+        api.post('/messages/new', obj)
         .then(function(result) {
-            console.log(result);
-        })
+            window.history.go(0);
+        });
     }
     componentDidMount() {
-        console.log(this.props.match.params.id);
+        if (window.localStorage.getItem('userid') === null) {
+            history.push('/auth');
+        }
         //get all messages between two users and order them by time
         let _this = this;
-        axios.get(`http://recyclr.xyz/listing/${this.props.match.params.id}`, {headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
+        api.get(`/listing/${this.props.match.params.id}`)
         .then(function(result) {
             let temp;
-            if (_this.state.listing.frozen_by === window.localStorage.getItem('userid')) {
+            if (result.data.frozen_by === parseInt(window.localStorage.getItem('userid'))) {
                 temp = result.data.user_id;
             }
             else {
@@ -53,9 +60,8 @@ export default class ChatRoom extends React.Component {
             let obj = {
                 for_listing: parseInt(_this.props.match.params.id),
             }
-            axios.post("http://recyclr.xyz/messages/get", obj, {headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
+            api.post("/messages/get", obj)
             .then(function(results) {
-                console.log(results);
                 if (results.data === null) {
 
                 } else {
@@ -69,20 +75,22 @@ export default class ChatRoom extends React.Component {
         
     }
     render() {
-        //set row that has all of the message components to have css with 'overflow:scroll'
         return(
             <div className="container-fluid">
-                <div className="row">
-                    {this.state.messageList.map((item, key) => <IndMess Item={item}></IndMess>)}
+                
+                <div className="card" style={{border: "0px", padding: "5px", overflowY: "scroll", maxHeight: "80vh"}}>
+                    {this.state.messageList.map((item, key) => <IndMess key={key} Item={item} other_user={this.state.to_user}></IndMess>)}
+                    
                 </div>
-                <div className='row'>
-                    <div className="card">
+                
+                <div className='row' style={{marginTop: "30px"}}>
+                    <div className='card' style={{width: "100%", border: "0px", background: "inherit"}}>
                         <div className='row'>
-                            <div className='col-9'>
-                                <textarea className='form-control' value={this.state.newMessText} onChange={this.textHandle}></textarea>
+                            <div className='col-10' style={{padding: "0px"}}>
+                                <input type="text" className='form-control' value={this.state.newMessText} onChange={this.textHandle} />
                             </div>
-                            <div className='col-3'>
-                                <button className='btn btn-primary' onClick={this.sendMess}>Send</button>
+                            <div className='col-2' style={{textAlign: "center", padding: "0px"}}>
+                                <button style={{width: "100%"}} className='btn btn-primary' onClick={this.sendMess}>Send</button>
                             </div>
                         </div>
                     </div>

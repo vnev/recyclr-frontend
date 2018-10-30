@@ -117,7 +117,6 @@ export default class AuthPage extends React.Component {
             console.log(error);
             _this.setState({alert: true});
         });
-
     }
     signup() {
         let newObj = {
@@ -152,11 +151,7 @@ export default class AuthPage extends React.Component {
                 _this.setState({alert: true});
             });
         }
-
-
     }
-
-
     render() {
         if (this.state.alert == true) {
             alert = <div className="alert alert-danger alert-dismissible" role="alert">
@@ -169,70 +164,52 @@ export default class AuthPage extends React.Component {
         let bodyContent;
         if (this.state.signinTog == true) {
             bodyContent = <div className="card-body">
-
-
-
-
             <h3 id="signinHeading" className="card-title">Sign In</h3>
-
-
             <form>
-                <input type="text" className="form-control authInput" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
-                <input type="password" className="form-control authInput" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
-
-
+                <div className="form-group">
+                    <input type="text" className="form-control " placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
+                </div>
+                <div className="form-group">
+                    <input type="password" className="form-control " placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
+                </div>
+                
             </form>
             <button className="btn btn-primary authButton" onClick={this.signin}>Log In</button>
         </div>;
         }
         else {
             bodyContent = <div className="card-body">
-
             <h3 id="signUpHeading" className="card-title">Sign Up for Free</h3>
-
-
             <form>
-                <div className="form-row">
-                    <div className="col-12">
-                       <input type="text" className="form-control authInput" placeholder="Username" value={this.state.firstname} onChange={this.userHandle}></input>
-                    </div>
-                </div>
-                <input type="text" className="form-control authInput" placeholder="Address" value={this.state.address} onChange={this.addressHandle}></input>
-                <input type="text" className="form-control authInput" placeholder="City" value={this.state.city} onChange={this.cityHandle}></input>
-                <input type="text" className="form-control authInput" placeholder="State" value={this.state.state} onChange={this.stateHandle}></input>
-                <input type="text" className="form-control authInput" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
-                <input type="password" className="form-control authInput" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
-                <select className="form-control authSelect" value={this.state.accountType} onChange={this.typeHandle}>
+                <input type="text" className="form-control " placeholder="Username" value={this.state.firstname} onChange={this.userHandle}></input>
+                <input type="text" className="form-control" placeholder="Address" value={this.state.address} onChange={this.addressHandle}></input>
+                <input type="text" className="form-control" placeholder="City" value={this.state.city} onChange={this.cityHandle}></input>
+                <input type="text" className="form-control" placeholder="State" value={this.state.state} onChange={this.stateHandle}></input>
+                <input type="text" className="form-control" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
+                <input type="password" className="form-control" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
+                <select className="form-control " value={this.state.accountType} onChange={this.typeHandle}>
                     <option value="f">Recyclr</option>
                     <option value="t">Business</option>
                 </select>
-
-
-
-
-
             </form>
-            <button className="btn btn-primary authButton" onClick={this.signup}>GET STARTED</button>
+            <button className="btn btn-primary" onClick={this.signup}>GET STARTED</button>
         </div>;
         }
         return(
-            <div className="row d-flex align-content-center justify-content-center" id="authRow">
+            <div className="row d-flex align-content-center justify-content-center">
                 <div className="col-6">
-                    <div className="card authCard text-center">
-                        <div className="card-header">
+                    <div className="card text-center">
                             <ul className="nav nav-pills justify-content-center">
                                 <li className="nav-item ">
-                                    <a className="nav-link authNav active" data-toggle="pill" onClick={() => this.setState({signinTog: !this.state.signinTog})}>Sign In</a>
+                                    <a className="nav-link active" data-toggle="pill" onClick={() => this.setState({signinTog: !this.state.signinTog})}>Sign In</a>
                                 </li>
                                 <li className="nav-item ">
-                                    <a className="nav-link authNav" data-toggle="pill" onClick={() => this.setState({signinTog: !this.state.signinTog})}>Sign Up</a>
+                                    <a className="nav-link" data-toggle="pill" onClick={() => this.setState({signinTog: !this.state.signinTog})}>Sign Up</a>
                                 </li>
                             </ul>
-                        </div>
+                        
                         {alert}
                         {bodyContent}
-                        <h2>Or, you can sign in using your <a href="/googleAuth">Google Account</a></h2>
-
                     </div>
                 </div>
             </div>

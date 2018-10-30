@@ -107,7 +107,7 @@ export default class Settings extends React.Component {
                     <div className="card text-center" id="contain-settings">
                         <div className="card-body">
 
-                            <h1 className="card-title">Settings</h1>
+                            <h1 className="card-title">Settings for {window.localStorage.getItem('username')}</h1>
                             <p>This page allows you to adjust profile and account settings.</p>
 
                             <div className="card-body" id="change-username">

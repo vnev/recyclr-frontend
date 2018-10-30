@@ -15,7 +15,7 @@ export default class ListingItem extends React.Component {
     }
     componentDidMount() {
         // TODO: actually add a "created by" name based on per listing, and not just a singular user's name
-        let _this = this;
+        /*let _this = this;
         let userId = this.props.Item.user_id;
         console.log(this.props.Item);
         Axios.get(`http://recyclr.xyz/user/${userId}`, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
@@ -23,7 +23,7 @@ export default class ListingItem extends React.Component {
                 _this.setState({
                     name: result.data.name
                 });
-            });
+            });*/
     }
     freezeListing() {
         let obj = {
@@ -38,14 +38,15 @@ export default class ListingItem extends React.Component {
         let rightSide;
         if (this.props.ButBool === true) {
             rightSide = <div className="col-3 text-right">
-                <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>By: <b>{this.state.name}</b></p>
+                <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>By: <b>{this.props.Item.username}</b></p>
                 <button className="btn btn-primary margin-bottom-2" onClick={this.freezeListing}>Freeze</button>
                 <button className="btn btn-secondary margin-bottom-2" onClick={() => { history.push('/choose_date/' + this.props.Item.listing_id) }}>Select Pickup date</button>
                 <button className="btn btn-primary" onClick={() => { history.push('/payment') }}>Payment</button>
             </div>;
         }
         else {
-            rightSide = <button className="btn btn-primary" onClick={() => history.push(`/chatroom/${this.props.Item.listing_id}`)}>Enter Chat</button>
+            rightSide = <div><button className="btn btn-primary" onClick={() => history.push(`/chatroom/${this.props.Item.listing_id}`)}>Enter Chat</button>
+            <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>Frozen By: <b>{this.props.Item.company_name}</b></p></div>
         }
         return (
             <div className="row" style={{ marginBottom: "5px" }}>

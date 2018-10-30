@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import axios from 'axios';
 import history from './history.js'
 
@@ -52,7 +51,7 @@ export default class Navigation extends React.Component {
                             <a className="nav-link" href="/settings">My Settings</a>
                         </li>
                     </ul>
-
+                    {but}
             </div>;
         }
         else if (window.localStorage.getItem('is_company') === 'false') {
@@ -70,12 +69,15 @@ export default class Navigation extends React.Component {
                         <li className="nav-item">
                             <a className="nav-link" href="/settings">Settings</a>
                         </li>
+                        {but}
                     </ul>
 
             </div>;
         }
         else if (window.localStorage.getItem('is_company') === null){
-            view = null;
+            view =  <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        {but}
+                    </div>;
         }
         return(
 
@@ -88,9 +90,7 @@ export default class Navigation extends React.Component {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 {view}
-                <ul className="navbar-nav my-2 my-lg-0">
-                        {but}
-                </ul>
+                
                 </div>
         );
     }

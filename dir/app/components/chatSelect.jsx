@@ -1,6 +1,6 @@
 import React from 'react'
 import ListingItem from './listingItem.jsx'
-import axios from 'axios'
+import api from './api.js'
 
 export default class ChatSelect extends React.Component {
     constructor(props) {
@@ -11,18 +11,16 @@ export default class ChatSelect extends React.Component {
         
     }
     componentDidMount() {
+        if (window.localStorage.getItem('userid') === null) {
+            history.push('/auth');
+        }
         //get all listings that a user has frozen
         let obj = {
-            is_company: window.localStorage.getItem('is_company') == false ? false : true,
+            is_company: window.localStorage.getItem('is_company') == 'false' ? false : true,
         }
         let _this = this;
-        axios.post(`http://recyclr.xyz/listing/frozen/${window.localStorage.getItem('userid')}`, obj, {
-            headers: {
-                'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 
-                'Access-Control-Allow-Origin': '*'
-            }})
+        api.post(`/listing/frozen/${window.localStorage.getItem('userid')}`, obj)
         .then(function(result){
-            console.log(result);
              _this.setState({
                 chatList: result.data,
             })

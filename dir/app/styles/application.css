@@ -3,81 +3,6 @@
 
 }
 
-listingRow {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-.authCard {
-
-  background-color: black;
-  color: white;
-
-}
-
-.authNav {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
-.authInput {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  border-radius: 0%;
-  color: white;
-  background-color: black;
-}
-
-.authSelect {
-  margin-top: 25px;
-  color: black;
-}
-
-.authButton {
-  width: 100%;
-  margin-top: 50px;
-  height: 80px;
-
-}
-
-.paymentBtn {
-  width: 25%;
-  margin-top: 10px;
-  height: 50px;
-}
-
-.banButton {
-  width: 25%;
-  margin-top: 10px;
-  height: 50px;
-}
-
-.banInput {
-  margin-top: 20px;
-  width: 25%;
-  border-radius: 0%;
-}
-
-.addressInput {
-  margin-top: 20px;
-  margin-left: 20px;
-  width: 25%;
-  margin-bottom: 10px;
-}
-
-.formButton {
-  /* width: 40%; */
-  margin-top: 10px;
-  /* height: 50px; */
-}
-
-.formInput {
-  width: 40%;
-  margin-top: 20px;
-  border-radius: 0%;
-}
 
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
@@ -323,4 +248,19 @@ main {
 
 .margin-bottom-2 {
   margin-bottom: 2px;
+}
+.otherMessage {
+  background-color: #d3d3d3;
+  color: black;
+  width: 60%;
+  float: right;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+.sameMessage {
+  width: 60%;
+  float: left;
+  color: black;
+  border-radius: 15px;
+  margin-top: 10px;
 }
