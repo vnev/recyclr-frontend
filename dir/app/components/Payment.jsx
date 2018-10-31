@@ -50,7 +50,7 @@ export default class PaymentPage extends Component {
     }
 
     applyIncentive() {
-        let newPoints = 301;
+        let newPoints = this.state.userObj.points - this.state.incentivePoints;
         let requestObject = {
             points: newPoints,
         }
