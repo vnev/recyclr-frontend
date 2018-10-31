@@ -38,15 +38,10 @@ export default class PaymentPage extends Component {
         .then(function(result) {
             console.log(result.data);
             _this.setState({userObj: result.data});
-
-            console.log("__userObj: " + _this.state.userObj);
-
             _this.calculateIncentivePercentage();
         }).catch(function(error) {
             console.log(error);
         });
-
-        calculateIncentivePercentage();
     }
 
     applyIncentive() {
@@ -57,13 +52,9 @@ export default class PaymentPage extends Component {
         let _this = this;
         Axios.put(`http://recyclr.xyz/user/` + window.localStorage.getItem('userid'),  requestObject, {headers: {'Authorization': 'Bearer ' + window.localStorage.getItem('token'),}},)
         .then(function(result) {
-            console.log(result);
             let newObj = _this.state.userObj;
             newObj.points = newPoints;
             _this.setState({userObj: newObj}, _this.calculateIncentivePercentage());
-            
-            console.log("__afterChange: " + _this.state.userObj.points);
-
         }).then(function(error) {
             console.log(error);
         });
