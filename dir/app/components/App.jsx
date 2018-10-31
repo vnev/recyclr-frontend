@@ -10,10 +10,12 @@ import createListing from './createListing.jsx';
 import Listings from './Listings.jsx';
 import GoogleAuth from './googleAuth.jsx';
 import InvoiceH from './Invoices.jsx';
-import PendTrans from './Pending.jsx';
+//import PendTrans from './Pending.jsx';
 import {Switch} from 'react-router-dom';
 import history from './history.js';
+import ChatSelect from './chatSelect.jsx'
 import {Route, Router} from 'react-router-dom';
+import ChatRoom from './ChatRoom.jsx';
 
 
 
@@ -37,15 +39,17 @@ export default class App extends React.Component {
             <Route exact path={'/'} component={AuthPage}/>
             <Route path={'/auth'} component={AuthPage}/>
             <Route path={'/settings'} component={Settings}/>
-           
+            <Route path={'/chat'} component={ChatRoom}/>
             <Route path={'/listings'} component={Listings}/>
             <Route path={'/admin'} component={AdminPage}/>
             <Route path={'/googleAuth'} component={GoogleAuth}/>
             <Route path={'/createListing'} component={createListing}/>
             <Route path={'/calendar'} component={Calendar}/>
             <Route path={'/payment'} component={Payment}/>
+            <Route path={'/messages'} component={ChatSelect}/>
+            <Route path={'/chatroom/:id'} component={ChatRoom}/>
             <Route path={'/invoiceHistory'} component={InvoiceH}/>
-            <Route path={'/pendingTrans'} component={PendTrans}/>
+            {/* <Route path={'/pendingTrans'} component={PendTrans}/> */}
 
             <Route path={'/choose_date/:id'} component={Calendar}/>
             <Route path={'/progress'} component={Progress}/>
