@@ -10,6 +10,7 @@ import createListing from './createListing.jsx';
 import Listings from './Listings.jsx';
 import GoogleAuth from './googleAuth.jsx';
 import InvoiceH from './Invoices.jsx';
+import HomePage from './Home.jsx';
 //import PendTrans from './Pending.jsx';
 import {Switch} from 'react-router-dom';
 import history from './history.js';
@@ -36,7 +37,7 @@ export default class App extends React.Component {
         <div className="row">
           <div className="col">
           <Switch>
-            <Route exact path={'/'} component={AuthPage}/>
+            <Route exact path={'/'} component={HomePage}/>
             <Route path={'/auth'} component={AuthPage}/>
             <Route path={'/settings'} component={Settings}/>
             <Route path={'/chat'} component={ChatRoom}/>
