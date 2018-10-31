@@ -38,9 +38,6 @@ export default class PaymentPage extends Component {
         .then(function(result) {
           
             _this.setState({userObj: result.data});
-
-           
-
             _this.calculateIncentivePercentage();
         }).catch(function(error) {
           
@@ -58,9 +55,12 @@ export default class PaymentPage extends Component {
             let newObj = _this.state.userObj;
             newObj.points = newPoints;
             _this.setState({userObj: newObj}, _this.calculateIncentivePercentage());
+<<<<<<< HEAD
             
 
 
+=======
+>>>>>>> ee4893aa7345acf4c360a9610975564b60e6c588
         }).then(function(error) {
      
         });
