@@ -19,9 +19,9 @@ export default class Admin extends React.Component {
 
     banUser(event) {
         console.log(this.state.userToBan)
-        Axios.get('http://recyclr.xyz/user/' + this.state.userToBan + '/ban').then(function(result) {
+        Axios.get('http://recyclr.xyz/user/' + this.state.userToBan + '/ban').then(function (result) {
             console.log(result);
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.log(error);
         });
         window.localStorage.removeItem('userid');
@@ -31,17 +31,23 @@ export default class Admin extends React.Component {
     }
 
     render() {
-        return(
-            <div className="row align-content-left ">
-                <div className="col">
-                    <h3 className="title">Admin Tools </h3>
-                    <h6 className="banUser">Ban a user</h6>
-
-                    <form>
-                        <input type="text" className="form-control banInput" placeholder="example: bob@recyclr.xyz" value={this.state.userToBan} onChange={this.handleChange}></input>
-                        <button className="btn btn-primary banButton" onClick={this.banUser}>Ban User</button>
-                    </form>
-                    
+        return (
+            <div className="row">
+                <div className="col-md-12 text-center">
+                    <div className="card">
+                        <div className="card-body">
+                            <h3 className="title">Admin Tools</h3>
+                            <p>Enter the email of the user to be banned</p>
+                            <div className="row">
+                                <div className="col-md-4 offset-md-4">
+                                    <form>
+                                        <input type="text" className="form-control" placeholder="bob@recyclr.xyz" value={this.state.userToBan} onChange={this.handleChange}></input>
+                                        <button className="btn btn-primary formButton" onClick={this.banUser}>Ban User</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

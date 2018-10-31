@@ -1,17 +1,8 @@
 #appBase {
-    width: 100%;
+  width: 100%;
 
 }
-listingRow {
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-.authCard {
 
-    background-color: black;
-    color: white;
-
-}
 .authNav {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -39,6 +30,14 @@ listingRow {
 .paymentBtn {
   width: 25%;
   margin-top: 10px;
+  margin-bottom: 10px;
+  height: 50px;
+}
+
+.incentiveBtn {
+  width: 30%;
+  margin-top: 10px;
+  margin-bottom: 10px;
   height: 50px;
 }
 
@@ -109,13 +108,13 @@ listingRow {
 }
 
 body {
-    font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-    font-size: 1em;
-    font-weight: 300;
-    line-height: 1.5;
-    color: var(--text-color);
-    background: var(--bg-color);
-    position: relative;
+  font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-size: 1em;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--text-color);
+  background: var(--bg-color);
+  position: relative;
 }
 
 header {
@@ -244,7 +243,7 @@ main {
 
 .calendar .body .selected {
   border-left: 10px solid transparent;
-  border-image: linear-gradient(45deg, #1a8fff 0%,#53cbf1 40%);
+  border-image: linear-gradient(45deg, #1a8fff 0%, #53cbf1 40%);
   border-image-slice: 1;
 }
 
@@ -287,7 +286,8 @@ main {
   letter-spacing: -.07em;
 }
 
-.calendar .body .cell:hover .bg, .calendar .body .selected .bg  {
+.calendar .body .cell:hover .bg,
+.calendar .body .selected .bg {
   opacity: 0.05;
   transition: .5s ease-in;
 }
@@ -298,3 +298,33 @@ main {
   width: calc(100%/7);
 }
 
+.nopad-left {
+  padding-left: 0px;
+}
+
+.nopad-right {
+  padding-right: 0px;
+}
+
+.spongebob-squarepants {
+  border-radius: 0;
+}
+
+.margin-bottom-2 {
+  margin-bottom: 2px;
+}
+.otherMessage {
+  background-color: #d3d3d3;
+  color: black;
+  width: 60%;
+  float: right;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+.sameMessage {
+  width: 60%;
+  float: left;
+  color: black;
+  border-radius: 15px;
+  margin-top: 10px;
+}
