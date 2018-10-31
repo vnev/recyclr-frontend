@@ -4,6 +4,7 @@ import React from 'react'
 import history from './history.js'
 import axios from 'axios'
 import urls  from './Urls.js'
+import Autocomplete from 'react-google-autocomplete'
 
 //TODO change ui
 
@@ -85,7 +86,7 @@ export default class AuthPage extends React.Component {
     }
     stateHandle(event) {
         this.setState({
-            USstate: event.target.value,
+            state: event.target.value,
         });
     }
     //{{'Authentication': 'Bearer ' + window.localStorage.token}}
@@ -121,9 +122,7 @@ export default class AuthPage extends React.Component {
     signup() {
         let newObj = {
             address: this.state.address,
-            city: this.state.city,
-            USState: this.state.USState,
-            name: this.state.username,
+            user_name: this.state.username,
             email: this.state.email,
             passwd: this.state.password,
             is_company: this.state.accountType,
@@ -131,11 +130,10 @@ export default class AuthPage extends React.Component {
             state: this.state.state,
         }
         let _this = this;
-        console.log(newObj);
         //call create user
-        if (this.state.is_company === 'f') {
+        if (this.state.accountType === 'f') {
             axios.post(`http://recyclr.xyz/user`, newObj).then(function(result) {
-                console.log(result);
+
                 _this.setState({signinTog: false});
             }).catch(function(error) {
                 console.log(error);
@@ -144,7 +142,7 @@ export default class AuthPage extends React.Component {
         }
         else {
             axios.post(`http://recyclr.xyz/company`, newObj).then(function(result) {
-                console.log(result);
+    
                 _this.setState({signinTog: false});
             }).catch(function(error) {
                 console.log(error);
@@ -182,9 +180,13 @@ export default class AuthPage extends React.Component {
             <h3 id="signUpHeading" className="card-title">Sign Up for Free</h3>
             <form>
                 <input type="text" className="form-control " placeholder="Username" value={this.state.firstname} onChange={this.userHandle}></input>
-                <input type="text" className="form-control" placeholder="Address" value={this.state.address} onChange={this.addressHandle}></input>
-                <input type="text" className="form-control" placeholder="City" value={this.state.city} onChange={this.cityHandle}></input>
-                <input type="text" className="form-control" placeholder="State" value={this.state.state} onChange={this.stateHandle}></input>
+                <Autocomplete
+                                    className="form-control"
+                                    onPlaceSelected={(place) => {this.setState({address: place.formatted_address, city: place.address_components[2].long_name, state: place.address_components[5].long_name})}}
+                                    types={['address']}
+                                    componentRestrictions={{country: 'USA'}}
+                                />
+                
                 <input type="text" className="form-control" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
                 <input type="password" className="form-control" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
                 <select className="form-control " value={this.state.accountType} onChange={this.typeHandle}>
