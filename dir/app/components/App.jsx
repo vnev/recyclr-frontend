@@ -9,6 +9,8 @@ import Progress from './Progress.jsx';
 import createListing from './createListing.jsx';
 import Listings from './Listings.jsx';
 import GoogleAuth from './googleAuth.jsx';
+import InvoiceH from './Invoices.jsx';
+//import PendTrans from './Pending.jsx';
 import {Switch} from 'react-router-dom';
 import history from './history.js';
 import ChatSelect from './chatSelect.jsx'
@@ -46,6 +48,9 @@ export default class App extends React.Component {
             <Route path={'/payment'} component={Payment}/>
             <Route path={'/messages'} component={ChatSelect}/>
             <Route path={'/chatroom/:id'} component={ChatRoom}/>
+            <Route path={'/invoiceHistory'} component={InvoiceH}/>
+            {/* <Route path={'/pendingTrans'} component={PendTrans}/> */}
+
             <Route path={'/choose_date/:id'} component={Calendar}/>
             <Route path={'/progress'} component={Progress}/>
 

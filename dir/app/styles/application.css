@@ -3,6 +3,70 @@
 
 }
 
+.authNav {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.authInput {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-radius: 0%;
+    color: white;
+    background-color: black;
+}
+.authSelect {
+    margin-top: 25px;
+    color: black;
+}
+.authButton {
+    width: 100%;
+    margin-top: 50px;
+    height: 80px;
+
+}
+
+.paymentBtn {
+  width: 25%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 50px;
+}
+
+.incentiveBtn {
+  width: 30%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 50px;
+}
+
+.banButton {
+    width: 25%;
+    margin-top: 10px;
+    height: 50px;
+}
+.banInput {
+    margin-top: 20px;
+    width: 25%;
+    border-radius: 0%;
+}
+.addressInput {
+  margin-top: 20px;
+  margin-left: 20px;
+  width:25%;
+  margin-bottom: 10px;
+}
+.formButton {
+  width: 40%;
+  margin-top: 10px;
+  height: 50px;
+}
+.formInput {
+  width: 40%;
+  margin-top: 20px;
+  border-radius: 0%;
+}
 
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
