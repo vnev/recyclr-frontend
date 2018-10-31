@@ -75,10 +75,6 @@ export default class PaymentPage extends Component {
                 <div className="row">
                     <div className="col-8 offset-2">
                         <div className="card">
-                                    <h2>Number of Incentives you have: </h2>
-                                    <div className="col-8">
-                                        <button className="btn btn-primary incentiveBtn">Use incentives</button>
-                                     </div>
                                 <h2>Please complete payment with the help of Stripe!</h2>
                                 <Elements> 
                                     <CheckOut />
