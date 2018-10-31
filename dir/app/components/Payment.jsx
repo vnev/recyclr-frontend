@@ -36,11 +36,11 @@ export default class PaymentPage extends Component {
         //make get request using stored email/username
         Axios.get('http://recyclr.xyz/user/' + window.localStorage.getItem('userid'),{headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
         .then(function(result) {
-          
+
             _this.setState({userObj: result.data});
             _this.calculateIncentivePercentage();
         }).catch(function(error) {
-          
+
         });
     }
 
@@ -55,25 +55,20 @@ export default class PaymentPage extends Component {
             let newObj = _this.state.userObj;
             newObj.points = newPoints;
             _this.setState({userObj: newObj}, _this.calculateIncentivePercentage());
-<<<<<<< HEAD
-            
 
-
-=======
->>>>>>> ee4893aa7345acf4c360a9610975564b60e6c588
         }).then(function(error) {
-     
+
         });
     }
 
     render() {
-        return( 
+        return(
             <div className="container">
                 <div className="row">
                     <div className="col-8 offset-2">
                         <div className="card">
                                 <h2>Please complete payment with the help of Stripe!</h2>
-                                <Elements> 
+                                <Elements>
                                     <CheckOut />
                                 </Elements>
                         </div>
