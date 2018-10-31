@@ -77,7 +77,7 @@ export default class Progress extends Component {
           <h3>Total number of Recyclr listings created: {this.state.list.length}</h3>
           <h3>Total weight of Recyclr listings: {this.calculateWeight(), this.state.totalWeight} lbs</h3>
 
-          <h3>Next Recyclr listings goal: {this.calculateIncentive(), this.state.incentiveCheck}. You need {this.state.list.length} more listings sold to reach your goal.</h3>
+          <h3>Next Recyclr listings goal: {this.calculateIncentive(), this.state.incentiveCheck}. You need {this.state.incentiveCheck - this.state.list.length} more listings sold to reach your goal.</h3>
           <div id="socialWrapper" onClick={this.hasShared}>
           <FacebookShareButton
             url='http://recyclr.xyz'

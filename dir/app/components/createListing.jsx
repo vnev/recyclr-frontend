@@ -16,6 +16,7 @@ export default class createListing extends React.Component {
             matWeight: '',
             image: '',
             address: '',
+            date: '',
             imagePreviewUrl: ''
 
         };
@@ -24,6 +25,7 @@ export default class createListing extends React.Component {
         this.typeHandler = this.typeHandler.bind(this);
         this.weightHandler = this.weightHandler.bind(this);
         this.imageHandler = this.imageHandler.bind(this);
+        this.dateHandler = this.dateHandler.bind(this);
         this.createNewListing = this.createNewListing.bind(this);
 
     }
@@ -46,7 +48,7 @@ export default class createListing extends React.Component {
         this.setState({
             matType: event.target.value
         }, () => console.log(this.state.matType));
-        
+
     }
     isNumeric(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
@@ -74,6 +76,12 @@ export default class createListing extends React.Component {
 
     reader.readAsDataURL(file)
   }
+
+  dateHandler(event) {
+    this.setState({
+        date: event.target.value
+    });
+  }
     createNewListing(event) {
         event.preventDefault();
 
@@ -84,6 +92,7 @@ export default class createListing extends React.Component {
         form.append('material_weight', parseFloat(this.state.matWeight));
         form.append('address', this.state.address);
         form.append('image', this.state.image);
+        form.append('pickup_date_time', this.state.date);
         form.append('user_id', parseInt(window.localStorage.getItem('userid')));
         Axios.post(`http://recyclr.xyz/listing`, form, {
             headers: {
@@ -109,7 +118,7 @@ export default class createListing extends React.Component {
                                     id="fileIn"
                                   type="file"
                                   onChange={(e)=>this.imageHandler(e)} />
-                                
+
                             </div>
                             <div className="form-group">
                                 <label htmlFor="titleIn">Title</label>
@@ -144,13 +153,18 @@ export default class createListing extends React.Component {
                                     componentRestrictions={{country: 'USA'}}
                                 />
                             </div>
-                            
+
+                            <div className='form-group'>
+                            <label htmlFor="dateIn">Select Pickup Date</label>
+                            <input type="date" className="btn btn-secondary" id="dateIn" value={this.state.date} name="pickup_date_time" onChange={this.dateHandler}/>
+                            </div>
+
                         <button type='submit' className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
                         </form>
                     </div>
-                    
+
                 </div>
-                
+
             </div>
         );
     }
