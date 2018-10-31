@@ -46,7 +46,7 @@ export default class createListing extends React.Component {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
     weightHandler(event) {
-        if (isNumeric(event.target.value)) {
+        if (is_numeric(event.target.value)) {
             this.setState({
                 matWeight: event.target.value
             });

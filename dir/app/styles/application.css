@@ -39,6 +39,14 @@ listingRow {
 .paymentBtn {
   width: 25%;
   margin-top: 10px;
+  margin-bottom: 10px;
+  height: 50px;
+}
+
+.incentiveBtn {
+  width: 30%;
+  margin-top: 10px;
+  margin-bottom: 10px;
   height: 50px;
 }
 
