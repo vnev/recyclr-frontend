@@ -1,13 +1,32 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
 import history from './history.js';
+import Axios from 'axios';
 
 export default class ListingItem extends React.Component {
     constructor(props) {
         super(props);
+        this.createInvoice = this.createInvoice.bind(this);
     }
-    render() {
 
+
+    createInvoice() {
+        /*let newObj = {
+
+        }
+        Axios.post(`http://recyclr.xyz/invoice/create`, )*/
+    }
+
+    render() {
+        let userObject;
+        let button;
+        Axios.get(`http://recyclr.xyz/user/` + window.localStorage.getItem('userid')).then(function(result) {
+            console.log(result);
+            userObject = result.data;
+        })
+        if(userObject.is_company) {
+            button = <button className="btn btn-primary" onClick={this.createInvoice}>Transaction Complete</button> 
+        }
         return(
             <div className="card listingRow">
                 <div className="row ">
@@ -27,8 +46,7 @@ export default class ListingItem extends React.Component {
                         <button className="btn btn-primary">Freeze listing</button>
                         
                           <button className="btn btn-secondary" onClick={() => { history.push('/choose_date/' + this.props.Item.listing_id) }}>Select Pickup date</button>
-                          
-                          <button className="btn btn-primary" onClick={()=> {history.push('/payment')} }>Payment</button>
+                            {button}
                     </div>
                 </div>
             </div>
