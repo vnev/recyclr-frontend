@@ -2,7 +2,9 @@ import React from 'react'
 import Axios from 'axios';
 import urls from './Urls.js';
 import history from './history.js'
+import Autocomplete from 'react-google-autocomplete'
 
+//uncomment file when database is updated
 
 export default class createListing extends React.Component {
     constructor(props) {
@@ -10,9 +12,11 @@ export default class createListing extends React.Component {
         this.state = {
             title: '',
             description: '',
-            matType: '',
-            matWeight: 0.0,
-            file: '',
+            matType: 'Plastic',
+            matWeight: '',
+            image: '',
+            address: '',
+            date: '',
             imagePreviewUrl: ''
 
         };
@@ -20,7 +24,10 @@ export default class createListing extends React.Component {
         this.descHandler = this.descHandler.bind(this);
         this.typeHandler = this.typeHandler.bind(this);
         this.weightHandler = this.weightHandler.bind(this);
+        this.imageHandler = this.imageHandler.bind(this);
+        this.dateHandler = this.dateHandler.bind(this);
         this.createNewListing = this.createNewListing.bind(this);
+
     }
     titleHandler(event) {
         this.setState({
@@ -28,7 +35,7 @@ export default class createListing extends React.Component {
         });
     }
     componentDidMount() {
-        if(window.localStorage.getItem('token') === null) {
+        if(window.localStorage.getItem('token') === null || window.localStorage.getItem('is_company') === 'true') {
             history.push('/auth');
         }
     }
@@ -40,54 +47,61 @@ export default class createListing extends React.Component {
     typeHandler(event) {
         this.setState({
             matType: event.target.value
-        });
+        }, () => console.log(this.state.matType));
+
     }
-    isNumberic(n) {
+    isNumeric(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
     weightHandler(event) {
-        if (is_numeric(event.target.value)) {
+        if (this.isNumeric(event.target.value)) {
             this.setState({
                 matWeight: event.target.value
             });
         }
     }
-
-  _handleImageChange(e) {
+  imageHandler(e) {
     e.preventDefault();
 
     let reader = new FileReader();
     let file = e.target.files[0];
+    console.log(file);
 
     reader.onloadend = () => {
       this.setState({
-        file: file,
+        image: file,
         imagePreviewUrl: reader.result
       });
     }
 
     reader.readAsDataURL(file)
   }
-    createNewListing() {
-        let newObj = {
-            title: this.state.title,
-            description: this.state.description,
-            material_type: this.state.matType,
-            material_weight: parseFloat(this.state.matWeight),
-            file: this.state.file,
-            user_id: parseInt(window.localStorage.getItem('userid')),
-            img_hash: '0'
-        }
-        console.log(window.localStorage.getItem('userid'));
-        Axios.post(`http://recyclr.xyz/listing`, newObj, {
+
+  dateHandler(event) {
+    this.setState({
+        date: event.target.value
+    });
+  }
+    createNewListing(event) {
+        event.preventDefault();
+
+        var form = new FormData();
+        form.append('title', this.state.title);
+        form.append('description', this.state.description);
+        form.append('material_type', this.state.matType);
+        form.append('material_weight', parseFloat(this.state.matWeight));
+        form.append('address', this.state.address);
+        form.append('image', this.state.image);
+        form.append('pickup_date_time', this.state.date);
+        form.append('user_id', parseInt(window.localStorage.getItem('userid')));
+        Axios.post(`http://recyclr.xyz/listing`, form, {
             headers: {
                 'Authorization': 'Bearer ' + window.localStorage.getItem('token'),
                 'Access-Control-Allow-Origin': '*'
             }},)
 
         .then(function(result) {
-            console.log(result);
-            //history.push('/listings');
+            history.push('/payment');
         }).catch(function(error) {
             console.log(error);
         });
@@ -97,6 +111,15 @@ export default class createListing extends React.Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
+                        <form>
+                            <div className="form-group">
+                            <label htmlFor="fileIn">Upload a Picture of Materials</label>
+                                <input className="fileInput form-control-file"
+                                    id="fileIn"
+                                  type="file"
+                                  onChange={(e)=>this.imageHandler(e)} />
+
+                            </div>
                             <div className="form-group">
                                 <label htmlFor="titleIn">Title</label>
                                 <input type="text" className="form-control" id="titleIn" value={this.state.title} onChange={this.titleHandler}/>
@@ -107,23 +130,41 @@ export default class createListing extends React.Component {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="matTypeIn">Material Type</label>
-                                <input type="text" className="form-control" id="matTypeIn" value={this.state.matType} onChange={this.typeHandler}/>
+                                <select className="form-control" id="matTypeIn" value={this.state.matType} onChange={this.typeHandler}>
+                                    <option value='Plastic'>Plastic</option>
+                                    <option value='Electronics'>Electronics</option>
+                                    <option value='Rubber'>Rubber</option>
+                                    <option value='Textiles'>Textiles</option>
+                                    <option value='Cardboard'>Cardboard</option>
+                                    <option value='Glass'>Glass</option>
+                                    <option value='Metal'>Metal</option>
+                                </select>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="matWeightIn">Material Weight</label>
+                                <label htmlFor="matWeightIn">Material Weight (lbs)</label>
                                 <input type="text" className="form-control" id="matWeightIn" value={this.state.matWeight} onChange={this.weightHandler}/>
                             </div>
+                            <div className='form-group'>
+                                <label htmlFor='googAuto'>Pickup Address</label>
+                                <Autocomplete
+                                    className="form-control"
+                                    onPlaceSelected={(place) => this.setState({address: place.formatted_address})}
+                                    types={['address']}
+                                    componentRestrictions={{country: 'USA'}}
+                                />
+                            </div>
 
-                            <div className="previewComponent">
-                              <form onSubmit={(e)=>this._handleSubmit(e)}>
-                                <input className="fileInput"
-                                  type="file"
-                                  onChange={(e)=>this._handleImageChange(e)} />
-                                </form>
-                          </div>
-                        <button className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
+                            <div className='form-group'>
+                            <label htmlFor="dateIn">Select Pickup Date</label>
+                            <input type="date" className="btn btn-secondary" id="dateIn" value={this.state.date} name="pickup_date_time" onChange={this.dateHandler}/>
+                            </div>
+
+                        <button type='submit' className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
+                        </form>
                     </div>
+
                 </div>
+
             </div>
         );
     }
