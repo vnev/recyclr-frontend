@@ -2,7 +2,7 @@ import React from 'react';
 import Navigation from './Navigation.jsx';
 import AuthPage from './Authentication.jsx';
 import Settings from './Settings.jsx';
-import Calendar from './calendar.jsx';
+// import Calendar from './calendar.jsx';
 import AdminPage from './Admin.jsx';
 import Payment from './Stripe.jsx';
 import Progress from './Progress.jsx';
@@ -44,14 +44,14 @@ export default class App extends React.Component {
             <Route path={'/admin'} component={AdminPage}/>
             <Route path={'/googleAuth'} component={GoogleAuth}/>
             <Route path={'/createListing'} component={createListing}/>
-            <Route path={'/calendar'} component={Calendar}/>
+            {/* <Route path={'/calendar'} component={Calendar}/> */}
             <Route path={'/payment'} component={Payment}/>
             <Route path={'/messages'} component={ChatSelect}/>
             <Route path={'/chatroom/:id'} component={ChatRoom}/>
             <Route path={'/invoiceHistory'} component={InvoiceH}/>
             {/* <Route path={'/pendingTrans'} component={PendTrans}/> */}
 
-            <Route path={'/choose_date/:id'} component={Calendar}/>
+            {/* <Route path={'/choose_date/:id'} component={Calendar}/> */}
             <Route path={'/progress'} component={Progress}/>
 
           </Switch>
