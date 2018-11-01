@@ -87,7 +87,7 @@ export default class Navigation extends React.Component {
 
             <div className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="navbar-brand">
-                    <a className="rootLink" href="/">Recyclr</a>
+                    <a className="rootLink" style={{ fontFamily: "Yeseva One", fontSize: "28px" }} href="/">Recyclr</a>
                 </div>
 
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
