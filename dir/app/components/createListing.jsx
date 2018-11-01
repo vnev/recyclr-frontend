@@ -82,6 +82,8 @@ export default class createListing extends React.Component {
     });
   }
     createNewListing(event) {
+        let price;
+        let _this = this;
         event.preventDefault();
         var form = new FormData();
         form.append('title', this.state.title);
@@ -95,6 +97,19 @@ export default class createListing extends React.Component {
         api.post(`/listing`, form)
         .then(function(result) {
             window.localStorage.setItem('currID', result.data.listing_id);
+            switch(_this.state.matType) {
+                case "Plastic":
+                    price = 1.5;
+                case "Electronics":
+                    price = 1.7;
+                case "Rubber":
+                    price = 1.9;
+                case "Textile":
+                    price = 2;
+                default:
+                    price = 2.3;
+            }
+            window.localStorage.setItem('price', price);
             console.log(window.localStorage.getItem('currID'));
             history.push('/payment');
         }).catch(function(error) {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FacebookShareButton, FacebookIcon } from 'react-share'
+import ListingItem from './listingItem'
 import history from './history.js'
 import axios from 'axios'
 //TODO: REPLACE DUMMY VALUES WITH DATABASE VALUES
@@ -7,10 +8,14 @@ export default class Progress extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userObj: {
+        points: 0
+      },
       list: [],
       shared: false,
       incentiveCheck: '',
-      totalWeight: 0
+      totalWeight: 0,
+      nextToIncentive: 0
     }
     this.hasShared = this.hasShared.bind(this);
   }
@@ -18,7 +23,7 @@ export default class Progress extends Component {
     if (window.localStorage.getItem('username') === null) {
       history.push('/auth');
     }
-    console.log((window.localStorage.getItem('userid')));
+    //console.log((window.localStorage.getItem('userid')));
     //  console.log(user_id);
       let _this = this;
       //make get request using stored email/username
@@ -34,6 +39,15 @@ export default class Progress extends Component {
       }).catch(function(error) {
         console.log(error);
       })
+
+      axios.get('http://recyclr.xyz/user/' + window.localStorage.getItem('userid'),{headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
+      .then(function(result) {
+
+          _this.setState({userObj: result.data});
+          _this.calculateNextIncentiveLevel();
+      }).catch(function(error) {
+        console.log(error);
+      });
     //set list = returned json objects list = results.data
   }
   hasShared() {
@@ -75,15 +89,23 @@ export default class Progress extends Component {
       this.state.totalWeight += this.state.list[i].material_weight;
     }
   }
+
+  calculateNextIncentiveLevel() {
+    let points = this.state.userObj.points % 100;
+    this.setState({nextToIncentive: 100 - points});
+  }
     render() {
       return(
         <div>
           <h1>My Recyclr Progress</h1>
           <h3>Total number of Recyclr listings created: {this.state.list.length}</h3>
           <h3>Total weight of Recyclr listings: {this.calculateWeight(), this.state.totalWeight} lbs</h3>
+          <h3>Total amount of Incentive Points: {this.state.userObj.points}</h3>
+          <h3>You need {this.state.nextToIncentive} more Incentive Points to reach the next incentive level!</h3>
+          <h3>Next Recyclr listings goal: {this.calculateIncentive(), this.state.incentiveCheck}. You need {this.state.incentiveCheck - this.state.list.length} more listings sold to reach your next goal.</h3>
 
-          <h3>Next Recyclr listings goal: {this.calculateIncentive(), this.state.incentiveCheck}. You need {this.state.incentiveCheck - this.state.list.length} more listings sold to reach your goal.</h3>
           <div id="socialWrapper" onClick={this.hasShared}>
+
           <FacebookShareButton
             url='http://recyclr.xyz'
             quote="My Recyclr Progress: Total Number of recycling:  {_this.state.list.length}"
@@ -94,6 +116,12 @@ export default class Progress extends Component {
             square
           />
           </FacebookShareButton>
+
+          <div className="row">
+              {this.state.list.map((item, key) => {
+                  return <ListingItem key={key} Item={item} ButBool={false} />
+              })}
+          </div>
         </div>
       </div>
     )

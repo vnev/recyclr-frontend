@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import history from './history.js';
 import Axios from 'axios';
+import api from './api.js';
 
 export default class ListingItem extends React.Component {
     constructor(props) {
@@ -10,7 +11,7 @@ export default class ListingItem extends React.Component {
             distance: '',
             name: ''
         }
-
+        this.createInvoice = this.createInvoice.bind(this);
         this.freezeListing = this.freezeListing.bind(this);
     }
     componentDidMount() {
@@ -34,8 +35,26 @@ export default class ListingItem extends React.Component {
             console.log(result);
         })
     }
+    
+    createInvoice() {
+        let obj = {
+            listing_id : this.props.Item.listing_id, 
+        }
+            api.post(`/invoice/create`, obj).then(function(result) {
+                console.log(result);
+            }).catch(function(error) {
+                console.log(error);
+            })
+            console.log(obj);
+            
+    }
+    
     render() {
         let rightSide;
+        let button;
+        if(window.localStorage.getItem('is_company') === 'true') {
+            button = <button className="btn btn-primary" onClick={this.createInvoice}>Transaction Complete</button> 
+        }
         if (this.props.ButBool === true) {
             rightSide = <div className="col-3 text-right">
                 <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>By: <b>{this.props.Item.username}</b></p>
@@ -67,6 +86,7 @@ export default class ListingItem extends React.Component {
                                     <p>Type: {this.props.Item.material_type}</p>
                                 </div> */}
                                 {rightSide}
+                                {button}
                             </div>
                         </div>
                     </div>
