@@ -17,6 +17,7 @@ import history from './history.js';
 import ChatSelect from './chatSelect.jsx'
 import {Route, Router} from 'react-router-dom';
 import ChatRoom from './ChatRoom.jsx';
+import PayHist from './PaymentHis.jsx';
 
 
 
@@ -50,6 +51,7 @@ export default class App extends React.Component {
             <Route path={'/messages'} component={ChatSelect}/>
             <Route path={'/chatroom/:id'} component={ChatRoom}/>
             <Route path={'/invoiceHistory'} component={InvoiceH}/>
+            <Route path={'/paymentHistory'} component={PayHist}/>
             {/* <Route path={'/pendingTrans'} component={PendTrans}/> */}
 
             {/* <Route path={'/choose_date/:id'} component={Calendar}/> */}
