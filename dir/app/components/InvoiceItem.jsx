@@ -16,6 +16,7 @@ export default class InvoiceItem extends React.Component {
                         <h2>Price : $ {v}</h2>
                         <h2>Transaction date : {d.toDateString()}</h2>
                         <h2>Company : {this.props.Item.company_name}</h2>
+                        <h2>Listing Title : {this.props.Item.title}</h2>
                     </div>
                 </div>
 

@@ -21,6 +21,7 @@ import Axios from 'axios';
             console.log(token.id);
             console.log(token.token);
             bodyFormData.set('token', token.token.id);
+            bodyFormData.set('listing_id', window.localStorage.getItem('currID'));
             Axios.post(`http://recyclr.xyz/charge`,  bodyFormData ,{headers : {'Content-Type' : 'multipart/form-data'}}).then(function(result) {
                 console.log("Purchase Complete");
             }).then(function (response) {
