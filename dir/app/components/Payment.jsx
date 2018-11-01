@@ -14,6 +14,7 @@ export default class PaymentPage extends Component {
             },
             incentivePoints: 0,
             incentivePercentage: 0,
+            incentiveUsed: false,
         }
         this.applyIncentive = this.applyIncentive.bind(this);
         this.calculateIncentivePercentage = this.calculateIncentivePercentage.bind(this);
@@ -54,13 +55,15 @@ export default class PaymentPage extends Component {
         let _this = this;
         Axios.put(`http://recyclr.xyz/user/` + window.localStorage.getItem('userid'),  requestObject, {headers: {'Authorization': 'Bearer ' + window.localStorage.getItem('token'),}},)
         .then(function(result) {
+            console.log(window.localStorage.getItem('currID'));
+            api.post(`/user/deduct/${window.localStorage.getItem('currID')}`, {percentage: _this.state.incentivePercentage})
+            .then(function(result) {
+                console.log(result);
+            })
             let newObj = _this.state.userObj;
             newObj.points = newPoints;
             _this.setState({userObj: newObj}, _this.calculateIncentivePercentage());
-            console.log(window.localStorage.getItem('currID'));
-            api.post(`/listing/${window.localStorage.getItem('currID')}/update`, {price: 5000}).then(function(result) {
-                conosle.log(result);
-            })
+            _this.setState({incentiveUsed: true});
         }).then(function(error) {
 
         });
@@ -73,6 +76,11 @@ export default class PaymentPage extends Component {
                     <div className="col-8 offset-2">
                         <div className="card">
                                 <h2>Please complete payment with the help of Stripe!</h2>
+                                {this.state.incentiveUsed &&
+                                    <h5 className="alert-success text-center">
+                                        {this.state.incentivePercentage}% discount has been applied!
+                                    </h5>
+                                }
                                 <Elements>
                                     <CheckOut />
                                 </Elements>
@@ -84,10 +92,10 @@ export default class PaymentPage extends Component {
 
                 <div className = "row">
                     <div className="col-8 offset-2">
-                        <div className="card">
-                            <h3>{"Total Incentive Points: " + this.state.userObj.points}</h3>
-                            <h4>{"Total Discount Percentage is " + this.state.incentivePercentage + "% by using " + this.state.incentivePoints + " points!"}</h4>
-                            <button className="btn btn-primary" onClick={this.applyIncentive}>Apply Incentive</button>
+                        <div className="card text-center">
+                            <h2 className="text-dark">{"Total Incentive Points: " + this.state.userObj.points}</h2>
+                            <h5 className="text-info">{"Total Discount Percentage is " + this.state.incentivePercentage + "% by using " + this.state.incentivePoints + " points!"}</h5>
+                            <button className="btn btn-info" onClick={this.applyIncentive}>Apply Incentive</button>
                         </div>
                     </div>
                 </div>
