@@ -83,6 +83,7 @@ export default class createListing extends React.Component {
     });
   }
     createNewListing(event) {
+        let price;
         event.preventDefault();
 
         var form = new FormData();
@@ -101,6 +102,19 @@ export default class createListing extends React.Component {
             }},)
 
         .then(function(result) {
+            switch(this.state.matType) {
+                case "Plastic":
+                    price = 1.5;
+                case "Electronics":
+                    price = 1.7;
+                case "Rubber":
+                    price = 1.9;
+                case "Textile":
+                    price = 2;
+                default:
+                    price = 2.3;
+            }
+            window.localStorage.setItem('price', price);
             history.push('/payment');
         }).catch(function(error) {
             console.log(error);
