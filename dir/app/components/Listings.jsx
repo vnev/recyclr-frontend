@@ -57,7 +57,7 @@ export default class Listings extends React.Component {
         }
         let rad = this.state.radius;
         console.log(newList);
-        newList = newList.filter((data) => data.distance <= parseFloat(rad) || parseFloat(rad) >= 25);
+        newList = newList.filter((data) => data.distance <= parseFloat(rad) || parseFloat(rad) > 25);
         console.log(newList);
         this.setState({ distList: newList });
     }

@@ -74,13 +74,14 @@ export default class Navigation extends React.Component {
                         </li>
                         {but}
                     </ul>
-
             </div>;
         }
         else if (window.localStorage.getItem('is_company') === null){
             view =  <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        {but}
-                    </div>;
+                <ul className="navbar-nav mr-auto">
+                            {but}
+                </ul>
+            </div>;
         }
         return(
 

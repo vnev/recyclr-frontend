@@ -49,8 +49,12 @@ export default class Settings extends React.Component {
         }
 
         // need request url ex
-        Axios.put(`http://recyclr.xyz/user/` + window.localStorage.getItem('userid'), requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), } }).then(function (result) {
+        let _this = this;
+        Axios.put(`http://recyclr.xyz/user/` + window.localStorage.getItem('userid'), requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), } })
+        .then(function (result) {
             console.log(result);
+            window.localStorage.setItem('username', _this.state.newUsername);
+            _this.setState({newUsername: ''});
         }).then(function (error) {
             console.log(error);
         })
@@ -65,7 +69,8 @@ export default class Settings extends React.Component {
         }
 
         // need request url ex
-        Axios.put(`http://recyclr.xyz/user/` + window.localStorage.getItem('userid'), requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token') } }).then(function (result) {
+        Axios.put(`http://recyclr.xyz/user/` + window.localStorage.getItem('userid'), requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token') } })
+        .then(function (result) {
             console.log(result);
         }).then(function (error) {
             console.log(error);
@@ -75,7 +80,8 @@ export default class Settings extends React.Component {
         let newObj = {
             passwd: this.state.newPass,
         }
-        Axios.put('http://recyclr.xyz/user/' + window.localStorage.getItem('userid'), newObj, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token') } }).then(function (result) {
+        Axios.put('http://recyclr.xyz/user/' + window.localStorage.getItem('userid'), newObj, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token') } })
+        .then(function (result) {
             console.log(result);
         }).catch(function (error) {
             console.log(error);
