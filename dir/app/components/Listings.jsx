@@ -19,8 +19,8 @@ export default class Listings extends React.Component {
         this.matHandle = this.matHandle.bind(this);
         this.typeHandle = this.typeHandle.bind(this);
         this.matChange = this.matChange.bind(this);
-        
-       
+
+
     }
     matHandle(event) {
         this.setState({
@@ -34,38 +34,38 @@ export default class Listings extends React.Component {
         }, () => this.sortHandle());
     }
     sortHandle() {
-        this.setState({distList: this.state.list});
+        this.setState({ distList: this.state.list });
         this.matChange();
-        
-        
+
+
     }
     matChange() {
         let mat = this.state.mat;
         let newList = this.state.list;
         if (mat === 'All') {
-            
+
         }
         else {
             newList = newList.filter((data) => data.material_type === mat);
         }
         if (this.state.type === 'A') {
-            newList = newList.sort(function(a,b){return a.distance - b.distance});
+            newList = newList.sort(function (a, b) { return a.distance - b.distance });
         }
         else {
-            newList = newList.sort(function(a,b){return a.distance - b.distance});
+            newList = newList.sort(function (a, b) { return a.distance - b.distance });
             newList.reverse();
         }
         let rad = this.state.radius;
         console.log(newList);
-        newList = newList.filter((data)=> data.distance <= parseFloat(rad) || parseFloat(rad) >= 25);
+        newList = newList.filter((data) => data.distance <= parseFloat(rad) || parseFloat(rad) >= 25);
         console.log(newList);
-        this.setState({distList: newList});
+        this.setState({ distList: newList });
     }
     distHandle(event) {
         this.setState({
             radius: event.target.value,
         }, () => this.sortHandle());
-        
+
     }
     distancePut() {
         let _this = this
@@ -165,11 +165,13 @@ export default class Listings extends React.Component {
                         <h3 className="card-title text-center">Listings</h3>
                         <p className="text-center">View listings within a specified radius</p>
                         <div className="row" style={{ marginBottom: "10px" }}>
-                            <div className="col-md-4 offset-md-4">
+                            <div className="col-4">
                                 <select className="custom-select" value={this.state.type} onChange={this.typeHandle}>
                                     <option value='A'>Ascending</option>
                                     <option value='D'>Descending</option>
                                 </select>
+                            </div>
+                            <div className="col-4">
                                 <select className="custom-select" value={this.state.mat} onChange={this.matHandle}>
                                     <option value="All">All</option>
                                     <option value='Plastic'>Plastic</option>
@@ -180,6 +182,8 @@ export default class Listings extends React.Component {
                                     <option value='Glass'>Glass</option>
                                     <option value='Metal'>Metal</option>
                                 </select>
+                            </div>
+                            <div className="col-4">
                                 <select className="custom-select" value={this.state.raduis} onChange={this.distHandle}>
                                     <option value='5'>5 Miles</option>
                                     <option value='10'>10 Miles</option>

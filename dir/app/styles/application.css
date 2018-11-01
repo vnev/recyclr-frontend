@@ -1,29 +1,32 @@
 #appBase {
   width: 100%;
-
+  font-family: "Work Sans", sans-serif;
 }
 
 .authNav {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
+
 .authInput {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    border-radius: 0%;
-    color: white;
-    background-color: black;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-radius: 0%;
+  color: white;
+  background-color: black;
 }
+
 .authSelect {
-    margin-top: 25px;
-    color: black;
+  margin-top: 25px;
+  color: black;
 }
+
 .authButton {
-    width: 100%;
-    margin-top: 50px;
-    height: 80px;
+  width: 100%;
+  margin-top: 50px;
+  height: 80px;
 
 }
 
@@ -42,26 +45,30 @@
 }
 
 .banButton {
-    width: 25%;
-    margin-top: 10px;
-    height: 50px;
+  width: 25%;
+  margin-top: 10px;
+  height: 50px;
 }
+
 .banInput {
-    margin-top: 20px;
-    width: 25%;
-    border-radius: 0%;
+  margin-top: 20px;
+  width: 25%;
+  border-radius: 0%;
 }
+
 .addressInput {
   margin-top: 20px;
   margin-left: 20px;
-  width:25%;
+  width: 25%;
   margin-bottom: 10px;
 }
+
 .formButton {
   width: 40%;
   margin-top: 10px;
   height: 50px;
 }
+
 .formInput {
   width: 40%;
   margin-top: 20px;
@@ -313,6 +320,7 @@ main {
 .margin-bottom-2 {
   margin-bottom: 2px;
 }
+
 .otherMessage {
   background-color: #d3d3d3;
   color: black;
@@ -321,6 +329,7 @@ main {
   border-radius: 15px;
   margin-top: 10px;
 }
+
 .sameMessage {
   width: 60%;
   float: left;

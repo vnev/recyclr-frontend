@@ -31,40 +31,40 @@ export default class ListingItem extends React.Component {
             company_id: parseInt(window.localStorage.getItem('userid')),
         }
         Axios.post(`http://recyclr.xyz/listing/freeze/${this.props.Item.listing_id}`, obj, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
-        .then(function(result) {
-            console.log(result);
-        })
+            .then(function (result) {
+                console.log(result);
+            })
     }
-    
+
     createInvoice() {
         let obj = {
-            listing_id : this.props.Item.listing_id, 
+            listing_id: this.props.Item.listing_id,
         }
-            api.post(`/invoice/create`, obj).then(function(result) {
-                console.log(result);
-            }).catch(function(error) {
-                console.log(error);
-            })
-            console.log(obj);
-            
+        api.post(`/invoice/create`, obj).then(function (result) {
+            console.log(result);
+        }).catch(function (error) {
+            console.log(error);
+        })
+        console.log(obj);
+
     }
-    
+
     render() {
         let rightSide;
         let button;
-        if(window.localStorage.getItem('is_company') === 'true') {
-            button = <button className="btn btn-primary" onClick={this.createInvoice}>Transaction Complete</button> 
+        if (window.localStorage.getItem('is_company') === 'true') {
+            button = <button className="btn btn-primary" onClick={this.createInvoice}>Transaction Complete</button>
         }
         if (this.props.ButBool === true) {
             rightSide = <div className="col-3 text-right">
                 <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>By: <b>{this.props.Item.username}</b></p>
-                <button className="btn btn-primary margin-bottom-2" onClick={this.freezeListing}>Freeze</button>
-                <button className="btn btn-primary" onClick={() => { history.push('/payment') }}>Payment</button>
+                <button style={{ display: "block", width: "100%" }} className="btn btn-primary margin-bottom-2" onClick={this.freezeListing}>Freeze</button>
+                <button style={{ display: "block", width: "100%" }} className="btn btn-dark" onClick={() => { history.push('/payment') }}>Payment</button>
             </div>;
         }
         else {
             rightSide = <div><button className="btn btn-primary" onClick={() => history.push(`/chatroom/${this.props.Item.listing_id}`)}>Enter Chat</button>
-            <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>Frozen By: <b>{this.props.Item.company_name}</b></p></div>
+                <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>Frozen By: <b>{this.props.Item.company_name}</b></p></div>
         }
         return (
             <div className="row" style={{ marginBottom: "5px" }}>
