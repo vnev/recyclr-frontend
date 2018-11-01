@@ -90,7 +90,7 @@ export default class AuthPage extends React.Component {
         });
     }
     //{{'Authentication': 'Bearer ' + window.localStorage.token}}
-    signin() {
+    signin(event) {
         let obj = {
             email: this.state.email,
             passwd: this.state.password,
@@ -165,14 +165,14 @@ export default class AuthPage extends React.Component {
             <h3 id="signinHeading" className="card-title">Sign In</h3>
             <form>
                 <div className="form-group">
-                    <input type="text" className="form-control " placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
+                    <input type="email" pattern='/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/' className="form-control " placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
                 </div>
                 <div className="form-group">
                     <input type="password" className="form-control " placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
                 </div>
                 
             </form>
-            <button className="btn btn-primary authButton" onClick={this.signin}>Log In</button>
+            <button type='submit' className="btn btn-primary authButton" onClick={this.signin}>Log In</button>
         </div>;
         }
         else {
@@ -187,7 +187,7 @@ export default class AuthPage extends React.Component {
                                     componentRestrictions={{country: 'USA'}}
                                 />
                 
-                <input type="text" className="form-control" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
+                <input type="email" pattern='/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/' className="form-control" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
                 <input type="password" className="form-control" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
                 <select className="form-control " value={this.state.accountType} onChange={this.typeHandle}>
                     <option value="f">Recyclr</option>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Elements } from 'react-stripe-elements';
 import Axios from 'axios';
+import api from './api.js'
 
 import CheckOut from './CheckOut.jsx';
 
@@ -31,6 +32,7 @@ export default class PaymentPage extends Component {
 
     componentDidMount() {
 
+        api.post('/listing/')
 
         let _this = this;
         //make get request using stored email/username
@@ -55,7 +57,10 @@ export default class PaymentPage extends Component {
             let newObj = _this.state.userObj;
             newObj.points = newPoints;
             _this.setState({userObj: newObj}, _this.calculateIncentivePercentage());
-
+            console.log(window.localStorage.getItem('currID'));
+            api.post(`/listing/${window.localStorage.getItem('currID')}/update`, {price: 5000}).then(function(result) {
+                conosle.log(result);
+            })
         }).then(function(error) {
 
         });
