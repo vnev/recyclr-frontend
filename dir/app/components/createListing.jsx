@@ -1,6 +1,5 @@
 import React from 'react'
-import Axios from 'axios';
-import urls from './Urls.js';
+import api from './api.js'
 import history from './history.js'
 import Autocomplete from 'react-google-autocomplete'
 
@@ -47,7 +46,7 @@ export default class createListing extends React.Component {
     typeHandler(event) {
         this.setState({
             matType: event.target.value
-        }, () => console.log(this.state.matType));
+        });
 
     }
     isNumeric(n) {
@@ -85,7 +84,6 @@ export default class createListing extends React.Component {
     createNewListing(event) {
         let price;
         event.preventDefault();
-
         var form = new FormData();
         form.append('title', this.state.title);
         form.append('description', this.state.description);
@@ -95,26 +93,11 @@ export default class createListing extends React.Component {
         form.append('image', this.state.image);
         form.append('pickup_date_time', this.state.date);
         form.append('user_id', parseInt(window.localStorage.getItem('userid')));
-        Axios.post(`http://recyclr.xyz/listing`, form, {
-            headers: {
-                'Authorization': 'Bearer ' + window.localStorage.getItem('token'),
-                'Access-Control-Allow-Origin': '*'
-            }},)
-
+        api.post(`/listing`, form)
         .then(function(result) {
-            switch(this.state.matType) {
-                case "Plastic":
-                    price = 1.5;
-                case "Electronics":
-                    price = 1.7;
-                case "Rubber":
-                    price = 1.9;
-                case "Textile":
-                    price = 2;
-                default:
-                    price = 2.3;
-            }
-            window.localStorage.setItem('price', price);
+            console.log(result);
+            window.localStorage.setItem('currID', result.data.listing_id);
+            console.log(window.localStorage.getItem('currID'));
             history.push('/payment');
         }).catch(function(error) {
             console.log(error);
@@ -173,7 +156,7 @@ export default class createListing extends React.Component {
                             <input type="date" className="btn btn-secondary" id="dateIn" value={this.state.date} name="pickup_date_time" onChange={this.dateHandler}/>
                             </div>
 
-                        <button type='submit' className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
+                        <button type="submit" className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
                         </form>
                     </div>
 
