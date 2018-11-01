@@ -57,30 +57,6 @@ export default class Progress extends Component {
     });
     console.log(this.state.shared);
   }
-
-  calculateIncentive() {
-
-    if (this.state.list.length < 5) {
-      this.state.incentiveCheck = 5;
-    }
-
-    else if (this.state.list.length < 10) {
-      this.state.incentiveCheck = 10;
-    }
-
-    else if (this.state.list.length < 50) {
-      this.state.incentiveCheck = 50;
-    }
-
-    else if (this.state.list.length < 100) {
-      this.state.incentiveCheck = 100;
-    }
-
-    else if (this.state.list.length < 500) {
-      this.state.incentiveCheck = 500;
-    }
-  }
-
   calculateWeight() {
 
     var i;
@@ -103,9 +79,6 @@ export default class Progress extends Component {
             <p>Total number of Recyclr listings created: <b>{this.state.list.length}</b></p>
             <p>Total weight of Recyclr listings: <b>{this.calculateWeight(), this.state.totalWeight} lbs</b></p>
             <p>Total amount of Incentive Points: <b>{this.state.userObj.points}</b></p>
-            <p>You need <b>{this.state.nextToIncentive}</b> more Incentive Points to reach the next incentive level!</p>
-            <p>Next Recyclr listings goal: <b>{this.calculateIncentive(), this.state.incentiveCheck}</b>. You need <b>{this.state.incentiveCheck - this.state.list.length}</b> more listings sold to reach your next goal.</p>
-
             <div id="socialWrapper" onClick={this.hasShared}>
 
               <FacebookShareButton
