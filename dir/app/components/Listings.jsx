@@ -12,16 +12,59 @@ export default class Listings extends React.Component {
             list: [],
             distList: [],
             userAddr: '',
+            mat: 'All',
+            type: 'A',
         }
         this.distHandle = this.distHandle.bind(this);
+        this.matHandle = this.matHandle.bind(this);
+        this.typeHandle = this.typeHandle.bind(this);
+        this.matChange = this.matChange.bind(this);
+
+
+    }
+    matHandle(event) {
+        this.setState({
+            mat: event.target.value,
+        }, () => this.sortHandle());
+
+    }
+    typeHandle(event) {
+        this.setState({
+            type: event.target.value,
+        }, () => this.sortHandle());
+    }
+    sortHandle() {
+        this.setState({ distList: this.state.list });
+        this.matChange();
+
+
+    }
+    matChange() {
+        let mat = this.state.mat;
+        let newList = this.state.list;
+        if (mat === 'All') {
+
+        }
+        else {
+            newList = newList.filter((data) => data.material_type === mat);
+        }
+        if (this.state.type === 'A') {
+            newList = newList.sort(function (a, b) { return a.distance - b.distance });
+        }
+        else {
+            newList = newList.sort(function (a, b) { return a.distance - b.distance });
+            newList.reverse();
+        }
+        let rad = this.state.radius;
+        console.log(newList);
+        newList = newList.filter((data) => data.distance <= parseFloat(rad) || parseFloat(rad) >= 25);
+        console.log(newList);
+        this.setState({ distList: newList });
     }
     distHandle(event) {
         this.setState({
             radius: event.target.value,
-        });
-        this.filterList();
-    }
-    componentDidUpdate(prevProps, prevState, snapshot) {
+        }, () => this.sortHandle());
 
     }
     distancePut() {
@@ -43,7 +86,7 @@ export default class Listings extends React.Component {
             _this.distancePut().then(function (data2) {
                 _this.setState({
                     distList: data2,
-                });
+                }, () => _this.sortHandle());
 
             });
         });
@@ -74,6 +117,9 @@ export default class Listings extends React.Component {
                     avoidTolls: false
                 }, (response, status) => {
                     var distance = response.rows[0].elements[0].distance;
+                    if (distance === undefined) {
+                        resolve();
+                    }
                     var distance_text = distance.text;
                     var miles = distance_text.substring(0, distance_text.length - 3);
                     data.distance = parseFloat(miles);
@@ -99,6 +145,7 @@ export default class Listings extends React.Component {
                 }
                 axios.get("http://recyclr.xyz/listings", { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
                     .then(function (result) {
+                        console.log(result);
                         _this.setState({ list: result.data }, () => {
                             _this.filterList()
                         });
@@ -118,8 +165,26 @@ export default class Listings extends React.Component {
                         <h3 className="card-title text-center">Listings</h3>
                         <p className="text-center">View listings within a specified radius</p>
                         <div className="row" style={{ marginBottom: "10px" }}>
-                            <div className="col-md-4 offset-md-4">
-                                <select className="custom-select" onChange={this.distHandle}>
+                            <div className="col-4">
+                                <select className="custom-select" value={this.state.type} onChange={this.typeHandle}>
+                                    <option value='A'>Ascending</option>
+                                    <option value='D'>Descending</option>
+                                </select>
+                            </div>
+                            <div className="col-4">
+                                <select className="custom-select" value={this.state.mat} onChange={this.matHandle}>
+                                    <option value="All">All</option>
+                                    <option value='Plastic'>Plastic</option>
+                                    <option value='Electronics'>Electronics</option>
+                                    <option value='Rubber'>Rubber</option>
+                                    <option value='Textiles'>Textiles</option>
+                                    <option value='Cardboard'>Cardboard</option>
+                                    <option value='Glass'>Glass</option>
+                                    <option value='Metal'>Metal</option>
+                                </select>
+                            </div>
+                            <div className="col-4">
+                                <select className="custom-select" value={this.state.raduis} onChange={this.distHandle}>
                                     <option value='5'>5 Miles</option>
                                     <option value='10'>10 Miles</option>
                                     <option value='25'>25 Miles</option>
