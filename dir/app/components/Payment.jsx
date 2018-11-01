@@ -6,6 +6,13 @@ import api from './api.js'
 import CheckOut from './CheckOut.jsx';
 
 export default class PaymentPage extends Component {
+    /*  userObj -> points: holds points that user has
+        incentivePoints: amount of points that incentive costs
+        incentivePercentage: percentage discount that current incentive points give
+        incentiveUsed: boolean for if 'Apply Incentive' has been clicked
+        price: price of listing from localStorage
+        incentivePercentageApplied: percentage that was applied to price of listing
+    */
     constructor(props) {
         super(props);
         this.state = {
@@ -15,6 +22,8 @@ export default class PaymentPage extends Component {
             incentivePoints: 0,
             incentivePercentage: 0,
             incentiveUsed: false,
+            price: 0,
+            incentivePercentageApplied: 0
         }
         this.applyIncentive = this.applyIncentive.bind(this);
         this.calculateIncentivePercentage = this.calculateIncentivePercentage.bind(this);
@@ -32,14 +41,11 @@ export default class PaymentPage extends Component {
     }
 
     componentDidMount() {
-
-        api.post('/listing/')
+        this.setState({price:window.localStorage.getItem('price')});
 
         let _this = this;
-        //make get request using stored email/username
         Axios.get('http://recyclr.xyz/user/' + window.localStorage.getItem('userid'),{headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
         .then(function(result) {
-
             _this.setState({userObj: result.data});
             _this.calculateIncentivePercentage();
         }).catch(function(error) {
@@ -62,8 +68,13 @@ export default class PaymentPage extends Component {
             })
             let newObj = _this.state.userObj;
             newObj.points = newPoints;
-            _this.setState({userObj: newObj}, _this.calculateIncentivePercentage());
+            _this.setState({userObj: newObj});
             _this.setState({incentiveUsed: true});
+            _this.setState({incentivePercentageApplied: _this.state.incentivePercentage});
+            let newPrice = (_this.state.price * ((100 - _this.state.incentivePercentage)/100)).toFixed(2);
+            console.log("__newPrice: " + newPrice + " percentage: " + _this.state.incentivePercentage);
+            _this.setState({price: newPrice});
+            _this.calculateIncentivePercentage();
         }).then(function(error) {
             console.log(error);
         });
@@ -72,25 +83,6 @@ export default class PaymentPage extends Component {
     render() {
         return(
             <div className="container">
-                <div className="row">
-                    <div className="col-8 offset-2">
-                        <div className="card">
-                                <h2>Please complete payment with the help of Stripe!</h2>
-                                <h3>Total Price: ${window.localStorage.getItem('price')}</h3>
-                                {this.state.incentiveUsed &&
-                                    <h5 className="alert-success text-center">
-                                        {this.state.incentivePercentage}% discount has been applied!
-                                    </h5>
-                                }
-                                <Elements>
-                                    <CheckOut />
-                                </Elements>
-                        </div>
-                    </div>
-                </div>
-
-                <br></br>
-
                 <div className = "row">
                     <div className="col-8 offset-2">
                         <div className="card text-center">
@@ -106,6 +98,24 @@ export default class PaymentPage extends Component {
                     </div>
                 </div>
 
+                <br></br>
+
+                <div className="row">
+                    <div className="col-8 offset-2">
+                        <div className="card">
+                                <h2>Please complete payment with the help of Stripe!</h2>
+                                <h3>Total Price: {this.state.price}</h3>
+                                {this.state.incentiveUsed &&
+                                    <h5 className="alert-success text-center">
+                                        {this.state.incentivePercentageApplied}% discount has been applied!
+                                    </h5>
+                                }
+                                <Elements>
+                                    <CheckOut />
+                                </Elements>
+                        </div>
+                    </div>
+                </div>
              </div>
         );
     }
