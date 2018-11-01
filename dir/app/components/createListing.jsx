@@ -123,7 +123,7 @@ export default class createListing extends React.Component {
                     <div className="card-body">
                         <div className="row">
                             <div className="col-md-12">
-                                <h3 className="card-title text-center">Create A New Listing</h3>
+                                <h1 className="card-title text-center">Create A New Listing</h1>
                                 <form>
                                     <div className="form-group">
                                         <label htmlFor="fileIn">Upload a Picture of Materials</label>

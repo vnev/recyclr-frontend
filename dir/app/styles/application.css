@@ -1,3 +1,7 @@
+:root {
+  --mainColor: #66bb6a;
+}
+
 #appBase {
   width: 100%;
   font-family: "Work Sans", sans-serif;
@@ -100,7 +104,7 @@
 
 
 :root {
-  --main-color: #1a8fff;
+  --main-color: #66bb6a;
   --text-color: #777;
   --text-color-light: #ccc;
   --border-color: #eee;
@@ -336,4 +340,23 @@ main {
   color: black;
   border-radius: 15px;
   margin-top: 10px;
+}
+
+.rootLink {
+  background:
+    linear-gradient(to bottom, var(--mainColor) 0%,
+    var(--mainColor) 100%);
+  background-position: 0 100%;
+  background-repeat: repeat-x;
+  background-size: 4px 4px;
+  color: #000;
+  text-decoration: none;
+  transition: background-size .2s;
+}
+
+.rootLink:hover {
+  text-decoration: none;
+  color: #000;
+  transition: color 0.2s ease;
+  background-size: 4px 50px;
 }

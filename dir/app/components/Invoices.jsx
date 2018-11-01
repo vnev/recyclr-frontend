@@ -9,10 +9,10 @@ export default class Invoice extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            invoicesId:[],
-            userInvoices:[],
+            invoicesId: [],
+            userInvoices: [],
         }
-       // let invoicesId = [];
+        // let invoicesId = [];
         //this.getInvoices = this.getInvoices.bind(this);
     }
 
@@ -22,13 +22,13 @@ export default class Invoice extends React.Component {
         //let invoicesId = [];
         let userInvoices = [];
         console.log(window.localStorage.getItem('userid'));
-        api.get(`/invoice/` + window.localStorage.getItem('userid')).then(function(result) {
+        api.get(`/invoice/` + window.localStorage.getItem('userid')).then(function (result) {
             console.log(result.data);
             _this.setState({
-                invoicesId : result.data,
+                invoicesId: result.data,
             });
-            
-        }).catch(function(error) {
+
+        }).catch(function (error) {
             console.log(error);
         });
         /*
@@ -46,14 +46,23 @@ export default class Invoice extends React.Component {
     render() {
         console.log("memes");
         //this.getInvoices();
-        return(
+        let invoices;
+        if (this.state.invoicesId.length == 0) {
+            invoices = <h5 className="text-center">No invoices to show...</h5>
+        } else {
+            invoices =
+                this.state.invoicesId.map((item, key) => {
+                    return <InvoiceItem Item={item} />
+                })
+        }
+        return (
             <div className="container">
-                <h1>Transaction History</h1>
-                <div className="card">
-                    {this.state.invoicesId.map((item,key) => {
-                        return <InvoiceItem Item={item}/>
-                    })}
+                <div className="card" style={{ height: "100vh" }}>
+                    <div className="card-body">
+                        <h1 className="card-title text-center">Transaction History</h1>
 
+                        {invoices}
+                    </div>
                 </div>
 
             </div>

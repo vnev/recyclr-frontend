@@ -8,7 +8,7 @@ export default class ChatSelect extends React.Component {
         this.state = {
             chatList: [],
         }
-        
+
     }
     componentDidMount() {
         if (window.localStorage.getItem('userid') === null) {
@@ -20,24 +20,29 @@ export default class ChatSelect extends React.Component {
         }
         let _this = this;
         api.post(`/listing/frozen/${window.localStorage.getItem('userid')}`, obj)
-        .then(function(result){
-             _this.setState({
-                chatList: result.data,
-            })
-        });
+            .then(function (result) {
+                _this.setState({
+                    chatList: result.data,
+                })
+            });
     }
     render() {
-        let disp =  <h2>You have no messages</h2>
-                    
+        let disp = <h2>You have no messages</h2>
+
         if (this.state.chatList !== null) {
-            disp =  this.state.chatList.map((item, key) => {
-                        return <ListingItem key={key} Item={item} ButBool={false}/>
-                        })
-                   
+            disp = this.state.chatList.map((item, key) => {
+                return <ListingItem key={key} Item={item} ButBool={false} />
+            })
+
         }
-        return(
-            <div className="container-fluid">
-                {disp}
+        return (
+            <div className="container">
+                <div className="card">
+                    <div className="card-body">
+                        <h1 className="card-title text-center">Messages</h1>
+                        {disp}
+                    </div>
+                </div>
             </div>
         );
     }

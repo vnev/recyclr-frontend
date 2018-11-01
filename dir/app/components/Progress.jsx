@@ -35,19 +35,22 @@ export default class Progress extends Component {
         }
         else {
           _this.setState({ list: result.data });
+          // _this.calculateWeight();
         }
+
+        axios.get('http://recyclr.xyz/user/' + window.localStorage.getItem('userid'), { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+          .then(function (result) {
+
+            _this.setState({ userObj: result.data });
+            _this.calculateNextIncentiveLevel();
+            _this.calculateWeight();
+          }).catch(function (error) {
+            console.log(error);
+          });
       }).catch(function (error) {
         console.log(error);
       })
 
-    axios.get('http://recyclr.xyz/user/' + window.localStorage.getItem('userid'), { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
-      .then(function (result) {
-
-        _this.setState({ userObj: result.data });
-        _this.calculateNextIncentiveLevel();
-      }).catch(function (error) {
-        console.log(error);
-      });
     //set list = returned json objects list = results.data
   }
   hasShared() {
@@ -60,10 +63,14 @@ export default class Progress extends Component {
   calculateWeight() {
 
     var i;
+    let temp = 0;
     for (i = 0; i < this.state.list.length; i++) {
-
-      this.state.totalWeight += this.state.list[i].material_weight;
+      temp = this.state.totalWeight + this.state.list[i].material_weight;
     }
+
+    this.setState({
+      totalWeight: temp
+    });
   }
 
   calculateNextIncentiveLevel() {
@@ -76,21 +83,25 @@ export default class Progress extends Component {
         <div className="card">
           <div className="card-body">
             <h1 className="card-title text-center">My Recyclr Progress</h1>
-            <p>Total number of Recyclr listings created: <b>{this.state.list.length}</b></p>
-            <p>Total weight of Recyclr listings: <b>{this.calculateWeight(), this.state.totalWeight} lbs</b></p>
-            <p>Total amount of Incentive Points: <b>{this.state.userObj.points}</b></p>
+            <div className="text-center">
+              <p>Total number of Recyclr listings created: <b>{this.state.list.length}</b></p>
+              <p>Total weight of Recyclr listings: <b>{this.state.totalWeight} lbs</b></p>
+              <p>Total amount of Incentive Points: <b>{this.state.userObj.points}</b></p>
+            </div>
             <div id="socialWrapper" onClick={this.hasShared}>
-
-              <FacebookShareButton
-                url='http://recyclr.xyz'
-                quote="My Recyclr Progress: Total Number of recycling:  {_this.state.list.length}"
-                id="socialButton"
-              >
-                <FacebookIcon
-                  size={32}
-                  square
-                />
-              </FacebookShareButton>
+              <div style={{ width: "100%", marginBottom: "10px" }}>
+                <FacebookShareButton
+                  url='http://recyclr.xyz'
+                  quote="My Recyclr Progress: Total Number of recycling:  {_this.state.list.length}"
+                  id="socialButton"
+                  className="text-center"
+                >
+                  <FacebookIcon
+                    size={32}
+                    square
+                  />
+                </FacebookShareButton>
+              </div>
 
               <div className="row">
                 {this.state.list.map((item, key) => {

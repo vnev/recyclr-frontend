@@ -52,6 +52,18 @@ export default class ListingItem extends React.Component {
     render() {
         let rightSide;
         let button;
+        let dist;
+        let frozen;
+        if (!this.props.Item.distance) {
+            dist = <div></div>
+        } else {
+            dist = <p><b>Distance</b>: {this.props.Item.distance} miles</p>
+        }
+        if (!this.props.Item.company_name) {
+            frozen = <div></div>
+        } else {
+            frozen = <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>Frozen By: <b>{this.props.Item.company_name}</b></p>
+        }
         if (window.localStorage.getItem('is_company') === 'true') {
             button = <button className="btn btn-primary" onClick={this.createInvoice}>Transaction Complete</button>
         }
@@ -64,7 +76,7 @@ export default class ListingItem extends React.Component {
         }
         else {
             rightSide = <div><button className="btn btn-primary" onClick={() => history.push(`/chatroom/${this.props.Item.listing_id}`)}>Enter Chat</button>
-                <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>Frozen By: <b>{this.props.Item.company_name}</b></p></div>
+                {frozen}</div>
         }
         return (
             <div className="row" style={{ marginBottom: "5px" }}>
@@ -78,7 +90,7 @@ export default class ListingItem extends React.Component {
                                 <div className="col-6">
                                     <h5>{this.props.Item.title}</h5>
                                     <p>{this.props.Item.description}</p>
-                                    <p><b>Distance</b>: {this.props.Item.distance} miles</p>
+                                    {dist}
                                     <p><b>Weight</b>: {this.props.Item.material_weight} lbs, <b>Type</b>: {this.props.Item.material_type}</p>
                                 </div>
                                 {/* <div className="col-3">
