@@ -25,7 +25,12 @@ export default class Progress extends Component {
       axios.get('http://recyclr.xyz/user/progress/' + window.localStorage.getItem('userid'),{headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
       .then(function(result) {
           console.log(result.data);
-          _this.setState({list: result.data});
+          if (result.data === null) {
+            _this.setState({list: []});
+          }
+          else {
+            _this.setState({list: result.data});
+          }
       }).catch(function(error) {
         console.log(error);
       })

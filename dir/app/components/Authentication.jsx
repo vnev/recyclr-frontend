@@ -54,11 +54,6 @@ export default class AuthPage extends React.Component {
           username: event.target.value,
         });
     }
-    lastHandle(event) {
-        this.setState({
-          lastname: event.target.value,
-        });
-    }
     typeHandle(event) {
         this.setState({
             accountType: event.target.value,
@@ -89,6 +84,7 @@ export default class AuthPage extends React.Component {
             state: event.target.value,
         });
     }
+    
     //{{'Authentication': 'Bearer ' + window.localStorage.token}}
     signin(event) {
         let obj = {
@@ -133,7 +129,6 @@ export default class AuthPage extends React.Component {
         //call create user
         if (this.state.accountType === 'f') {
             axios.post(`http://recyclr.xyz/user`, newObj).then(function(result) {
-
                 _this.setState({signinTog: false});
             }).catch(function(error) {
                 console.log(error);
@@ -142,7 +137,6 @@ export default class AuthPage extends React.Component {
         }
         else {
             axios.post(`http://recyclr.xyz/company`, newObj).then(function(result) {
-    
                 _this.setState({signinTog: false});
             }).catch(function(error) {
                 console.log(error);
@@ -165,10 +159,10 @@ export default class AuthPage extends React.Component {
             <h3 id="signinHeading" className="card-title">Sign In</h3>
             <form>
                 <div className="form-group">
-                    <input type="email" pattern='/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/' className="form-control " placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
+                    <input type="email" className="form-control " placeholder="Email Address" value={this.state.email} onChange={this.emailHandle} required></input>
                 </div>
                 <div className="form-group">
-                    <input type="password" className="form-control " placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
+                    <input type="password" className="form-control " placeholder="Password" value={this.state.password} onChange={this.passwordHandle} required></input>
                 </div>
                 
             </form>
@@ -179,17 +173,18 @@ export default class AuthPage extends React.Component {
             bodyContent = <div className="card-body">
             <h3 id="signUpHeading" className="card-title">Sign Up for Free</h3>
             <form>
-                <input type="text" className="form-control " placeholder="Username" value={this.state.firstname} onChange={this.userHandle}></input>
+                <input type="text" className="form-control " placeholder="Username" value={this.state.username} onChange={this.userHandle} required></input>
                 <Autocomplete
                                     className="form-control"
                                     onPlaceSelected={(place) => {this.setState({address: place.formatted_address, city: place.address_components[2].long_name, state: place.address_components[5].long_name})}}
                                     types={['address']}
                                     componentRestrictions={{country: 'USA'}}
+                                    required
                                 />
                 
-                <input type="email" pattern='/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/' className="form-control" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle}></input>
-                <input type="password" className="form-control" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
-                <select className="form-control " value={this.state.accountType} onChange={this.typeHandle}>
+                <input type="email" pattern='/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/' className="form-control" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle} required></input>
+                <input type="password" className="form-control" placeholder="Password" value={this.state.password} onChange={this.passwordHandle} required></input>
+                <select className="form-control " value={this.state.accountType} onChange={this.typeHandle} required>
                     <option value="f">Recyclr</option>
                     <option value="t">Business</option>
                 </select>

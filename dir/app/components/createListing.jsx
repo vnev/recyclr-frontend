@@ -94,7 +94,6 @@ export default class createListing extends React.Component {
         form.append('user_id', parseInt(window.localStorage.getItem('userid')));
         api.post(`/listing`, form)
         .then(function(result) {
-            console.log(result);
             window.localStorage.setItem('currID', result.data.listing_id);
             console.log(window.localStorage.getItem('currID'));
             history.push('/payment');
@@ -118,15 +117,15 @@ export default class createListing extends React.Component {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="titleIn">Title</label>
-                                <input type="text" className="form-control" id="titleIn" value={this.state.title} onChange={this.titleHandler}/>
+                                <input type="text" className="form-control" id="titleIn" value={this.state.title} onChange={this.titleHandler} required/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="descIn">Description</label>
-                                <input type="text" className="form-control" id="descIn" value={this.state.description} onChange={this.descHandler}/>
+                                <input type="text" className="form-control" id="descIn" value={this.state.description} onChange={this.descHandler} required/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="matTypeIn">Material Type</label>
-                                <select className="form-control" id="matTypeIn" value={this.state.matType} onChange={this.typeHandler}>
+                                <select className="form-control" id="matTypeIn" value={this.state.matType} onChange={this.typeHandler} required>
                                     <option value='Plastic'>Plastic</option>
                                     <option value='Electronics'>Electronics</option>
                                     <option value='Rubber'>Rubber</option>
@@ -138,7 +137,7 @@ export default class createListing extends React.Component {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="matWeightIn">Material Weight (lbs)</label>
-                                <input type="text" className="form-control" id="matWeightIn" value={this.state.matWeight} onChange={this.weightHandler}/>
+                                <input type="text" className="form-control" id="matWeightIn" value={this.state.matWeight} onChange={this.weightHandler} required/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='googAuto'>Pickup Address</label>
@@ -147,12 +146,12 @@ export default class createListing extends React.Component {
                                     onPlaceSelected={(place) => this.setState({address: place.formatted_address})}
                                     types={['address']}
                                     componentRestrictions={{country: 'USA'}}
-                                />
+                                    required/>
                             </div>
 
                             <div className='form-group'>
                             <label htmlFor="dateIn">Select Pickup Date</label>
-                            <input type="date" className="btn btn-secondary" id="dateIn" value={this.state.date} name="pickup_date_time" onChange={this.dateHandler}/>
+                            <input type="date" className="form-control" id="dateIn" value={this.state.date} name="pickup_date_time" onChange={this.dateHandler} required/>
                             </div>
 
                         <button type="submit" className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
