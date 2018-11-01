@@ -43,7 +43,7 @@ export default class PaymentPage extends Component {
             _this.setState({userObj: result.data});
             _this.calculateIncentivePercentage();
         }).catch(function(error) {
-
+            console.log(error);
         });
     }
 
@@ -65,7 +65,7 @@ export default class PaymentPage extends Component {
             _this.setState({userObj: newObj}, _this.calculateIncentivePercentage());
             _this.setState({incentiveUsed: true});
         }).then(function(error) {
-
+            console.log(error);
         });
     }
 
@@ -76,6 +76,7 @@ export default class PaymentPage extends Component {
                     <div className="col-8 offset-2">
                         <div className="card">
                                 <h2>Please complete payment with the help of Stripe!</h2>
+                                <h3>Total Price: ${window.localStorage.getItem('price')}</h3>
                                 {this.state.incentiveUsed &&
                                     <h5 className="alert-success text-center">
                                         {this.state.incentivePercentage}% discount has been applied!
