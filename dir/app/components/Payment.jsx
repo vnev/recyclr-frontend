@@ -95,7 +95,12 @@ export default class PaymentPage extends Component {
                         <div className="card text-center">
                             <h2 className="text-dark">{"Total Incentive Points: " + this.state.userObj.points}</h2>
                             <h5 className="text-info">{"Total Discount Percentage is " + this.state.incentivePercentage + "% by using " + this.state.incentivePoints + " points!"}</h5>
-                            <button className="btn btn-info" onClick={this.applyIncentive}>Apply Incentive</button>
+                            {!this.state.incentiveUsed &&
+                                <button className="btn btn-info" onClick={this.applyIncentive}>Apply Incentive</button>
+                            }
+                            {this.state.incentiveUsed &&
+                                <button className="btn btn-info" onClick={this.applyIncentive} disabled>Apply Incentive</button>
+                            }
                         </div>
                     </div>
                 </div>
