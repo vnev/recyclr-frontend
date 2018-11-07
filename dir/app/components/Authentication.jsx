@@ -5,6 +5,7 @@ import history from './history.js'
 import axios from 'axios'
 import urls from './Urls.js'
 import Autocomplete from 'react-google-autocomplete'
+import toastr from 'toastr'
 
 //TODO change ui
 
@@ -107,7 +108,9 @@ export default class AuthPage extends React.Component {
             axios.get(`http://recyclr.xyz/user/${window.localStorage.getItem('userid')}`, { headers: { 'Access-Control-Allow-Origin': '*', 'Authorization': 'Bearer ' + window.localStorage.getItem('token') } })
                 .then(function (result) {
                     window.localStorage.setItem('is_company', result.data.is_company);
-                    history.push('/settings');
+                    // history.push('/settings');
+                    toastr.options.closeButton = true;
+                    toastr.success("Ayo b wadup you signed in");
                 });
 
         }).catch(function (error) {
