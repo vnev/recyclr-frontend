@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Elements } from 'react-stripe-elements';
 import Axios from 'axios';
 import api from './api.js'
+import { formatPrice } from '../utils/config'
 
 import CheckOut from './CheckOut.jsx';
 
@@ -31,26 +32,26 @@ export default class PaymentPage extends Component {
 
     calculateIncentivePercentage() {
         let points = Math.floor(this.state.userObj.points / 100) * 100;
-        this.setState({incentivePoints: points});
-        if( points > 5000 ) {
-            this.setState({incentivePercentage: 50});
+        this.setState({ incentivePoints: points });
+        if (points > 5000) {
+            this.setState({ incentivePercentage: 50 });
         }
         else {
-            this.setState({incentivePercentage: (points / 100)});
+            this.setState({ incentivePercentage: (points / 100) });
         }
     }
 
     componentDidMount() {
-        this.setState({price:window.localStorage.getItem('price')});
+        this.setState({ price: window.localStorage.getItem('price') });
 
         let _this = this;
-        Axios.get('http://recyclr.xyz/user/' + window.localStorage.getItem('userid'),{headers:{'Authorization': 'Bearer ' + window.localStorage.getItem('token'),'Access-Control-Allow-Origin':'*'}})
-        .then(function(result) {
-            _this.setState({userObj: result.data});
-            _this.calculateIncentivePercentage();
-        }).catch(function(error) {
-            console.log(error);
-        });
+        Axios.get('http://recyclr.xyz/user/' + window.localStorage.getItem('userid'), { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+            .then(function (result) {
+                _this.setState({ userObj: result.data });
+                _this.calculateIncentivePercentage();
+            }).catch(function (error) {
+                console.log(error);
+            });
     }
 
     applyIncentive() {
@@ -59,31 +60,31 @@ export default class PaymentPage extends Component {
             points: newPoints,
         }
         let _this = this;
-        Axios.put(`http://recyclr.xyz/user/` + window.localStorage.getItem('userid'),  requestObject, {headers: {'Authorization': 'Bearer ' + window.localStorage.getItem('token'),}},)
-        .then(function(result) {
-            console.log(window.localStorage.getItem('currID'));
-            api.post(`/user/deduct/${window.localStorage.getItem('currID')}`, {percentage: _this.state.incentivePercentage})
-            .then(function(result) {
-                console.log(result);
-            })
-            let newObj = _this.state.userObj;
-            newObj.points = newPoints;
-            _this.setState({userObj: newObj});
-            _this.setState({incentiveUsed: true});
-            _this.setState({incentivePercentageApplied: _this.state.incentivePercentage});
-            let newPrice = (_this.state.price * ((100 - _this.state.incentivePercentage)/100)).toFixed(2);
-            console.log("__newPrice: " + newPrice + " percentage: " + _this.state.incentivePercentage);
-            _this.setState({price: newPrice});
-            _this.calculateIncentivePercentage();
-        }).then(function(error) {
-            console.log(error);
-        });
+        Axios.put(`http://recyclr.xyz/user/` + window.localStorage.getItem('userid'), requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), } })
+            .then(function (result) {
+                console.log(window.localStorage.getItem('currID'));
+                api.post(`/user/deduct/${window.localStorage.getItem('currID')}`, { percentage: _this.state.incentivePercentage })
+                    .then(function (result) {
+                        console.log(result);
+                    })
+                let newObj = _this.state.userObj;
+                newObj.points = newPoints;
+                _this.setState({ userObj: newObj });
+                _this.setState({ incentiveUsed: true });
+                _this.setState({ incentivePercentageApplied: _this.state.incentivePercentage });
+                let newPrice = (_this.state.price * ((100 - _this.state.incentivePercentage) / 100)).toFixed(2);
+                console.log("__newPrice: " + newPrice + " percentage: " + _this.state.incentivePercentage);
+                _this.setState({ price: newPrice });
+                _this.calculateIncentivePercentage();
+            }).then(function (error) {
+                console.log(error);
+            });
     }
 
     render() {
-        return(
+        return (
             <div className="container">
-                <div className = "row">
+                <div className="row">
                     <div className="col-8 offset-2">
                         <div className="card text-center">
                             <h2 className="text-dark">{"Total Incentive Points: " + this.state.userObj.points}</h2>
@@ -103,20 +104,22 @@ export default class PaymentPage extends Component {
                 <div className="row">
                     <div className="col-8 offset-2">
                         <div className="card">
-                                <h2>Please complete payment with the help of Stripe!</h2>
-                                <h3>Total Price: {this.state.price}</h3>
+                            <div className="card-body">
+                                <h4 className="card-title text-center">Please complete payment with the help of Stripe!</h4>
+                                <h5 className="text-center">Total: <b>{formatPrice(this.state.price)}</b></h5>
                                 {this.state.incentiveUsed &&
                                     <h5 className="alert-success text-center">
                                         {this.state.incentivePercentageApplied}% discount has been applied!
-                                    </h5>
+                                        </h5>
                                 }
                                 <Elements>
                                     <CheckOut />
                                 </Elements>
+                            </div>
                         </div>
                     </div>
                 </div>
-             </div>
+            </div>
         );
     }
 }

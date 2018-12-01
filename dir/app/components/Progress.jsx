@@ -65,7 +65,7 @@ export default class Progress extends Component {
     var i;
     let temp = 0;
     for (i = 0; i < this.state.list.length; i++) {
-      temp = this.state.totalWeight + this.state.list[i].material_weight;
+      temp += this.state.list[i].material_weight;
     }
 
     this.setState({
@@ -87,6 +87,7 @@ export default class Progress extends Component {
               <p>Total number of Recyclr listings created: <b>{this.state.list.length}</b></p>
               <p>Total weight of Recyclr listings: <b>{this.state.totalWeight} lbs</b></p>
               <p>Total amount of Incentive Points: <b>{this.state.userObj.points}</b></p>
+              <p>Total points to next incentive level: <b>{this.state.nextToIncentive}</b></p>
             </div>
             <div id="socialWrapper" onClick={this.hasShared}>
               <div style={{ width: "100%", marginBottom: "10px" }}>
