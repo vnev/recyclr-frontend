@@ -25,7 +25,7 @@ export default class ListingItem extends React.Component {
                     name: result.data.name
                 });
             });*/
-        console.log(this.props.Item);
+        
     }
     freezeListing() {
         let obj = {
@@ -36,9 +36,17 @@ export default class ListingItem extends React.Component {
             .then(function (result) {
                 console.log(result);
                 history.push(`/chatroom/${_this.props.Item.listing_id}`);
-            })
+            });
     }
-
+    unfreeze() {
+        //call api to unfreeze listing
+        api.get(`/listing/unfreeze/${this.props.Item.listing_id}`)
+        .then(function(result) {
+            console.log(result);
+            window.history.go(0);
+        });
+        
+    }
     createInvoice() {
         let obj = {
             listing_id: this.props.Item.listing_id,
@@ -77,7 +85,7 @@ export default class ListingItem extends React.Component {
             </div>;
         }
         else {
-            rightSide = <div><button className="btn btn-primary" onClick={() => history.push(`/chatroom/${this.props.Item.listing_id}`)}>Enter Chat</button>
+            rightSide = <div><button className='btn btn-primary' onClick={() => this.unfreeze(this.props.Item.listing_id)}> Unfreeze Listing</button><button className="btn btn-primary" onClick={() => history.push(`/chatroom/${this.props.Item.listing_id}`)}>Enter Chat</button>
                 {frozen}</div>
         }
         let pickup_date_time;

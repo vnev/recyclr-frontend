@@ -44,7 +44,6 @@ export default class Invoice extends React.Component {
     }
 
     render() {
-        console.log("memes");
         //this.getInvoices();
         let invoices;
         if (this.state.invoicesId.length == 0) {
