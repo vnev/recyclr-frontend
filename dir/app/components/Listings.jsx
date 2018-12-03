@@ -2,6 +2,7 @@ import React from 'react'
 import ListingItem from './listingItem'
 import history from './history.js'
 import axios from 'axios'
+import { CheckBox } from 'react'
 
 
 export default class Listings extends React.Component {
@@ -14,6 +15,7 @@ export default class Listings extends React.Component {
             userAddr: '',
             mat: 'All',
             type: 'A',
+            checked: false,
         }
         this.distHandle = this.distHandle.bind(this);
         this.matHandle = this.matHandle.bind(this);
@@ -94,12 +96,11 @@ export default class Listings extends React.Component {
     gatherDistances() {
         return new Promise((resolve, reject) => {
             let promiseArr = [];
+            console.log("Am gay");
             for (let i = 0; i < this.state.list.length; i++) {
                 promiseArr.push(this.updateList(this.state.list[i]));
             }
-            Promise.all(promiseArr).then(function (data) {
-                resolve();
-            });
+            Promise.all(promiseArr).then(data => resolve());
         });
     }
     updateList(data) {
@@ -129,6 +130,7 @@ export default class Listings extends React.Component {
         });
     }
     componentDidMount() {
+        console.log("We got some phat booty out here");
         if (window.localStorage.getItem('username') === null || window.localStorage.getItem('is_company') === 'false') {
             history.push('/auth');
         }
@@ -181,6 +183,7 @@ export default class Listings extends React.Component {
                                     <option value='Cardboard'>Cardboard</option>
                                     <option value='Glass'>Glass</option>
                                     <option value='Metal'>Metal</option>
+                                    <option value='Compost'>Compost</option>
                                 </select>
                             </div>
                             <div className="col-4">

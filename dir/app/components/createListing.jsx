@@ -151,6 +151,7 @@ export default class createListing extends React.Component {
                                             <option value='Cardboard'>Cardboard</option>
                                             <option value='Glass'>Glass</option>
                                             <option value='Metal'>Metal</option>
+                                            <option value='Compost'>Compost</option>
                                         </select>
                                     </div>
                                     <div className="form-group">
