@@ -1,7 +1,9 @@
 import React from 'react'
 import api from './api.js'
 import history from './history.js'
+import CurrPrices from "./currPrices"
 import Autocomplete from 'react-google-autocomplete'
+
 
 //uncomment file when database is updated
 
@@ -177,7 +179,9 @@ export default class createListing extends React.Component {
                                     </div>
                                 </form>
                             </div>
-
+                        </div>
+                        <div className='row'>
+                            <CurrPrices />
                         </div>
                     </div>
                 </div>

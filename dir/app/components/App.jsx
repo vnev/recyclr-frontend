@@ -1,4 +1,5 @@
 import React from 'react';
+import "babel-polyfill";
 import Navigation from './Navigation.jsx';
 import AuthPage from './Authentication.jsx';
 import Settings from './Settings.jsx';
@@ -18,6 +19,7 @@ import ChatSelect from './chatSelect.jsx'
 import {Route, Router} from 'react-router-dom';
 import ChatRoom from './ChatRoom.jsx';
 import PayHist from './PaymentHis.jsx';
+
 
 
 
@@ -46,6 +48,7 @@ export default class App extends React.Component {
             <Route path={'/admin'} component={AdminPage}/>
             <Route path={'/googleAuth'} component={GoogleAuth}/>
             <Route path={'/createListing'} component={createListing}/>
+            {/* <Route path={'/prices'} component={currPrices}/> */}
             {/* <Route path={'/calendar'} component={Calendar}/> */}
             <Route path={'/payment'} component={Payment}/>
             <Route path={'/messages'} component={ChatSelect}/>
