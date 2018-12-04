@@ -1,5 +1,5 @@
 import React from 'react';
-import "babel-polyfill";
+//import "babel-polyfill";
 import Navigation from './Navigation.jsx';
 import AuthPage from './Authentication.jsx';
 import Settings from './Settings.jsx';

@@ -43,7 +43,7 @@ class CheckOutPage extends Component {
                 <CardSection />
                 <div className="row align-content-left">
                     <div className="col-12 text-center">
-                        <button className="btn btn-primary paymentBtn">Confirm</button>
+                        <button className="btn btn-primary paymentBtn" id="paymentBtn">Confirm</button>
                     </div>
                 </div>
             </form>

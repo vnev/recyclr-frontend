@@ -175,7 +175,7 @@ export default class createListing extends React.Component {
                                         <input type="date" className="form-control" id="dateIn" value={this.state.date} name="pickup_date_time" onChange={this.dateHandler} required />
                                     </div>
                                     <div className="text-center">
-                                        <button type="submit" className="btn btn-primary" onClick={this.createNewListing}> Create New Listing</button>
+                                        <button type="submit" className="btn btn-primary" id="listBtn" onClick={this.createNewListing}> Create New Listing</button>
                                     </div>
                                 </form>
                             </div>
