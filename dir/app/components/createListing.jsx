@@ -116,6 +116,8 @@ export default class createListing extends React.Component {
                 history.push('/payment');
             }).catch(function (error) {
                 console.log(error);
+                toastr.options.closeButton = true;
+                toastr.error("Failed. Please try again", "Error");
             });
     }
     render() {
