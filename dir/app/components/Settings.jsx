@@ -51,13 +51,17 @@ export default class Settings extends React.Component {
         // need request url ex
         let _this = this;
         Axios.put(`http://recyclr.xyz/user/` + window.localStorage.getItem('userid'), requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), } })
-        .then(function (result) {
-            console.log(result);
-            window.localStorage.setItem('username', _this.state.newUsername);
-            _this.setState({newUsername: ''});
-        }).then(function (error) {
-            console.log(error);
-        })
+            .then(function (result) {
+                console.log(result);
+                window.localStorage.setItem('username', _this.state.newUsername);
+                _this.setState({ newUsername: '' });
+                toastr.options.closeButton = true;
+                toastr.success("Successfully updated username", "Success");
+            }).then(function (error) {
+                console.log(error);
+                toastr.options.closeButton = true;
+                toastr.error("Failed to update username. Please try again", "Error");
+            })
 
     }
 
@@ -70,22 +74,30 @@ export default class Settings extends React.Component {
 
         // need request url ex
         Axios.put(`http://recyclr.xyz/user/` + window.localStorage.getItem('userid'), requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token') } })
-        .then(function (result) {
-            console.log(result);
-        }).then(function (error) {
-            console.log(error);
-        })
+            .then(function (result) {
+                console.log(result);
+                toastr.options.closeButton = true;
+                toastr.success("Successfully updated email", "Success");
+            }).then(function (error) {
+                console.log(error);
+                toastr.options.closeButton = true;
+                toastr.error("Error updating email. Please try again", "Error");
+            })
     }
     changePassword() {
         let newObj = {
             passwd: this.state.newPass,
         }
         Axios.put('http://recyclr.xyz/user/' + window.localStorage.getItem('userid'), newObj, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token') } })
-        .then(function (result) {
-            console.log(result);
-        }).catch(function (error) {
-            console.log(error);
-        })
+            .then(function (result) {
+                console.log(result);
+                toastr.options.closeButton = true;
+                toastr.success("Successfully updated password", "Success");
+            }).catch(function (error) {
+                console.log(error);
+                toastr.options.closeButton = true;
+                toastr.error("Error updating password. Please try again", "Error");
+            })
     }
 
     deleteAccount() {

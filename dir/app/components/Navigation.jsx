@@ -22,6 +22,8 @@ export default class Navigation extends React.Component {
                 history.push('/auth');
             }).catch(function (error) {
                 console.log(error);
+                toastr.options.closeButton = true;
+                toastr.error("Error signing out. Please try again", "Error");
             })
     }
 

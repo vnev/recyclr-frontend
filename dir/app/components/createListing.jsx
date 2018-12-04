@@ -1,7 +1,9 @@
 import React from 'react'
 import api from './api.js'
 import history from './history.js'
+import CurrPrices from "./currPrices"
 import Autocomplete from 'react-google-autocomplete'
+
 
 //uncomment file when database is updated
 
@@ -114,6 +116,8 @@ export default class createListing extends React.Component {
                 history.push('/payment');
             }).catch(function (error) {
                 console.log(error);
+                toastr.options.closeButton = true;
+                toastr.error("Failed. Please try again", "Error");
             });
     }
     render() {
@@ -151,6 +155,7 @@ export default class createListing extends React.Component {
                                             <option value='Cardboard'>Cardboard</option>
                                             <option value='Glass'>Glass</option>
                                             <option value='Metal'>Metal</option>
+                                            <option value='Compost'>Metal</option>
                                         </select>
                                     </div>
                                     <div className="form-group">
@@ -176,7 +181,9 @@ export default class createListing extends React.Component {
                                     </div>
                                 </form>
                             </div>
-
+                        </div>
+                        <div className='row'>
+                            <CurrPrices />
                         </div>
                     </div>
                 </div>

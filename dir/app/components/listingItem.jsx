@@ -25,7 +25,7 @@ export default class ListingItem extends React.Component {
                     name: result.data.name
                 });
             });*/
-        console.log(this.props.Item);
+        
     }
 
     freezeListing() {
@@ -37,7 +37,16 @@ export default class ListingItem extends React.Component {
             .then(function (result) {
                 console.log(result);
                 history.push(`/chatroom/${_this.props.Item.listing_id}`);
-            })
+            });
+    }
+    unfreeze() {
+        //call api to unfreeze listing
+        api.get(`/listing/unfreeze/${this.props.Item.listing_id}`)
+        .then(function(result) {
+            console.log(result);
+            window.history.go(0);
+        });
+        
     }
 
     deleteListing() {
@@ -82,7 +91,7 @@ export default class ListingItem extends React.Component {
         } else {
             frozen = <div> 
             <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>Frozen By: <b>{this.props.Item.company_name}</b></p> 
-            <p>Company Rating: <b>{this.props.Item.company_rating} / 5</b></p> 
+            <p>Company Rating: <b>{this.props.Item.company_rating.toFixed(2)} / 5</b></p> 
             </div>;
         }
         if (window.localStorage.getItem('is_company') === 'true' && this.props.Item.frozen_by) {
@@ -95,9 +104,9 @@ export default class ListingItem extends React.Component {
             </div>;
         }
         else {
-            rightSide = <div><button className="btn btn-primary" onClick={() => history.push(`/chatroom/${this.props.Item.listing_id}`)}>Enter Chat</button>
-                {frozen}
-                </div>
+            rightSide = <div><button className='btn btn-primary' onClick={() => this.unfreeze(this.props.Item.listing_id)}> Unfreeze Listing</button> <br></br> <br></br>
+            <button className="btn btn-primary" onClick={() => history.push(`/chatroom/${this.props.Item.listing_id}`)}>Enter Chat</button>
+                {frozen}</div>
         }
         let pickup_date_time;
         if(this.props.Item.pickup_date_time) {

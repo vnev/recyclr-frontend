@@ -110,12 +110,14 @@ export default class AuthPage extends React.Component {
                     window.localStorage.setItem('is_company', result.data.is_company);
                     // history.push('/settings');
                     toastr.options.closeButton = true;
-                    toastr.success("Ayo b wadup you signed in");
+                    toastr.success("Successfully signed in", "Success!");
                 });
 
         }).catch(function (error) {
             console.log(error);
             _this.setState({ alert: true });
+            toastr.options.closeButton = true;
+            toastr.error("Failed to sign in", "Error");
         });
     }
     signup() {
