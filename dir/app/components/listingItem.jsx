@@ -9,10 +9,10 @@ export default class ListingItem extends React.Component {
         super(props);
         this.state = {
             distance: '',
-            name: ''
         }
         this.createInvoice = this.createInvoice.bind(this);
         this.freezeListing = this.freezeListing.bind(this);
+        this.deleteListing = this.deleteListing.bind(this);
     }
     componentDidMount() {
         // TODO: actually add a "created by" name based on per listing, and not just a singular user's name
@@ -27,6 +27,7 @@ export default class ListingItem extends React.Component {
             });*/
         console.log(this.props.Item);
     }
+
     freezeListing() {
         let obj = {
             company_id: parseInt(window.localStorage.getItem('userid')),
@@ -36,6 +37,18 @@ export default class ListingItem extends React.Component {
             .then(function (result) {
                 console.log(result);
                 history.push(`/chatroom/${_this.props.Item.listing_id}`);
+            })
+    }
+
+    deleteListing() {
+        /*let obj = {
+            user_id: parseInt(window.localStorage.getItem('userid')),
+        }*/
+        let _this = this;
+        Axios.get(`http://recyclr.xyz/listing/delete/${this.props.Item.listing_id}`, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+            .then(function (result) {
+                console.log(result);
+                window.history.go(0);
             })
     }
 
@@ -52,7 +65,9 @@ export default class ListingItem extends React.Component {
 
     }
 
+
     render() {
+        console.log(this.props.Item);
         let rightSide;
         let button;
         let dist;
@@ -63,9 +78,12 @@ export default class ListingItem extends React.Component {
             dist = <p><b>Distance</b>: {this.props.Item.distance} miles</p>
         }
         if (!this.props.Item.company_name) {
-            frozen = <div></div>
+            frozen = <div><br></br><button className="btn btn-danger" onClick={this.deleteListing}>Delete Listing</button></div>;
         } else {
-            frozen = <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>Frozen By: <b>{this.props.Item.company_name}</b></p>
+            frozen = <div> 
+            <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>Frozen By: <b>{this.props.Item.company_name}</b></p> 
+            <p>Company Rating: <b>{this.props.Item.company_rating} / 5</b></p> 
+            </div>;
         }
         if (window.localStorage.getItem('is_company') === 'true' && this.props.Item.frozen_by) {
             button = <button className="btn btn-primary" onClick={this.createInvoice}>Transaction Complete</button>
@@ -78,7 +96,8 @@ export default class ListingItem extends React.Component {
         }
         else {
             rightSide = <div><button className="btn btn-primary" onClick={() => history.push(`/chatroom/${this.props.Item.listing_id}`)}>Enter Chat</button>
-                {frozen}</div>
+                {frozen}
+                </div>
         }
         let pickup_date_time;
         if(this.props.Item.pickup_date_time) {
