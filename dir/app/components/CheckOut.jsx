@@ -24,14 +24,20 @@ class CheckOutPage extends Component {
             bodyFormData.set('listing_id', window.localStorage.getItem('currID'));
             Axios.post(`http://recyclr.xyz/charge`, bodyFormData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(function (result) {
                 console.log("Purchase Complete");
+                toastr.options.closeButton = true;
+                toastr.success("Transaction successful", "Success!");
             }).then(function (response) {
                 //handle success
                 console.log(response);
-
+                toastr.clear();
+                toastr.options.closeButton = true;
+                toastr.success("Transaction successful", "Success!");
             })
                 .catch(function (response) {
                     //handle error
                     console.log(response);
+                    toastr.options.closeButton = true;
+                    toastr.error("Could not complete transaction. Please try again", "Error");
                 });
         });
     }

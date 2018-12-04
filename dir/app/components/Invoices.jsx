@@ -27,9 +27,12 @@ export default class Invoice extends React.Component {
             _this.setState({
                 invoicesId: result.data,
             });
-
+            toastr.options.closeButton = true;
+            toastr.success("Got all invoices", "Success");
         }).catch(function (error) {
             console.log(error);
+            toastr.options.closeButton = true;
+            toastr.error("Error fetching invoices. Please try again", "Error");
         });
         /*
         while(i < _this.state.invoicesId.length) {
