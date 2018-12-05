@@ -28,12 +28,7 @@ export default class ListingItem extends React.Component {
             });*/
 
     }
-<<<<<<< HEAD
-    /*Freeze listing is a button that's only rendered if the current page is /listings. It allows for companies to indicate they are interested in the listing.
-    Doing this prevents the listing from being seen by other companies, and starts a chatroom between the owner of the listing and the company.*/
-=======
 
->>>>>>> a3e7024ccf0e62a4a54e01cef60d9dc891cb287b
     freezeListing() {
         let obj = {
             company_id: parseInt(window.localStorage.getItem('userid')),
@@ -56,9 +51,6 @@ export default class ListingItem extends React.Component {
         });
 
     }
-<<<<<<< HEAD
-    /*Create invoice is a button rendered only when the company is ready to indicate the transaction is complete*/ 
-=======
 
     deleteListing() {
         /*let obj = {
@@ -72,7 +64,6 @@ export default class ListingItem extends React.Component {
             })
     }
 
->>>>>>> a3e7024ccf0e62a4a54e01cef60d9dc891cb287b
     createInvoice() {
         let obj = {
             listing_id: this.props.Item.listing_id,
@@ -101,9 +92,9 @@ export default class ListingItem extends React.Component {
         if (!this.props.Item.company_name) {
             frozen = <div><br></br><button className="btn btn-danger" onClick={this.deleteListing}>Delete Listing</button></div>;
         } else {
-            frozen = <div> 
-            <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>Frozen By: <b>{this.props.Item.company_name}</b></p> 
-            <p>Company Rating: <b>{this.props.Item.company_rating.toFixed(2)} / 5</b></p> 
+            frozen = <div>
+            <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>Frozen By: <b>{this.props.Item.company_name}</b></p>
+            <p>Company Rating: <b>{this.props.Item.company_rating.toFixed(2)} / 5</b></p>
             </div>;
         }
         if (window.localStorage.getItem('is_company') === 'true' && this.props.Item.frozen_by) {
