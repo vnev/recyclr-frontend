@@ -13,6 +13,8 @@ class CheckOutPage extends Component {
         this.submitHandle = this.submitHandle.bind(this);
     }
 
+    /*This component is the checkout page for paying to post a listing on recyclr, providing form fields for a credit card.
+    Credit card data is processed using Stripe API*/
     submitHandle(ev) {
         ev.preventDefault();
         var bodyFormData = new FormData();

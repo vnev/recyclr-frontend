@@ -22,7 +22,7 @@ import ChatRoom from './ChatRoom.jsx';
 
 
 
-
+/*Routes all paths to a jsx component*/
 export default class App extends React.Component {
   render() {
     return (

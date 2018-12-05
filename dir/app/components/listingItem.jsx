@@ -4,6 +4,7 @@ import history from './history.js';
 import Axios from 'axios';
 import api from './api.js';
 
+/*Component for an already created listing. Displays neatly in a rectangular element. Allows for listings to be filtered by certain properties*/
 export default class ListingItem extends React.Component {
     constructor(props) {
         super(props);
@@ -25,8 +26,10 @@ export default class ListingItem extends React.Component {
                     name: result.data.name
                 });
             });*/
-        
+
     }
+    /*Freeze listing is a button that's only rendered if the current page is /listings. It allows for companies to indicate they are interested in the listing.
+    Doing this prevents the listing from being seen by other companies, and starts a chatroom between the owner of the listing and the company.*/
     freezeListing() {
         let obj = {
             company_id: parseInt(window.localStorage.getItem('userid')),
@@ -38,6 +41,8 @@ export default class ListingItem extends React.Component {
                 history.push(`/chatroom/${_this.props.Item.listing_id}`);
             });
     }
+    /*A user may unfreeze
+    the listing if no agreement is reached to unhide the listing from the page*/
     unfreeze() {
         //call api to unfreeze listing
         api.get(`/listing/unfreeze/${this.props.Item.listing_id}`)
@@ -45,8 +50,9 @@ export default class ListingItem extends React.Component {
             console.log(result);
             window.history.go(0);
         });
-        
+
     }
+    /*Create invoice is a button rendered only when the company is ready to indicate the transaction is complete*/ 
     createInvoice() {
         let obj = {
             listing_id: this.props.Item.listing_id,
