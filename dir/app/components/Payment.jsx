@@ -79,7 +79,7 @@ export default class PaymentPage extends Component {
                 _this.calculateIncentivePercentage();
                 toastr.options.closeButton = true;
                 toastr.success("Successfully applied incentives", "Success");
-            }).then(function (error) {
+            }).catch(function (error) {
                 console.log(error);
                 toastr.options.closeButton = true;
                 toastr.error("Failed to apply incentives", "Error");

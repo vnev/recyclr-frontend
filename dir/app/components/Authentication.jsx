@@ -139,20 +139,31 @@ export default class AuthPage extends React.Component {
         let _this = this;
         //call create user
         if (this.state.accountType === 'f') {
-            axios.post(`http://recyclr.xyz/api/user`, newObj).then(function (result) {
-                _this.setState({ signinTog: false });
-            }).catch(function (error) {
-                console.log(error);
-                _this.setState({ alert: true });
-            });
+            axios.post(`http://recyclr.xyz/api/user`, newObj)
+                .then(function (result) {
+                    _this.setState({ signinTog: false });
+                    toastr.options.closeButton = true;
+                    toastr.success("Successfully created new account", "Success!");
+                    history.push("/auth");
+                }).catch(function (error) {
+                    console.log(error);
+                    _this.setState({ alert: true });
+                    toastr.options.closeButton = true;
+                    toastr.error("Could not create new account. Please try again", "Error");
+                });
         }
         else {
-            axios.post(`http://recyclr.xyz/api/company`, newObj).then(function (result) {
-                _this.setState({ signinTog: false });
-            }).catch(function (error) {
-                console.log(error);
-                _this.setState({ alert: true });
-            });
+            axios.post(`http://recyclr.xyz/api/company`, newObj)
+                .then(function (result) {
+                    _this.setState({ signinTog: false });
+                    toastr.options.closeButton = true;
+                    toastr.success("Successfully created new account", "Success!");
+                }).catch(function (error) {
+                    console.log(error);
+                    _this.setState({ alert: true });
+                    toastr.options.closeButton = true;
+                    toastr.error("Could not create new account. Please try again", "Error");
+                });
         }
     }
 
