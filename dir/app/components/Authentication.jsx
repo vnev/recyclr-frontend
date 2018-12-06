@@ -114,6 +114,7 @@ export default class AuthPage extends React.Component {
                     // history.push('/settings');
                     toastr.options.closeButton = true;
                     toastr.success("Successfully signed in", "Success!");
+                    history.push('/progress');
                 });
 
         }).catch(function (error) {
