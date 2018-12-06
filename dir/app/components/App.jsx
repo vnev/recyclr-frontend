@@ -18,11 +18,12 @@ import history from './history.js';
 import ChatSelect from './chatSelect.jsx'
 import {Route, Router} from 'react-router-dom';
 import ChatRoom from './ChatRoom.jsx';
+import Mission from './Mission.jsx';
 
 
 
 
-
+/*Routes all paths to a jsx component*/
 export default class App extends React.Component {
   render() {
     return (
@@ -57,6 +58,7 @@ export default class App extends React.Component {
 
             {/* <Route path={'/choose_date/:id'} component={Calendar}/> */}
             <Route path={'/progress'} component={Progress}/>
+            <Route path={'/mission'} component={Mission}/>
 
           </Switch>
           </div>

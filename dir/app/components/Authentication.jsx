@@ -9,6 +9,7 @@ import toastr from 'toastr'
 
 //TODO change ui
 
+/*Handles both login and signup.*/
 export default class AuthPage extends React.Component {
     constructor(props) {
         super(props);
@@ -87,6 +88,8 @@ export default class AuthPage extends React.Component {
     }
 
     //{{'Authentication': 'Bearer ' + window.localStorage.token}}
+    /*This function checks to make sure the email and password the user has entered exist in the database, and returns 400 if it's
+    valid, or one of the various error codes depending on the problem*/
     signin(event) {
         let obj = {
             email: this.state.email,
@@ -120,6 +123,8 @@ export default class AuthPage extends React.Component {
             toastr.error("Failed to sign in", "Error");
         });
     }
+    /*This function requires all form data to be entered, and will post it to the database when the user clicks the button. It also
+    specifies if the account is a user or a company*/
     signup() {
         let newObj = {
             address: this.state.address,
@@ -149,6 +154,8 @@ export default class AuthPage extends React.Component {
             });
         }
     }
+
+    /*Renders two different tabs for the user to choose between if they are making a new account, or loggin in, and provides them with the respective forms*/
     render() {
         if (this.state.alert == true) {
             alert = <div className="alert alert-danger alert-dismissible" role="alert">

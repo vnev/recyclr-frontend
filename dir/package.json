@@ -33,6 +33,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-share": "^2.3.1",
+    "react-star-rating-component": "^1.4.1",
     "react-stripe-checkout": "^2.6.3",
     "react-stripe-elements": "^2.0.1",
     "toastr": "^2.1.4"
@@ -54,6 +55,7 @@
   },
   "jest": {
     "verbose": true,
+    "collectCoverage": true,
     "setupTestFrameworkScriptFile": "<rootDir>/__tests__/Setup/test-setup.js",
     "testPathIgnorePatterns": [
       "<rootDir>/__tests__/Setup/"

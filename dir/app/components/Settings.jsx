@@ -3,6 +3,7 @@ import Axios from 'axios';
 import history from './history.js'
 // import urls  from './Urls.js';
 
+/*Allows changes to be made to an account, including updating all identifying information*/
 export default class Settings extends React.Component {
     constructor(props) {
         super(props);

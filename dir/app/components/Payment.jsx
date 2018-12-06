@@ -6,6 +6,7 @@ import { formatPrice } from '../utils/config'
 
 import CheckOut from './CheckOut.jsx';
 
+/*Payment is used to calculate the total price of creating the listing. It allows the user to spend their incentive points to reduce the cost of listing their item*/
 export default class PaymentPage extends Component {
     /*  userObj -> points: holds points that user has
         incentivePoints: amount of points that incentive costs

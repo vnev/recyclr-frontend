@@ -6,7 +6,7 @@ import Axios from 'axios';
 import urls from './Urls.js';
 
 //TODO change ui
-
+/*Allows users to sign in with their Google account*/
 export default class GoogleAuth extends React.Component {
     constructor(props) {
         super(props);

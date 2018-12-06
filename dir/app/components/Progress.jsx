@@ -3,7 +3,8 @@ import { FacebookShareButton, FacebookIcon } from 'react-share'
 import ListingItem from './listingItem'
 import history from './history.js'
 import axios from 'axios'
-//TODO: REPLACE DUMMY VALUES WITH DATABASE VALUES
+
+/*Progress acts as a profile page, providing total stats for a user account, like how much weight of material they have listed, and their total incentive points earned*/
 export default class Progress extends Component {
   constructor(props) {
     super(props);
