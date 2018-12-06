@@ -3,8 +3,9 @@ import InvoiceItem from './InvoiceItem.jsx';
 import Axios from 'axios';
 import api from './api.js';
 
-//Needs to be reworked so the passed values are 
+//Needs to be reworked so the passed values are
 
+/*Fetches all previous invoices of a user, or indicates there have been none so far*/
 export default class Invoice extends React.Component {
     constructor(props) {
         super(props);

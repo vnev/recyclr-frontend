@@ -1,6 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 
+/*This component provides admin functionality to an account, and is only rendered if the user is an admin*/
 export default class Admin extends React.Component {
     constructor(props) {
         super(props);
@@ -17,6 +18,7 @@ export default class Admin extends React.Component {
         });
     }
 
+/*Removes user from database*/
     banUser(event) {
         console.log(this.state.userToBan)
         Axios.get('http://recyclr.xyz/user/' + this.state.userToBan + '/ban').then(function (result) {
@@ -29,7 +31,7 @@ export default class Admin extends React.Component {
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('username');
     }
-
+/*Renders text box and button for banning a user*/ 
     render() {
         return (
             <div className="row">

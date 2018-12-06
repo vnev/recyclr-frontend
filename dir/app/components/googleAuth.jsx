@@ -6,7 +6,7 @@ import Axios from 'axios';
 import urls  from './Urls.js';
 
 //TODO change ui
-
+/*Allows users to sign in with their Google account*/
 export default class GoogleAuth extends React.Component {
     constructor(props) {
         super(props);
@@ -31,10 +31,10 @@ export default class GoogleAuth extends React.Component {
         this.GoogFailUp = this.GoogFailUp.bind(this);
         this.GoogSuccessIn = this.GoogSuccessIn.bind(this);
         this.GoogSuccessUp = this.GoogSuccessUp.bind(this);
-       
-        
+
+
     }
-   
+
     emailHandle(event) {
         this.setState({
           email: event.target.value,
@@ -61,7 +61,7 @@ export default class GoogleAuth extends React.Component {
         });
     }
     //{{'Authentication': 'Bearer ' + window.localStorage.token}}
-   
+
     GoogSuccessIn(responce) {
         console.log(responce);
         let _this = this;
@@ -74,7 +74,7 @@ export default class GoogleAuth extends React.Component {
             let user = {
                 name: result.data.user_name,
                 user_id: result.data.user_id,
-                email: responce.profileObj.email, 
+                email: responce.profileObj.email,
             };
             window.localStorage.setItem('userid', user.user_id);
             window.localStorage.setItem('username', user.name);
@@ -87,8 +87,8 @@ export default class GoogleAuth extends React.Component {
             console.log(error);
             _this.setState({alert: true});
         });
-        
-        
+
+
     }
     GoogFailIn(responce) {
         console.log("Failed");
@@ -113,7 +113,7 @@ export default class GoogleAuth extends React.Component {
         });
         //window.sessionStorage.setItem();
         //history.push('/auth');
-        
+
     }
     GoogFailUp(responce) {
         console.log("Failed");
@@ -134,14 +134,14 @@ export default class GoogleAuth extends React.Component {
         if (this.state.signinTog == true) {
             bodyContent = <div className="card-body">
 
-           
-            
+
+
             <h3 id="signinHeading" className="card-title">Sign In</h3>
-            
+
 
             <form>
                 <input type="password" className="form-control authInput" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
-                   
+
             </form>
             <GoogleLogin
                 clientId = "874168937531-i135rv9v06a5rkt2sj6c8f12l2tvud2j.apps.googleusercontent.com"
@@ -149,7 +149,7 @@ export default class GoogleAuth extends React.Component {
                 className = "btn btn-secondary"
                 onSuccess={this.GoogSuccessIn}
                 onFailure={this.GoogFailIn}
-                /> 
+                />
 
         </div>;
         }
@@ -157,10 +157,10 @@ export default class GoogleAuth extends React.Component {
             bodyContent = <div className="card-body">
 
             <h3 className="card-title">Sign Up for Free</h3>
-           
 
-            
-            
+
+
+
 
             <form>
                 <h4>For added security, we would like for you to come up with an additional password for Recyclr, as well as provide an address for your recycling pickups</h4>
@@ -171,10 +171,10 @@ export default class GoogleAuth extends React.Component {
                     <option value="t">Business</option>
                 </select>
 
-                
-                
 
-                
+
+
+
             </form>
             <GoogleLogin
                 clientId = "874168937531-eqlmo921f0k15mqm5rdlp0o2op317eps.apps.googleusercontent.com"
@@ -182,7 +182,7 @@ export default class GoogleAuth extends React.Component {
                 className = "btn btn-secondary"
                 onSuccess={this.GoogSuccessUp}
                 onFailure={this.GoogFailUp}
-                /> 
+                />
         </div>;
         }
         return(
@@ -192,10 +192,10 @@ export default class GoogleAuth extends React.Component {
                         <div className="card-header">
                             <ul className="nav nav-pills justify-content-center">
                                 <li className="nav-item ">
-                                    <a className="nav-link authNav active" data-toggle="pill" onClick={() => this.setState({signinTog: !this.state.signinTog})}>Sign In</a>                                   
+                                    <a className="nav-link authNav active" data-toggle="pill" onClick={() => this.setState({signinTog: !this.state.signinTog})}>Sign In</a>
                                 </li>
                                 <li className="nav-item ">
-                                    <a className="nav-link authNav" data-toggle="pill" onClick={() => this.setState({signinTog: !this.state.signinTog})}>Sign Up</a>                                   
+                                    <a className="nav-link authNav" data-toggle="pill" onClick={() => this.setState({signinTog: !this.state.signinTog})}>Sign Up</a>
                                 </li>
                             </ul>
                         </div>

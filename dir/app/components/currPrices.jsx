@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
+/*This component provides users with current US market prices for the common types of recyclable material*/
 export default class CurrPrices extends React.Component {
     constructor(props) {
         super(props);

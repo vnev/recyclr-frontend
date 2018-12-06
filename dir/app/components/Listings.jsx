@@ -3,7 +3,7 @@ import ListingItem from './listingItem'
 import history from './history.js'
 import axios from 'axios'
 
-
+/*Listings component is a browse/search page for all currently unfrozen listings*/
 export default class Listings extends React.Component {
     constructor(props) {
         super(props);
@@ -80,6 +80,7 @@ export default class Listings extends React.Component {
         });
 
     }
+    /*The features of this page allow filtering listings by the type of material and listings being sold within a certain radius*/
     filterList() {
         let _this = this;
         this.gatherDistances().then(function () {

@@ -1,5 +1,6 @@
 import React from 'react'
 
+/*Home page of Recyclr, explains our app's goal and features*/
 export default class HomePage extends React.Component {
     constructor(props) {
         super(props);
@@ -47,4 +48,4 @@ export default class HomePage extends React.Component {
             </div>
         );
     }
-} 
+}

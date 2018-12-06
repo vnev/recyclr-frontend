@@ -3,6 +3,7 @@ import { formatPrice } from '../utils/config';
 import Axios from 'axios';
 import StarRatingComponent from 'react-star-rating-component';
 
+/*Invoices are provided after a company and a user complete a transaction. This is the component for a single invoice item*/
 export default class InvoiceItem extends React.Component {
     constructor(props) {
         super(props);

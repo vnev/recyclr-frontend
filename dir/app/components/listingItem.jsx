@@ -4,6 +4,7 @@ import history from './history.js';
 import Axios from 'axios';
 import api from './api.js';
 
+/*Component for an already created listing. Displays neatly in a rectangular element. Allows for listings to be filtered by certain properties*/
 export default class ListingItem extends React.Component {
     constructor(props) {
         super(props);
@@ -25,7 +26,7 @@ export default class ListingItem extends React.Component {
                     name: result.data.name
                 });
             });*/
-        
+
     }
 
     freezeListing() {
@@ -39,6 +40,8 @@ export default class ListingItem extends React.Component {
                 history.push(`/chatroom/${_this.props.Item.listing_id}`);
             });
     }
+    /*A user may unfreeze
+    the listing if no agreement is reached to unhide the listing from the page*/
     unfreeze() {
         //call api to unfreeze listing
         api.get(`/listing/unfreeze/${this.props.Item.listing_id}`)
@@ -46,7 +49,7 @@ export default class ListingItem extends React.Component {
             console.log(result);
             window.history.go(0);
         });
-        
+
     }
 
     deleteListing() {
@@ -89,9 +92,9 @@ export default class ListingItem extends React.Component {
         if (!this.props.Item.company_name) {
             frozen = <div><br></br><button className="btn btn-danger" onClick={this.deleteListing}>Delete Listing</button></div>;
         } else {
-            frozen = <div> 
-            <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>Frozen By: <b>{this.props.Item.company_name}</b></p> 
-            <p>Company Rating: <b>{this.props.Item.company_rating.toFixed(2)} / 5</b></p> 
+            frozen = <div>
+            <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>Frozen By: <b>{this.props.Item.company_name}</b></p>
+            <p>Company Rating: <b>{this.props.Item.company_rating.toFixed(2)} / 5</b></p>
             </div>;
         }
         if (window.localStorage.getItem('is_company') === 'true' && this.props.Item.frozen_by) {
