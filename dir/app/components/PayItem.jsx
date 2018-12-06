@@ -10,7 +10,7 @@ export default class PayItem extends React.Component {
         let v = this.props.Item.price;
         v = Math.round(v*100)/100
         return(
-            <div className="card listingRow">
+            <div id="cardR" className="card listingRow">
                 <div className="row">
                     <div className="col">
                         <h2>Price : $ {v}</h2>

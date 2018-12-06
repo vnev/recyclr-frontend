@@ -135,7 +135,7 @@ export default class Settings extends React.Component {
                                         <input type="text" className="form-control" placeholder="recyclingman1" value={this.state.newUsername} onChange={this.usernameHandle}></input>
                                     </div>
                                 </div>
-                                <button className="btn btn-primary formButton" onClick={this.changeUsername}>Change Username</button>
+                                <button id="usernBtn" className="btn btn-primary formButton" onClick={this.changeUsername}>Change Username</button>
 
                             </div>
 
@@ -146,7 +146,7 @@ export default class Settings extends React.Component {
                                         <input type="email" className="form-control" placeholder="recyclingman1@gmail.com" value={this.state.newEmail} onChange={this.emailHandle}></input>
                                     </div>
                                 </div>
-                                <button className="btn btn-primary formButton" onClick={this.changeEmail}>Change Email</button>
+                                <button id="emailBtn" className="btn btn-primary formButton" onClick={this.changeEmail}>Change Email</button>
                             </div>
                             <div className="card-body" id="change-password">
                                 <h5 className="card-text">Change Your Account Password</h5>
@@ -155,13 +155,13 @@ export default class Settings extends React.Component {
                                         <input type="password" className="form-control" placeholder="recyclingman1" value={this.state.newPass} onChange={this.passHandle}></input>
                                     </div>
                                 </div>
-                                <button className="btn btn-primary formButton" onClick={this.changePassword}>Change Password</button>
+                                <button id="passBtn" className="btn btn-primary formButton" onClick={this.changePassword}>Change Password</button>
 
                             </div>
                             <div className="card-body" id="delete-account">
                                 <h5 className="card-text">Delete Your Account</h5>
 
-                                <button className="btn btn-danger formButton" onClick={this.deleteAccount}>Delete Account</button>
+                                <button id="deleteBtn" className="btn btn-danger formButton" onClick={this.deleteAccount}>Delete Account</button>
                             </div>
                         </div>
                     </div>

@@ -87,7 +87,7 @@ export default class ListingItem extends React.Component {
             dist = <p><b>Distance</b>: {this.props.Item.distance} miles</p>
         }
         if (!this.props.Item.company_name) {
-            frozen = <div><br></br><button className="btn btn-danger" onClick={this.deleteListing}>Delete Listing</button></div>;
+            frozen = <div><br></br><button id="dBtn" className="btn btn-danger" onClick={this.deleteListing}>Delete Listing</button></div>;
         } else {
             frozen = <div> 
             <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>Frozen By: <b>{this.props.Item.company_name}</b></p> 
@@ -100,11 +100,11 @@ export default class ListingItem extends React.Component {
         if (this.props.ButBool === true) {
             rightSide = <div className="col-3 text-right">
                 <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>By: <b>{this.props.Item.username}</b></p>
-                <button style={{ display: "block", width: "100%" }} className="btn btn-primary margin-bottom-2" onClick={this.freezeListing}>Freeze</button>
+                <button style={{ display: "block", width: "100%" }} id="freezeBtn" className="btn btn-primary margin-bottom-2" onClick={this.freezeListing}>Freeze</button>
             </div>;
         }
         else {
-            rightSide = <div><button className='btn btn-primary' onClick={() => this.unfreeze(this.props.Item.listing_id)}> Unfreeze Listing</button> <br></br> <br></br>
+            rightSide = <div><button id="unfreezeBtn" className='btn btn-primary' onClick={() => this.unfreeze(this.props.Item.listing_id)}> Unfreeze Listing</button> <br></br> <br></br>
             <button className="btn btn-primary" onClick={() => history.push(`/chatroom/${this.props.Item.listing_id}`)}>Enter Chat</button>
                 {frozen}</div>
         }
@@ -113,7 +113,7 @@ export default class ListingItem extends React.Component {
            pickup_date_time =  <p>{"Desired Pick Up Date: " + (new Date(this.props.Item.pickup_date_time)).toDateString()}</p>
         }
         return (
-            <div className="row" style={{ marginBottom: "5px" }}>
+            <div id="overallC" className="row" style={{ marginBottom: "5px" }}>
                 <div className="col-md-12">
                     <div className="card">
                         <div className="card-body">

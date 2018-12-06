@@ -59,7 +59,7 @@ export default class CurrPrices extends React.Component {
     }
     render() {
         return(
-            <div className="card">
+            <div id="card" className="card">
                 <h2>Current material Prices</h2>
                 <p>Copper: ${this.state.copperPrice} USD per Pound</p>
                 <p>Tin: ${this.state.steelPrice} USD per Pound</p>

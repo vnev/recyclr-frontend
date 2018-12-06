@@ -96,7 +96,6 @@ export default class Listings extends React.Component {
     gatherDistances() {
         return new Promise((resolve, reject) => {
             let promiseArr = [];
-            console.log("Am gay");
             for (let i = 0; i < this.state.list.length; i++) {
                 promiseArr.push(this.updateList(this.state.list[i]));
             }
@@ -130,7 +129,6 @@ export default class Listings extends React.Component {
         });
     }
     componentDidMount() {
-        console.log("We got some phat booty out here");
         if (window.localStorage.getItem('username') === null || window.localStorage.getItem('is_company') === 'false') {
             history.push('/auth');
         }
@@ -161,20 +159,20 @@ export default class Listings extends React.Component {
     }
     render() {
         return (
-            <div className="container">
+            <div id="lContain" className="container">
                 <div className="card">
                     <div className="card-body">
                         <h3 className="card-title text-center">Listings</h3>
                         <p className="text-center">View listings within a specified radius</p>
                         <div className="row" style={{ marginBottom: "10px" }}>
                             <div className="col-4">
-                                <select className="custom-select" value={this.state.type} onChange={this.typeHandle}>
+                                <select id="tH" className="custom-select" value={this.state.type} onChange={this.typeHandle}>
                                     <option value='A'>Ascending</option>
                                     <option value='D'>Descending</option>
                                 </select>
                             </div>
                             <div className="col-4">
-                                <select className="custom-select" value={this.state.mat} onChange={this.matHandle}>
+                                <select id="matH" className="custom-select" value={this.state.mat} onChange={this.matHandle}>
                                     <option value="All">All</option>
                                     <option value='Plastic'>Plastic</option>
                                     <option value='Electronics'>Electronics</option>
@@ -187,7 +185,7 @@ export default class Listings extends React.Component {
                                 </select>
                             </div>
                             <div className="col-4">
-                                <select className="custom-select" value={this.state.raduis} onChange={this.distHandle}>
+                                <select id="dH" className="custom-select" value={this.state.raduis} onChange={this.distHandle}>
                                     <option value='5'>5 Miles</option>
                                     <option value='10'>10 Miles</option>
                                     <option value='25'>25 Miles</option>

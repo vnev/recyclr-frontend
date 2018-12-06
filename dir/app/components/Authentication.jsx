@@ -29,13 +29,8 @@ export default class AuthPage extends React.Component {
         this.emailHandle = this.emailHandle.bind(this);
         this.passwordHandle = this.passwordHandle.bind(this);
         this.userHandle = this.userHandle.bind(this);
-        this.addressHandle = this.addressHandle.bind(this);
-        this.cityHandle = this.cityHandle.bind(this);
-        this.stateHandle = this.stateHandle.bind(this);
         this.passwordHandle = this.passwordHandle.bind(this);
         this.typeHandle = this.typeHandle.bind(this);
-        this.cityHandle = this.cityHandle.bind(this);
-        this.stateHandle = this.stateHandle.bind(this);
         this.signin = this.signin.bind(this);
         this.signup = this.signup.bind(this);
 
@@ -60,31 +55,7 @@ export default class AuthPage extends React.Component {
             accountType: event.target.value,
         });
     }
-    cityHandle(event) {
-        this.setState({
-            city: event.target.value,
-        });
-    }
-    stateHandle(event) {
-        this.setState({
-            state: event.target.value,
-        })
-    }
-    addressHandle(event) {
-        this.setState({
-            address: event.target.value,
-        });
-    }
-    cityHandle(event) {
-        this.setState({
-            city: event.target.value,
-        });
-    }
-    stateHandle(event) {
-        this.setState({
-            state: event.target.value,
-        });
-    }
+    //City, Address, and State handles where removed due to them not being used
 
     //{{'Authentication': 'Bearer ' + window.localStorage.token}}
     signin(event) {
@@ -171,7 +142,7 @@ export default class AuthPage extends React.Component {
                     </div>
 
                 </form>
-                <button type='submit' className="btn btn-primary" onClick={this.signin}>Log In</button>
+                <button type='submit' className="btn btn-primary" onClick={this.signin} id="loginBtn">Log In</button>
             </div>;
         }
         else {
@@ -179,7 +150,7 @@ export default class AuthPage extends React.Component {
                 <h3 id="signUpHeading" className="card-title">Sign Up for Free</h3>
                 <form>
                     <div className="form-group">
-                        <input type="text" className="form-control " placeholder="Username" value={this.state.username} onChange={this.userHandle} required></input>
+                        <input id="uForm" type="text" className="form-control " placeholder="Username" value={this.state.username} onChange={this.userHandle} required></input>
                     </div>
                     <div className="form-group">
                         <Autocomplete
@@ -191,32 +162,32 @@ export default class AuthPage extends React.Component {
                         />
                     </div>
                     <div className="form-group">
-                        <input type="email" className="form-control" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle} required></input>
+                        <input id="eForm" type="email" className="form-control" placeholder="Email Address" value={this.state.email} onChange={this.emailHandle} required></input>
                     </div>
                     <div className="form-group">
-                        <input type="password" className="form-control" placeholder="Password" value={this.state.password} onChange={this.passwordHandle} required></input>
+                        <input id="pForm" type="password" className="form-control" placeholder="Password" value={this.state.password} onChange={this.passwordHandle} required></input>
                     </div>
                     <div className="form-group">
                         <label for="typeSelect">Are you a Business or a Recyclr?</label>
-                        <select name="typeSelect" className="form-control " value={this.state.accountType} onChange={this.typeHandle} required>
+                        <select id="tForm" name="typeSelect" className="form-control " value={this.state.accountType} onChange={this.typeHandle} required>
                             <option value="f">Recyclr</option>
                             <option value="t">Business</option>
                         </select>
                     </div>
                 </form>
-                <button className="btn btn-primary" onClick={this.signup}>Get Started</button>
+                <button className="btn btn-primary" onClick={this.signup} id="signUpBtn">Get Started</button>
             </div>;
         }
         return (
             <div className="row d-flex align-content-center justify-content-center">
                 <div className="col-6">
                     <div className="card text-center">
-                        <ul className="nav nav-pills justify-content-center">
-                            <li className="nav-item ">
-                                <a className="nav-link active" data-toggle="pill" onClick={() => this.setState({ signinTog: !this.state.signinTog })}>Sign In</a>
+                        <ul  className="nav nav-pills justify-content-center">
+                            <li  className="nav-item ">
+                                <a id="navLink1" className="nav-link active" data-toggle="pill" onClick={() => this.setState({ signinTog: !this.state.signinTog })}>Sign In</a>
                             </li>
                             <li className="nav-item ">
-                                <a className="nav-link" data-toggle="pill" onClick={() => this.setState({ signinTog: !this.state.signinTog })}>Sign Up</a>
+                                <a id="navLink2" className="nav-link" data-toggle="pill" onClick={() => this.setState({ signinTog: !this.state.signinTog })}>Sign Up</a>
                             </li>
                         </ul>
 

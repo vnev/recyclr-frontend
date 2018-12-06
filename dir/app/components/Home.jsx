@@ -6,7 +6,7 @@ export default class HomePage extends React.Component {
     }
     render() {
         return (
-            <div className="container-fluid">
+            <div id="classN" className="container-fluid">
                 <div className="row">
                     <div className='card'>
                         <div className='card-body'>

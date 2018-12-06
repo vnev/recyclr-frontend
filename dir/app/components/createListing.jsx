@@ -63,7 +63,6 @@ export default class createListing extends React.Component {
     }
     imageHandler(e) {
         e.preventDefault();
-
         let reader = new FileReader();
         let file = e.target.files[0];
         console.log(file);
