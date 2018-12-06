@@ -22,7 +22,7 @@ class CheckOutPage extends Component {
             console.log(token.token);
             bodyFormData.set('token', token.token.id);
             bodyFormData.set('listing_id', window.localStorage.getItem('currID'));
-            Axios.post(`http://recyclr.xyz/charge`, bodyFormData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(function (result) {
+            Axios.post(`http://recyclr.xyz/api/charge`, bodyFormData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(function (result) {
                 console.log("Purchase Complete");
                 toastr.options.closeButton = true;
                 toastr.success("Transaction successful", "Success!");

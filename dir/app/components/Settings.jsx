@@ -50,7 +50,7 @@ export default class Settings extends React.Component {
 
         // need request url ex
         let _this = this;
-        Axios.put(`http://recyclr.xyz/user/` + window.localStorage.getItem('userid'), requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), } })
+        Axios.put(`http://recyclr.xyz/api/user/` + window.localStorage.getItem('userid'), requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), } })
             .then(function (result) {
                 console.log(result);
                 window.localStorage.setItem('username', _this.state.newUsername);
@@ -73,7 +73,7 @@ export default class Settings extends React.Component {
         }
 
         // need request url ex
-        Axios.put(`http://recyclr.xyz/user/` + window.localStorage.getItem('userid'), requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token') } })
+        Axios.put(`http://recyclr.xyz/api/user/` + window.localStorage.getItem('userid'), requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token') } })
             .then(function (result) {
                 console.log(result);
                 toastr.options.closeButton = true;
@@ -88,7 +88,7 @@ export default class Settings extends React.Component {
         let newObj = {
             passwd: this.state.newPass,
         }
-        Axios.put('http://recyclr.xyz/user/' + window.localStorage.getItem('userid'), newObj, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token') } })
+        Axios.put('http://recyclr.xyz/api/user/' + window.localStorage.getItem('userid'), newObj, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token') } })
             .then(function (result) {
                 console.log(result);
                 toastr.options.closeButton = true;
@@ -102,7 +102,7 @@ export default class Settings extends React.Component {
 
     deleteAccount() {
         console.log("__deleteAccount");
-        Axios.get('http://recyclr.xyz/user/' + window.localStorage.getItem('userid') + '/delete').then(function (result) {
+        Axios.get('http://recyclr.xyz/api/user/' + window.localStorage.getItem('userid') + '/delete').then(function (result) {
             console.log(result);
         }).catch(function (error) {
             console.log(error);

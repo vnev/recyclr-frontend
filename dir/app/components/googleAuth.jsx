@@ -3,7 +3,7 @@ import React from 'react'
 import { GoogleLogin } from 'react-google-login'
 import history from './history.js'
 import Axios from 'axios';
-import urls  from './Urls.js';
+import urls from './Urls.js';
 
 //TODO change ui
 
@@ -31,23 +31,23 @@ export default class GoogleAuth extends React.Component {
         this.GoogFailUp = this.GoogFailUp.bind(this);
         this.GoogSuccessIn = this.GoogSuccessIn.bind(this);
         this.GoogSuccessUp = this.GoogSuccessUp.bind(this);
-       
-        
+
+
     }
-   
+
     emailHandle(event) {
         this.setState({
-          email: event.target.value,
+            email: event.target.value,
         });
     }
     passwordHandle(event) {
         this.setState({
-          password: event.target.value,
+            password: event.target.value,
         });
     }
     userHandle(event) {
         this.setState({
-          username: event.target.value,
+            username: event.target.value,
         });
     }
     typeHandle(event) {
@@ -61,7 +61,7 @@ export default class GoogleAuth extends React.Component {
         });
     }
     //{{'Authentication': 'Bearer ' + window.localStorage.token}}
-   
+
     GoogSuccessIn(responce) {
         console.log(responce);
         let _this = this;
@@ -69,12 +69,12 @@ export default class GoogleAuth extends React.Component {
             email: responce.profileObj.email,
             passwd: this.state.password,
         }
-        Axios.post('http://recyclr.xyz/signin', newObj).then(function(result) {
+        Axios.post('http://recyclr.xyz/api/signin', newObj).then(function (result) {
             console.log(result);
             let user = {
                 name: result.data.user_name,
                 user_id: result.data.user_id,
-                email: responce.profileObj.email, 
+                email: responce.profileObj.email,
             };
             window.localStorage.setItem('userid', user.user_id);
             window.localStorage.setItem('username', user.name);
@@ -83,17 +83,17 @@ export default class GoogleAuth extends React.Component {
             window.localStorage.setItem('token', result.data.token);
             console.log(window.localStorage.getItem('userid'));
             history.push('/settings');
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.log(error);
-            _this.setState({alert: true});
+            _this.setState({ alert: true });
         });
-        
-        
+
+
     }
     GoogFailIn(responce) {
         console.log("Failed");
         console.log(responce);
-        this.setState({alert: true});
+        this.setState({ alert: true });
     }
     GoogSuccessUp(responce) {
         console.log(responce);
@@ -104,29 +104,29 @@ export default class GoogleAuth extends React.Component {
             address: this.state.address,
         };
         let _this = this;
-        Axios.post('http://recyclr.xyz/user', newObj).then(function(result) {
+        Axios.post('http://recyclr.xyz/api/user', newObj).then(function (result) {
             console.log(result);
-            _this.setState({signinTog: false});
-        }).catch(function(error) {
+            _this.setState({ signinTog: false });
+        }).catch(function (error) {
             console.log(error);
-            _this.setState({alert: true});
+            _this.setState({ alert: true });
         });
         //window.sessionStorage.setItem();
         //history.push('/auth');
-        
+
     }
     GoogFailUp(responce) {
         console.log("Failed");
         console.log(responce);
-        this.setState({alert: true});
+        this.setState({ alert: true });
     }
     render() {
         let alert;
         if (this.state.alert == true) {
             alert = <div className="alert alert-danger alert-dismissible" role="alert">
-            An error has occured. Please try again
+                An error has occured. Please try again
             <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
         }
@@ -134,68 +134,68 @@ export default class GoogleAuth extends React.Component {
         if (this.state.signinTog == true) {
             bodyContent = <div className="card-body">
 
-           
-            
-            <h3 id="signinHeading" className="card-title">Sign In</h3>
-            
 
-            <form>
-                <input type="password" className="form-control authInput" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
-                   
-            </form>
-            <GoogleLogin
-                clientId = "874168937531-i135rv9v06a5rkt2sj6c8f12l2tvud2j.apps.googleusercontent.com"
-                buttonText = "Sign In with Google"
-                className = "btn btn-secondary"
-                onSuccess={this.GoogSuccessIn}
-                onFailure={this.GoogFailIn}
-                /> 
 
-        </div>;
+                <h3 id="signinHeading" className="card-title">Sign In</h3>
+
+
+                <form>
+                    <input type="password" className="form-control authInput" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
+
+                </form>
+                <GoogleLogin
+                    clientId="874168937531-i135rv9v06a5rkt2sj6c8f12l2tvud2j.apps.googleusercontent.com"
+                    buttonText="Sign In with Google"
+                    className="btn btn-secondary"
+                    onSuccess={this.GoogSuccessIn}
+                    onFailure={this.GoogFailIn}
+                />
+
+            </div>;
         }
         else {
             bodyContent = <div className="card-body">
 
-            <h3 className="card-title">Sign Up for Free</h3>
-           
+                <h3 className="card-title">Sign Up for Free</h3>
 
-            
-            
 
-            <form>
-                <h4>For added security, we would like for you to come up with an additional password for Recyclr, as well as provide an address for your recycling pickups</h4>
-                <input type="text" className="form-control authInput" placeholder="Address" value={this.state.address} onChange={this.addressHandle}></input>
-                <input type="password" className="form-control authInput" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
-                <select className="form-control authSelect" value={this.state.accountType} onChange={this.typeHandle}>
-                    <option value="f">Recyclr</option>
-                    <option value="t">Business</option>
-                </select>
 
-                
-                
 
-                
-            </form>
-            <GoogleLogin
-                clientId = "874168937531-eqlmo921f0k15mqm5rdlp0o2op317eps.apps.googleusercontent.com"
-                buttonText = "Sign In with Google"
-                className = "btn btn-secondary"
-                onSuccess={this.GoogSuccessUp}
-                onFailure={this.GoogFailUp}
-                /> 
-        </div>;
+
+                <form>
+                    <h4>For added security, we would like for you to come up with an additional password for Recyclr, as well as provide an address for your recycling pickups</h4>
+                    <input type="text" className="form-control authInput" placeholder="Address" value={this.state.address} onChange={this.addressHandle}></input>
+                    <input type="password" className="form-control authInput" placeholder="Password" value={this.state.password} onChange={this.passwordHandle}></input>
+                    <select className="form-control authSelect" value={this.state.accountType} onChange={this.typeHandle}>
+                        <option value="f">Recyclr</option>
+                        <option value="t">Business</option>
+                    </select>
+
+
+
+
+
+                </form>
+                <GoogleLogin
+                    clientId="874168937531-eqlmo921f0k15mqm5rdlp0o2op317eps.apps.googleusercontent.com"
+                    buttonText="Sign In with Google"
+                    className="btn btn-secondary"
+                    onSuccess={this.GoogSuccessUp}
+                    onFailure={this.GoogFailUp}
+                />
+            </div>;
         }
-        return(
+        return (
             <div className="row d-flex align-content-center justify-content-center" id="authRow">
                 <div className="col-6">
                     <div className="card authCard text-center">
                         <div className="card-header">
                             <ul className="nav nav-pills justify-content-center">
                                 <li className="nav-item ">
-                                    <a className="nav-link authNav active" data-toggle="pill" onClick={() => this.setState({signinTog: !this.state.signinTog})}>Sign In</a>                                   
+                                    <a className="nav-link authNav active" data-toggle="pill" onClick={() => this.setState({ signinTog: !this.state.signinTog })}>Sign In</a>
                                 </li>
                                 <li className="nav-item ">
-                                    <a className="nav-link authNav" data-toggle="pill" onClick={() => this.setState({signinTog: !this.state.signinTog})}>Sign Up</a>                                   
+                                    <a className="nav-link authNav" data-toggle="pill" onClick={() => this.setState({ signinTog: !this.state.signinTog })}>Sign Up</a>
                                 </li>
                             </ul>
                         </div>

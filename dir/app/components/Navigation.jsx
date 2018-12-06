@@ -16,7 +16,7 @@ export default class Navigation extends React.Component {
         let requestObject = {
             user_id: parseInt(window.localStorage.getItem('userid')),
         }
-        axios.post(`http://recyclr.xyz/user/logout`, requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+        axios.post(`http://recyclr.xyz/api/user/logout`, requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
             .then(function (result) {
                 window.localStorage.clear();
                 history.push('/auth');

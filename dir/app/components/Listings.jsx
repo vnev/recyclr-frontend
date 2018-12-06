@@ -133,7 +133,7 @@ export default class Listings extends React.Component {
             history.push('/auth');
         }
         let _this = this;
-        axios.get(`http://recyclr.xyz/user/${window.localStorage.getItem('userid')}`, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+        axios.get(`http://recyclr.xyz/api/user/${window.localStorage.getItem('userid')}`, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
             .then(function (result) {
                 if (result.data.is_company === false) {
                     //history.push('/auth');
@@ -143,7 +143,7 @@ export default class Listings extends React.Component {
                         userAddr: `${result.data.address}, ${result.data.city} ${result.data.state}`,
                     });
                 }
-                axios.get("http://recyclr.xyz/listings", { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+                axios.get("http://recyclr.xyz/api/listings", { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
                     .then(function (result) {
                         console.log(result);
                         _this.setState({ list: result.data }, () => {

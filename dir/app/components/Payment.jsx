@@ -45,7 +45,7 @@ export default class PaymentPage extends Component {
         this.setState({ price: window.localStorage.getItem('price') });
 
         let _this = this;
-        Axios.get('http://recyclr.xyz/user/' + window.localStorage.getItem('userid'), { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+        Axios.get('http://recyclr.xyz/api/user/' + window.localStorage.getItem('userid'), { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
             .then(function (result) {
                 _this.setState({ userObj: result.data });
                 _this.calculateIncentivePercentage();
@@ -60,7 +60,7 @@ export default class PaymentPage extends Component {
             points: newPoints,
         }
         let _this = this;
-        Axios.put(`http://recyclr.xyz/user/` + window.localStorage.getItem('userid'), requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), } })
+        Axios.put(`http://recyclr.xyz/api/user/` + window.localStorage.getItem('userid'), requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), } })
             .then(function (result) {
                 console.log(window.localStorage.getItem('currID'));
                 api.post(`/user/deduct/${window.localStorage.getItem('currID')}`, { percentage: _this.state.incentivePercentage })

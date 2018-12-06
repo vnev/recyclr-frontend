@@ -93,7 +93,7 @@ export default class AuthPage extends React.Component {
             passwd: this.state.password,
         }
         let _this = this;
-        axios.post(`http://recyclr.xyz/signin`, obj).then(function (result) {
+        axios.post(`http://recyclr.xyz/api/signin`, obj).then(function (result) {
             console.log(result);
             let user = {
                 email: _this.state.email,
@@ -105,7 +105,7 @@ export default class AuthPage extends React.Component {
             window.localStorage.setItem('username', user.name);
             window.localStorage.setItem('useremail', user.email);
             window.localStorage.setItem('token', result.data.token);
-            axios.get(`http://recyclr.xyz/user/${window.localStorage.getItem('userid')}`, { headers: { 'Access-Control-Allow-Origin': '*', 'Authorization': 'Bearer ' + window.localStorage.getItem('token') } })
+            axios.get(`http://recyclr.xyz/api/user/${window.localStorage.getItem('userid')}`, { headers: { 'Access-Control-Allow-Origin': '*', 'Authorization': 'Bearer ' + window.localStorage.getItem('token') } })
                 .then(function (result) {
                     window.localStorage.setItem('is_company', result.data.is_company);
                     // history.push('/settings');
@@ -133,7 +133,7 @@ export default class AuthPage extends React.Component {
         let _this = this;
         //call create user
         if (this.state.accountType === 'f') {
-            axios.post(`http://recyclr.xyz/user`, newObj).then(function (result) {
+            axios.post(`http://recyclr.xyz/api/user`, newObj).then(function (result) {
                 _this.setState({ signinTog: false });
             }).catch(function (error) {
                 console.log(error);
@@ -141,7 +141,7 @@ export default class AuthPage extends React.Component {
             });
         }
         else {
-            axios.post(`http://recyclr.xyz/company`, newObj).then(function (result) {
+            axios.post(`http://recyclr.xyz/api/company`, newObj).then(function (result) {
                 _this.setState({ signinTog: false });
             }).catch(function (error) {
                 console.log(error);

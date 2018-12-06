@@ -25,14 +25,14 @@ export default class ListingItem extends React.Component {
                     name: result.data.name
                 });
             });*/
-        
+
     }
     freezeListing() {
         let obj = {
             company_id: parseInt(window.localStorage.getItem('userid')),
         }
         let _this = this;
-        Axios.post(`http://recyclr.xyz/listing/freeze/${this.props.Item.listing_id}`, obj, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+        Axios.post(`http://recyclr.xyz/api/listing/freeze/${this.props.Item.listing_id}`, obj, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
             .then(function (result) {
                 console.log(result);
                 history.push(`/chatroom/${_this.props.Item.listing_id}`);
@@ -41,11 +41,11 @@ export default class ListingItem extends React.Component {
     unfreeze() {
         //call api to unfreeze listing
         api.get(`/listing/unfreeze/${this.props.Item.listing_id}`)
-        .then(function(result) {
-            console.log(result);
-            window.history.go(0);
-        });
-        
+            .then(function (result) {
+                console.log(result);
+                window.history.go(0);
+            });
+
     }
     createInvoice() {
         let obj = {
@@ -89,8 +89,8 @@ export default class ListingItem extends React.Component {
                 {frozen}</div>
         }
         let pickup_date_time;
-        if(this.props.Item.pickup_date_time) {
-           pickup_date_time =  <p>{"Desired Pick Up Date: " + (new Date(this.props.Item.pickup_date_time)).toDateString()}</p>
+        if (this.props.Item.pickup_date_time) {
+            pickup_date_time = <p>{"Desired Pick Up Date: " + (new Date(this.props.Item.pickup_date_time)).toDateString()}</p>
         }
         return (
             <div className="row" style={{ marginBottom: "5px" }}>
