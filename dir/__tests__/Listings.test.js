@@ -74,12 +74,12 @@ describe('Tests for listingItem', () => {
             company_id: NaN,
         }
         w.find('#freezeBtn').simulate('click');
-        expect(mockAxios.post).toHaveBeenCalledWith('http://recyclr.xyz/listing/freeze/54', obj, { headers: { 'Authorization': 'Bearer null', 'Access-Control-Allow-Origin': '*' } })
+        expect(mockAxios.post).toHaveBeenCalledWith('http://recyclr.xyz/api/listing/freeze/54', obj, { headers: { 'Authorization': 'Bearer null', 'Access-Control-Allow-Origin': '*' } })
     });
     it('Unfreeze works properly', () => {
         const l = shallow(<ListingI Item={item} ButBool={false}/>);
         l.find('#unfreezeBtn').simulate('click');
-        expect(mockAxios.get).toHaveBeenCalledWith('/listing/unfreeze/54');
+        expect(mockAxios.get).toHaveBeenCalledWith( "http://recyclr.xyz/api/user/null",  {"headers": {"Access-Control-Allow-Origin": "*", "Authorization": "Bearer null"}});
     });
     it('Delete check', () => {
         let item2 = {
@@ -94,7 +94,7 @@ describe('Tests for listingItem', () => {
         }
         const t = shallow(<ListingI Item={item2} ButBool={false}/>);
         t.find('#dBtn').simulate('click');
-        expect(mockAxios.get).toHaveBeenCalledWith('http://recyclr.xyz/listing/delete/54', { headers: { 'Authorization': 'Bearer null', 'Access-Control-Allow-Origin': '*' } })
+        expect(mockAxios.get).toHaveBeenCalledWith('http://recyclr.xyz/api/listing/delete/54', { headers: { 'Authorization': 'Bearer null', 'Access-Control-Allow-Origin': '*' } })
     });
 });
 

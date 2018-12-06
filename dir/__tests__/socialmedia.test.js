@@ -16,6 +16,6 @@ describe('Testing that the social media and the progress page works properly', (
     });
     it('Correct Axios calls', () => {
         localStorage.setItem('userid', 'jon');
-        expect(mockAxios.get).toHaveBeenCalledWith('http://recyclr.xyz/user/progress/null',  {headers: {"Access-Control-Allow-Origin": "*", "Authorization": "Bearer null"}});
+        expect(mockAxios.get).toHaveBeenCalledWith('http://recyclr.xyz/api/user/progress/null',  {headers: {"Access-Control-Allow-Origin": "*", "Authorization": "Bearer null"}});
     });
 });
