@@ -30,7 +30,7 @@ describe('Settings component render properly', () => {
             newEmail: "1@gmail.com"
         });
         wrapper.find('#emailBtn').simulate('click');
-        expect(mockAxios.put).toHaveBeenCalledWith('http://recyclr.xyz/user/null', newObj, { headers: { 'Authorization': 'Bearer null' } })
+        expect(mockAxios.put).toHaveBeenCalledWith('http://recyclr.xyz/api/user/null', newObj, { headers: { 'Authorization': 'Bearer null' } })
     });
     it('Change password works properly', () => {
         let newObj = {
@@ -40,7 +40,7 @@ describe('Settings component render properly', () => {
             newPass: "1"    
         });
         wrapper.find('#passBtn').simulate('click');
-        expect(mockAxios.put).toHaveBeenCalledWith('http://recyclr.xyz/user/null', newObj, { headers: { 'Authorization': 'Bearer null'} })
+        expect(mockAxios.put).toHaveBeenCalledWith('http://recyclr.xyz/api/user/null', newObj, { headers: { 'Authorization': 'Bearer null'} })
     });
     it('Change username works properly', () => {
         let newObj = {
@@ -50,10 +50,10 @@ describe('Settings component render properly', () => {
             newUsername: "1"    
         });
         wrapper.find('#usernBtn').simulate('click');
-        expect(mockAxios.put).toHaveBeenCalledWith('http://recyclr.xyz/user/null', newObj, { headers: { 'Authorization': 'Bearer null'} })
+        expect(mockAxios.put).toHaveBeenCalledWith('http://recyclr.xyz/api/user/null', newObj, { headers: { 'Authorization': 'Bearer null'} })
     });
     it('Delete works properly', () => {
         wrapper.find('#deleteBtn').simulate('click');
-        expect(mockAxios.get).toHaveBeenCalledWith('http://recyclr.xyz/user/null/delete')
+        expect(mockAxios.get).toHaveBeenCalledWith('http://recyclr.xyz/api/user/null/delete')
     });
 });

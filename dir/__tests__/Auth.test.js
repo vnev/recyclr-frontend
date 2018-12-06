@@ -35,7 +35,7 @@ describe('Tests for the Authentication components', () => {
             state: "Indiana",
         }
         wrapper.find('#signUpBtn').simulate('click');
-        expect(mockAxios.post).toHaveBeenCalledWith('http://recyclr.xyz/user', data);
+        expect(mockAxios.post).toHaveBeenCalledWith('http://recyclr.xyz/api/user', data);
     });
     it('Correct Axios call from sign in', () => {
         const wrapper = shallow(<Auth/>);
@@ -48,7 +48,7 @@ describe('Tests for the Authentication components', () => {
             passwd: "1",
         };
         wrapper.find('#loginBtn').simulate('click');
-        expect(mockAxios.post).toHaveBeenCalledWith(`http://recyclr.xyz/signin`, data);
+        expect(mockAxios.post).toHaveBeenCalledWith(`http://recyclr.xyz/api/signin`, data);
     });
     it('Testing navLinks', () => {
         const wrapper = shallow(<Auth/>);

@@ -25,7 +25,7 @@ describe('Testing for the payment page and pages associated with it', () => {
             incentivePoints: 5,
         });
         wrapper.find('#incetBtn').simulate('click');
-        expect(mockAxios.put).toHaveBeenCalledWith(`http://recyclr.xyz/user/null`, requestObj ,  { headers: { 'Authorization': 'Bearer null', } })
+        expect(mockAxios.put).toHaveBeenCalledWith(`http://recyclr.xyz/api/user/null`, requestObj ,  { headers: { 'Authorization': 'Bearer null', } })
     });
     it('CardSec renders properly', () => {
         const w = shallow(<CardSec/>);
@@ -42,7 +42,7 @@ describe('Testing for the payment page and pages associated with it', () => {
 
     it('Component did mount is called', () => {
         const wrapp = shallow(<Payment/>);
-        expect(mockAxios.get).toHaveBeenCalledWith('http://recyclr.xyz/user/null', { headers: { 'Authorization': 'Bearer null', 'Access-Control-Allow-Origin': '*' } });
+        expect(mockAxios.get).toHaveBeenCalledWith('http://recyclr.xyz/api/user/null', { headers: { 'Authorization': 'Bearer null', 'Access-Control-Allow-Origin': '*' } });
     });
 });
 
