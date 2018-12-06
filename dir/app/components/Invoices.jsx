@@ -51,12 +51,12 @@ export default class Invoice extends React.Component {
     render() {
         //this.getInvoices();
         let invoices;
-        if (this.state.invoicesId.length == 0) {
+        if (!this.state.invoicesId) {
             invoices = <h5 className="text-center">No invoices to show...</h5>
         } else {
             invoices =
                 this.state.invoicesId.map((item, key) => {
-                    return <InvoiceItem Item={item} />
+                    return <InvoiceItem Item={item} key={key} />
                 })
         }
         return (
@@ -64,7 +64,6 @@ export default class Invoice extends React.Component {
                 <div className="card" style={{ height: "100vh" }}>
                     <div className="card-body">
                         <h1 className="card-title text-center">Transaction History</h1>
-
                         {invoices}
                     </div>
                 </div>
