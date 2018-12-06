@@ -6,7 +6,7 @@ import Autocomplete from 'react-google-autocomplete'
 
 
 //uncomment file when database is updated
-
+/*Create listing provides the core functionality of our app, letting user's post their recyclable material with all relevant details for sale.*/
 export default class createListing extends React.Component {
     constructor(props) {
         super(props);
@@ -40,6 +40,7 @@ export default class createListing extends React.Component {
             history.push('/auth');
         }
     }
+    /*Handler functions update state on change*/
     descHandler(event) {
         this.setState({
             description: event.target.value
@@ -82,6 +83,7 @@ export default class createListing extends React.Component {
             date: event.target.value
         });
     }
+    /*This function will pass the current React state containing a Recyclr listing to the database*/
     createNewListing(event) {
         let price;
         let _this = this;
@@ -119,6 +121,7 @@ export default class createListing extends React.Component {
                 toastr.error("Failed. Please try again", "Error");
             });
     }
+    /*Renders all necessary form elements to allow for user input, including local file select for images, and a small calendar element to select a pick-up date*/
     render() {
         return (
             <div className="container">

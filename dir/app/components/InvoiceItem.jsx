@@ -2,7 +2,9 @@ import React from 'react';
 import { formatPrice } from '../utils/config';
 import Axios from 'axios';
 import StarRatingComponent from 'react-star-rating-component';
+import toastr from 'toastr';
 
+/*Invoices are provided after a company and a user complete a transaction. This is the component for a single invoice item*/
 export default class InvoiceItem extends React.Component {
     constructor(props) {
         super(props);
@@ -25,11 +27,11 @@ export default class InvoiceItem extends React.Component {
                 transaction_rating: this.state.rating,
                 invoice_id: this.props.Item.invoice_id
             }
-            
+
             Axios.put(`http://recyclr.xyz/invoice/rating`, requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), } })
-            .then(function (result) {
-                console.log(result);
-            })
+                .then(function (result) {
+                    console.log(result);
+                })
 
             let requestRating = {
                 listing_id: this.props.Item.listing_id,
@@ -37,11 +39,11 @@ export default class InvoiceItem extends React.Component {
             }
 
             Axios.put(`http://recyclr.xyz/user/rating`, requestRating, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), } })
-            .then(function (result) {
-                console.log(result);
-            }).then(function (error) {
-                console.log(error);
-            })
+                .then(function (result) {
+                    console.log(result);
+                }).then(function (error) {
+                    console.log(error);
+                })
 
         })
 
@@ -74,14 +76,14 @@ export default class InvoiceItem extends React.Component {
                     <h5>Transaction date: <b>{d.toDateString()}</b></h5>
                     <h5>Company: <b>{this.props.Item.company_name}</b></h5>
                     <h5>Listing Title: <b>{this.props.Item.title}</b></h5>
-                    <h4>Rate Your Transaction: {rating}/5</h4>
-                    <StarRatingComponent 
-                        name="rate1" 
+                    <h5>Rate Your Transaction: {rating}/5</h5>
+                    <StarRatingComponent
+                        name="rate1"
                         starCount={5}
                         value={rating}
                         onStarClick={this.onStarClick.bind(this)}
                     />
- 
+
                 </div>
 
             </div>

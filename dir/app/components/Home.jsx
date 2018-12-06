@@ -1,5 +1,6 @@
 import React from 'react'
 
+/*Home page of Recyclr, explains our app's goal and features*/
 export default class HomePage extends React.Component {
     constructor(props) {
         super(props);
@@ -39,7 +40,7 @@ export default class HomePage extends React.Component {
                             </div>
                             <hr></hr>
                             <div className="text-center">
-                                <h5>Learn more about <a href="/auth" className="rootLink">our mission</a>.</h5>
+                                <h5>Learn more about <a href="/mission" className="rootLink">our mission</a>.</h5>
                             </div>
                         </div>
                     </div>
@@ -47,4 +48,4 @@ export default class HomePage extends React.Component {
             </div>
         );
     }
-} 
+}

@@ -4,7 +4,7 @@ import history from './history.js'
 import axios from 'axios'
 import { CheckBox } from 'react'
 
-
+/*Listings component is a browse/search page for all currently unfrozen listings*/
 export default class Listings extends React.Component {
     constructor(props) {
         super(props);
@@ -82,6 +82,7 @@ export default class Listings extends React.Component {
         });
 
     }
+    /*The features of this page allow filtering listings by the type of material and listings being sold within a certain radius*/
     filterList() {
         let _this = this;
         this.gatherDistances().then(function () {
@@ -133,7 +134,7 @@ export default class Listings extends React.Component {
             history.push('/auth');
         }
         let _this = this;
-        axios.get(`http://recyclr.xyz/user/${window.localStorage.getItem('userid')}`, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+        axios.get(`http://recyclr.xyz/api/user/${window.localStorage.getItem('userid')}`, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
             .then(function (result) {
                 if (result.data.is_company === false) {
                     //history.push('/auth');
@@ -143,7 +144,7 @@ export default class Listings extends React.Component {
                         userAddr: `${result.data.address}, ${result.data.city} ${result.data.state}`,
                     });
                 }
-                axios.get("http://recyclr.xyz/listings", { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+                axios.get("http://recyclr.xyz/api/listings", { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
                     .then(function (result) {
                         console.log(result);
                         _this.setState({ list: result.data }, () => {

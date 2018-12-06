@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import history from './history.js'
+import toastr from 'toastr'
 
-
+/*Navigation renders tabs of all the different our app that allow quick access to each feature. The NavBar changes slightly depending on the user type currently logged in*/
 export default class Navigation extends React.Component {
     constructor(props) {
         super(props);
@@ -16,9 +17,11 @@ export default class Navigation extends React.Component {
         let requestObject = {
             user_id: parseInt(window.localStorage.getItem('userid')),
         }
-        axios.post(`http://recyclr.xyz/user/logout`, requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+        axios.post(`http://recyclr.xyz/api/user/logout`, requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
             .then(function (result) {
                 window.localStorage.clear();
+                toastr.options.closeButton = true;
+                toastr.success("Logged out", "Success");
                 history.push('/auth');
             }).catch(function (error) {
                 console.log(error);

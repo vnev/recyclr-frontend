@@ -1,5 +1,5 @@
 const urls = {
-    "remote": "http://recyclr.xyz",
+    "remote": "http://recyclr.xyz/api",
 
 };
 

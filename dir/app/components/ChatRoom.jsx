@@ -4,7 +4,7 @@ import axios from 'axios';
 import history from './history.js';
 import api from './api.js';
 
-
+/*This component is providing chat room functionality to a user and a company to communicate pickup/cost details in an efficient manner*/
 export default class ChatRoom extends React.Component {
     constructor(props) {
         super(props);
@@ -23,9 +23,9 @@ export default class ChatRoom extends React.Component {
         });
     }
 
+    /*Send new message, then reload page and fetch the whole list again*/
     sendMess() {
         let _this = this;
-        //send new message, then reload page and fetch the whole list again
         let obj = {
             to_user: this.state.to_user,
             from_user: parseInt(window.localStorage.getItem('userid')),
@@ -39,11 +39,11 @@ export default class ChatRoom extends React.Component {
                 window.history.go(0);
             });
     }
+    /*Get all messages between two users and order them by time*/
     componentDidMount() {
         if (window.localStorage.getItem('userid') === null) {
             history.push('/auth');
         }
-        //get all messages between two users and order them by time
         let _this = this;
         api.get(`/listing/${this.props.match.params.id}`)
             .then(function (result) {
@@ -74,6 +74,7 @@ export default class ChatRoom extends React.Component {
             });
 
     }
+    /*Renders the message between users in a text message format, display both messages sent and received in a box*/
     render() {
         let elem;
         if (this.state.messageList.length === 0) {

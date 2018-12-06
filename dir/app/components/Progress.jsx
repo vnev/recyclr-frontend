@@ -3,7 +3,9 @@ import { FacebookShareButton, FacebookIcon } from 'react-share'
 import ListingItem from './listingItem'
 import history from './history.js'
 import axios from 'axios'
-//TODO: REPLACE DUMMY VALUES WITH DATABASE VALUES
+import toastr from 'toastr'
+
+/*Progress acts as a profile page, providing total stats for a user account, like how much weight of material they have listed, and their total incentive points earned*/
 export default class Progress extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +29,7 @@ export default class Progress extends Component {
     //  console.log(user_id);
     let _this = this;
     //make get request using stored email/username
-    axios.get('http://recyclr.xyz/user/progress/' + window.localStorage.getItem('userid'), { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+    axios.get('http://recyclr.xyz/api/user/progress/' + window.localStorage.getItem('userid'), { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
       .then(function (result) {
         console.log(result.data);
         if (result.data === null) {
@@ -38,7 +40,7 @@ export default class Progress extends Component {
           // _this.calculateWeight();
         }
 
-        axios.get('http://recyclr.xyz/user/' + window.localStorage.getItem('userid'), { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+        axios.get('http://recyclr.xyz/api/user/' + window.localStorage.getItem('userid'), { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
           .then(function (result) {
 
             _this.setState({ userObj: result.data });

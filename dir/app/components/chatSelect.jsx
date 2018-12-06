@@ -2,6 +2,7 @@ import React from 'react'
 import ListingItem from './listingItem.jsx'
 import api from './api.js'
 
+/*This component loads a list of all chat rooms existing for each listing being discussed*/
 export default class ChatSelect extends React.Component {
     constructor(props) {
         super(props);

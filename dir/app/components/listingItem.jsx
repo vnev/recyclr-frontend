@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom'
 import history from './history.js';
 import Axios from 'axios';
 import api from './api.js';
+import toastr from 'toastr';
 
+/*Component for an already created listing. Displays neatly in a rectangular element. Allows for listings to be filtered by certain properties*/
 export default class ListingItem extends React.Component {
     constructor(props) {
         super(props);
@@ -25,7 +27,7 @@ export default class ListingItem extends React.Component {
                     name: result.data.name
                 });
             });*/
-        
+
     }
 
     freezeListing() {
@@ -33,20 +35,22 @@ export default class ListingItem extends React.Component {
             company_id: parseInt(window.localStorage.getItem('userid')),
         }
         let _this = this;
-        Axios.post(`http://recyclr.xyz/listing/freeze/${this.props.Item.listing_id}`, obj, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+        Axios.post(`http://recyclr.xyz/api/listing/freeze/${this.props.Item.listing_id}`, obj, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
             .then(function (result) {
                 console.log(result);
                 history.push(`/chatroom/${_this.props.Item.listing_id}`);
             });
     }
+    /*A user may unfreeze
+    the listing if no agreement is reached to unhide the listing from the page*/
     unfreeze() {
         //call api to unfreeze listing
         api.get(`/listing/unfreeze/${this.props.Item.listing_id}`)
-        .then(function(result) {
-            console.log(result);
-            window.history.go(0);
-        });
-        
+            .then(function (result) {
+                console.log(result);
+                window.history.go(0);
+            });
+
     }
 
     deleteListing() {
@@ -54,7 +58,7 @@ export default class ListingItem extends React.Component {
             user_id: parseInt(window.localStorage.getItem('userid')),
         }*/
         let _this = this;
-        Axios.get(`http://recyclr.xyz/listing/delete/${this.props.Item.listing_id}`, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+        Axios.get(`http://recyclr.xyz/api/listing/delete/${this.props.Item.listing_id}`, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
             .then(function (result) {
                 console.log(result);
                 window.history.go(0);
@@ -89,9 +93,9 @@ export default class ListingItem extends React.Component {
         if (!this.props.Item.company_name) {
             frozen = <div><br></br><button id="dBtn" className="btn btn-danger" onClick={this.deleteListing}>Delete Listing</button></div>;
         } else {
-            frozen = <div> 
-            <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>Frozen By: <b>{this.props.Item.company_name}</b></p> 
-            <p>Company Rating: <b>{this.props.Item.company_rating.toFixed(2)} / 5</b></p> 
+            frozen = <div>
+                <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>Frozen By: <b>{this.props.Item.company_name}</b></p>
+                <p>Company Rating: <b>{this.props.Item.company_rating.toFixed(2)} / 5</b></p>
             </div>;
         }
         if (window.localStorage.getItem('is_company') === 'true' && this.props.Item.frozen_by) {
@@ -103,14 +107,14 @@ export default class ListingItem extends React.Component {
                 <button style={{ display: "block", width: "100%" }} id="freezeBtn" className="btn btn-primary margin-bottom-2" onClick={this.freezeListing}>Freeze</button>
             </div>;
         }
-        else {
-            rightSide = <div><button id="unfreezeBtn" className='btn btn-primary' onClick={() => this.unfreeze(this.props.Item.listing_id)}> Unfreeze Listing</button> <br></br> <br></br>
-            <button className="btn btn-primary" onClick={() => history.push(`/chatroom/${this.props.Item.listing_id}`)}>Enter Chat</button>
+        else if (this.props.Item.frozen_by != 0) {
+            rightSide = <div><button className='btn btn-primary' onClick={() => this.unfreeze(this.props.Item.listing_id)}> Unfreeze Listing</button> <br></br> <br></br>
+                <button id="unfreezeBtn" className="btn btn-primary" onClick={() => history.push(`/chatroom/${this.props.Item.listing_id}`)}>Enter Chat</button>
                 {frozen}</div>
         }
         let pickup_date_time;
-        if(this.props.Item.pickup_date_time) {
-           pickup_date_time =  <p>{"Desired Pick Up Date: " + (new Date(this.props.Item.pickup_date_time)).toDateString()}</p>
+        if (this.props.Item.pickup_date_time) {
+            pickup_date_time = <p>{"Desired Pick Up Date: " + (new Date(this.props.Item.pickup_date_time)).toDateString()}</p>
         }
         return (
             <div id="overallC" className="row" style={{ marginBottom: "5px" }}>

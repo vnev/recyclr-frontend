@@ -9,6 +9,7 @@ import toastr from 'toastr'
 
 //TODO change ui
 
+/*Handles both login and signup.*/
 export default class AuthPage extends React.Component {
     constructor(props) {
         super(props);
@@ -58,13 +59,15 @@ export default class AuthPage extends React.Component {
     //City, Address, and State handles where removed due to them not being used
 
     //{{'Authentication': 'Bearer ' + window.localStorage.token}}
+    /*This function checks to make sure the email and password the user has entered exist in the database, and returns 400 if it's
+    valid, or one of the various error codes depending on the problem*/
     signin(event) {
         let obj = {
             email: this.state.email,
             passwd: this.state.password,
         }
         let _this = this;
-        axios.post(`http://recyclr.xyz/signin`, obj).then(function (result) {
+        axios.post(`http://recyclr.xyz/api/signin`, obj).then(function (result) {
             console.log(result);
             let user = {
                 email: _this.state.email,
@@ -76,12 +79,13 @@ export default class AuthPage extends React.Component {
             window.localStorage.setItem('username', user.name);
             window.localStorage.setItem('useremail', user.email);
             window.localStorage.setItem('token', result.data.token);
-            axios.get(`http://recyclr.xyz/user/${window.localStorage.getItem('userid')}`, { headers: { 'Access-Control-Allow-Origin': '*', 'Authorization': 'Bearer ' + window.localStorage.getItem('token') } })
+            axios.get(`http://recyclr.xyz/api/user/${window.localStorage.getItem('userid')}`, { headers: { 'Access-Control-Allow-Origin': '*', 'Authorization': 'Bearer ' + window.localStorage.getItem('token') } })
                 .then(function (result) {
                     window.localStorage.setItem('is_company', result.data.is_company);
                     // history.push('/settings');
                     toastr.options.closeButton = true;
                     toastr.success("Successfully signed in", "Success!");
+                    history.push('/progress');
                 });
 
         }).catch(function (error) {
@@ -91,6 +95,8 @@ export default class AuthPage extends React.Component {
             toastr.error("Failed to sign in", "Error");
         });
     }
+    /*This function requires all form data to be entered, and will post it to the database when the user clicks the button. It also
+    specifies if the account is a user or a company*/
     signup() {
         let newObj = {
             address: this.state.address,
@@ -104,22 +110,35 @@ export default class AuthPage extends React.Component {
         let _this = this;
         //call create user
         if (this.state.accountType === 'f') {
-            axios.post(`http://recyclr.xyz/user`, newObj).then(function (result) {
-                _this.setState({ signinTog: false });
-            }).catch(function (error) {
-                console.log(error);
-                _this.setState({ alert: true });
-            });
+            axios.post(`http://recyclr.xyz/api/user`, newObj)
+                .then(function (result) {
+                    _this.setState({ signinTog: false });
+                    toastr.options.closeButton = true;
+                    toastr.success("Successfully created new account", "Success!");
+                    history.push("/auth");
+                }).catch(function (error) {
+                    console.log(error);
+                    _this.setState({ alert: true });
+                    toastr.options.closeButton = true;
+                    toastr.error("Could not create new account. Please try again", "Error");
+                });
         }
         else {
-            axios.post(`http://recyclr.xyz/company`, newObj).then(function (result) {
-                _this.setState({ signinTog: false });
-            }).catch(function (error) {
-                console.log(error);
-                _this.setState({ alert: true });
-            });
+            axios.post(`http://recyclr.xyz/api/company`, newObj)
+                .then(function (result) {
+                    _this.setState({ signinTog: false });
+                    toastr.options.closeButton = true;
+                    toastr.success("Successfully created new account", "Success!");
+                }).catch(function (error) {
+                    console.log(error);
+                    _this.setState({ alert: true });
+                    toastr.options.closeButton = true;
+                    toastr.error("Could not create new account. Please try again", "Error");
+                });
         }
     }
+
+    /*Renders two different tabs for the user to choose between if they are making a new account, or loggin in, and provides them with the respective forms*/
     render() {
         if (this.state.alert == true) {
             alert = <div className="alert alert-danger alert-dismissible" role="alert">

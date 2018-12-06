@@ -5,7 +5,9 @@ import api from './api.js'
 import { formatPrice } from '../utils/config'
 
 import CheckOut from './CheckOut.jsx';
+import toastr from 'toastr';
 
+/*Payment is used to calculate the total price of creating the listing. It allows the user to spend their incentive points to reduce the cost of listing their item*/
 export default class PaymentPage extends Component {
     /*  userObj -> points: holds points that user has
         incentivePoints: amount of points that incentive costs
@@ -45,7 +47,7 @@ export default class PaymentPage extends Component {
         this.setState({ price: window.localStorage.getItem('price') });
 
         let _this = this;
-        Axios.get('http://recyclr.xyz/user/' + window.localStorage.getItem('userid'), { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+        Axios.get('http://recyclr.xyz/api/user/' + window.localStorage.getItem('userid'), { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
             .then(function (result) {
                 _this.setState({ userObj: result.data });
                 _this.calculateIncentivePercentage();
@@ -60,7 +62,7 @@ export default class PaymentPage extends Component {
             points: newPoints,
         }
         let _this = this;
-        Axios.put(`http://recyclr.xyz/user/` + window.localStorage.getItem('userid'), requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), } })
+        Axios.put(`http://recyclr.xyz/api/user/` + window.localStorage.getItem('userid'), requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), } })
             .then(function (result) {
                 console.log(window.localStorage.getItem('currID'));
                 api.post(`/user/deduct/${window.localStorage.getItem('currID')}`, { percentage: _this.state.incentivePercentage })
@@ -78,7 +80,7 @@ export default class PaymentPage extends Component {
                 _this.calculateIncentivePercentage();
                 toastr.options.closeButton = true;
                 toastr.success("Successfully applied incentives", "Success");
-            }).then(function (error) {
+            }).catch(function (error) {
                 console.log(error);
                 toastr.options.closeButton = true;
                 toastr.error("Failed to apply incentives", "Error");

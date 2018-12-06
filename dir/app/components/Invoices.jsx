@@ -2,9 +2,11 @@ import React from 'react';
 import InvoiceItem from './InvoiceItem.jsx';
 import Axios from 'axios';
 import api from './api.js';
+import toastr from 'toastr';
 
-//Needs to be reworked so the passed values are 
+//Needs to be reworked so the passed values are
 
+/*Fetches all previous invoices of a user, or indicates there have been none so far*/
 export default class Invoice extends React.Component {
     constructor(props) {
         super(props);
@@ -39,12 +41,12 @@ export default class Invoice extends React.Component {
     render() {
         //this.getInvoices();
         let invoices;
-        if (this.state.invoicesId.length == 0) {
+        if (!this.state.invoicesId) {
             invoices = <h5 className="text-center">No invoices to show...</h5>
         } else {
             invoices =
                 this.state.invoicesId.map((item, key) => {
-                    return <InvoiceItem Item={item} />
+                    return <InvoiceItem Item={item} key={key} />
                 })
         }
         return (
@@ -52,7 +54,6 @@ export default class Invoice extends React.Component {
                 <div className="card" style={{ height: "100vh" }}>
                     <div className="card-body">
                         <h1 className="card-title text-center">Transaction History</h1>
-
                         {invoices}
                     </div>
                 </div>
