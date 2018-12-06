@@ -3,6 +3,7 @@ import { injectStripe } from 'react-stripe-elements';
 import CardSection from './CardSection.jsx';
 import Axios from 'axios';
 import toastr from 'toastr';
+import history from './history.js';
 
 class CheckOutPage extends Component {
 
