@@ -24,20 +24,18 @@ class CheckOutPage extends Component {
             console.log(token.token);
             bodyFormData.set('token', token.token.id);
             bodyFormData.set('listing_id', window.localStorage.getItem('currID'));
-            Axios.post(`http://recyclr.xyz/api/charge`, bodyFormData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(function (result) {
-                console.log("Purchase Complete");
-                toastr.options.closeButton = true;
-                toastr.success("Transaction successful", "Success!");
-            }).then(function (response) {
-                //handle success
-                console.log(response);
-                toastr.clear();
-                toastr.options.closeButton = true;
-                toastr.success("Transaction successful", "Success!");
-            })
-                .catch(function (response) {
-                    //handle error
+            Axios.post(`http://recyclr.xyz/api/charge`, bodyFormData, { headers: { 'Content-Type': 'multipart/form-data' } })
+                .then(function (response) {
+                    //handle success
                     console.log(response);
+                    toastr.clear();
+                    toastr.options.closeButton = true;
+                    toastr.success("Transaction successful", "Success!");
+                    history.push("/progress");
+                })
+                .catch(function (error) {
+                    //handle error
+                    console.log(error);
                     toastr.options.closeButton = true;
                     toastr.error("Could not complete transaction. Please try again", "Error");
                 });
