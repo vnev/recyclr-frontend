@@ -4,6 +4,7 @@ import { GoogleLogin } from 'react-google-login'
 import history from './history.js'
 import Axios from 'axios';
 import urls from './Urls.js';
+import toastr from 'toastr';
 
 //TODO change ui
 /*Allows users to sign in with their Google account*/

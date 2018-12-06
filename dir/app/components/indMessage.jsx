@@ -1,6 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
-import api from './api.js'
+import api from './api.js';
+import toastr from 'toastr';
 
 export default class IndMess extends React.Component {
     constructor(props) {

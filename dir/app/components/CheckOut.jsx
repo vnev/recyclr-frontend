@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { injectStripe } from 'react-stripe-elements';
 import CardSection from './CardSection.jsx';
 import Axios from 'axios';
+import toastr from 'toastr';
 
 class CheckOutPage extends Component {
 
@@ -19,16 +20,15 @@ class CheckOutPage extends Component {
         ev.preventDefault();
         var bodyFormData = new FormData();
         this.props.stripe.createToken({ name: localStorage.getItem('username') }).then(token => {
-            console.log(token);
-            console.log(token.id);
-            console.log(token.token);
+            // console.log(token);
+            // console.log(token.id);
+            // console.log(token.token);
             bodyFormData.set('token', token.token.id);
             bodyFormData.set('listing_id', window.localStorage.getItem('currID'));
             Axios.post(`http://recyclr.xyz/api/charge`, bodyFormData, { headers: { 'Content-Type': 'multipart/form-data' } })
                 .then(function (response) {
                     //handle success
                     console.log(response);
-                    toastr.clear();
                     toastr.options.closeButton = true;
                     toastr.success("Transaction successful", "Success!");
                     history.push("/progress");

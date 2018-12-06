@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import history from './history.js';
 import Axios from 'axios';
 import api from './api.js';
+import toastr from 'toastr';
 
 /*Component for an already created listing. Displays neatly in a rectangular element. Allows for listings to be filtered by certain properties*/
 export default class ListingItem extends React.Component {

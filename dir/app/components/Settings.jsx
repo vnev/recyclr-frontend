@@ -1,6 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 import history from './history.js'
+import toastr from 'toastr'
 // import urls  from './Urls.js';
 
 /*Allows changes to be made to an account, including updating all identifying information*/

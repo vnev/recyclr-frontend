@@ -3,6 +3,7 @@ import { FacebookShareButton, FacebookIcon } from 'react-share'
 import ListingItem from './listingItem'
 import history from './history.js'
 import axios from 'axios'
+import toastr from 'toastr'
 
 /*Progress acts as a profile page, providing total stats for a user account, like how much weight of material they have listed, and their total incentive points earned*/
 export default class Progress extends Component {

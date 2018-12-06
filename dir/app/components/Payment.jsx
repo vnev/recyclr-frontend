@@ -5,6 +5,7 @@ import api from './api.js'
 import { formatPrice } from '../utils/config'
 
 import CheckOut from './CheckOut.jsx';
+import toastr from 'toastr';
 
 /*Payment is used to calculate the total price of creating the listing. It allows the user to spend their incentive points to reduce the cost of listing their item*/
 export default class PaymentPage extends Component {
