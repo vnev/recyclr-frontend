@@ -55,16 +55,16 @@ export default class CurrPrices extends React.Component {
     }
     render() {
         return (
-            <div className="container">
-                <div className="col-md-6 col-offset-3">
+            <div className="container" style={{ marginTop: "20px" }}>
+                <div className="col-md-6 offset-3">
                     <div className="card">
-                        <div className="card-body">
+                        <div className="card-body text-center">
                             <h3 className="card-title">Current Material Prices</h3>
-                            <p>Copper: ${this.state.copperPrice} USD per Pound</p>
-                            <p>Tin: ${this.state.steelPrice} USD per Pound</p>
-                            <p>Aluminum: ${this.state.aluminumPrice} USD per Pound</p>
-                            <p>Textiles: ¢{this.state.textilePrice} USD per Pound</p>
-                            <p>Rubber: ¢{this.state.rubberPrice} USD per Pound</p>
+                            <p>Copper: ${this.state.copperPrice} per Pound</p>
+                            <p>Tin: ${this.state.steelPrice} per Pound</p>
+                            <p>Aluminum: ${this.state.aluminumPrice} per Pound</p>
+                            <p>Textiles: ${this.state.textilePrice} per Pound</p>
+                            <p>Rubber: ${this.state.rubberPrice} per Pound</p>
                         </div>
                     </div>
                 </div>
