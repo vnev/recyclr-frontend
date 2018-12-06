@@ -3,6 +3,7 @@ import { formatPrice } from '../utils/config';
 import Axios from 'axios';
 import StarRatingComponent from 'react-star-rating-component';
 import toastr from 'toastr';
+import api from './api.js'
 
 /*Invoices are provided after a company and a user complete a transaction. This is the component for a single invoice item*/
 export default class InvoiceItem extends React.Component {
@@ -28,7 +29,7 @@ export default class InvoiceItem extends React.Component {
                 invoice_id: this.props.Item.invoice_id
             }
 
-            Axios.put(`http://recyclr.xyz/invoice/rating`, requestObject, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), } })
+            api.put(`/invoice/rating`, requestObject)
                 .then(function (result) {
                     console.log(result);
                 })
@@ -38,7 +39,7 @@ export default class InvoiceItem extends React.Component {
                 rating: this.state.rating
             }
 
-            Axios.put(`http://recyclr.xyz/user/rating`, requestRating, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), } })
+            api.put(`/user/rating`, requestRating)
                 .then(function (result) {
                     console.log(result);
                 }).then(function (error) {

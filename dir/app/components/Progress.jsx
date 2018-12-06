@@ -4,6 +4,7 @@ import ListingItem from './listingItem'
 import history from './history.js'
 import axios from 'axios'
 import toastr from 'toastr'
+import api from './api.js'
 
 /*Progress acts as a profile page, providing total stats for a user account, like how much weight of material they have listed, and their total incentive points earned*/
 export default class Progress extends Component {
@@ -29,7 +30,7 @@ export default class Progress extends Component {
     //  console.log(user_id);
     let _this = this;
     //make get request using stored email/username
-    axios.get('http://recyclr.xyz/api/user/progress/' + window.localStorage.getItem('userid'), { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+    api.get('/user/progress/' + window.localStorage.getItem('userid'))
       .then(function (result) {
         console.log(result.data);
         if (result.data === null) {
@@ -40,7 +41,7 @@ export default class Progress extends Component {
           // _this.calculateWeight();
         }
 
-        axios.get('http://recyclr.xyz/api/user/' + window.localStorage.getItem('userid'), { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+        api.get('/user/' + window.localStorage.getItem('userid'))
           .then(function (result) {
 
             _this.setState({ userObj: result.data });

@@ -35,7 +35,7 @@ export default class ListingItem extends React.Component {
             company_id: parseInt(window.localStorage.getItem('userid')),
         }
         let _this = this;
-        Axios.post(`http://recyclr.xyz/api/listing/freeze/${this.props.Item.listing_id}`, obj, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+        api.post(`/listing/freeze/${this.props.Item.listing_id}`, obj)
             .then(function (result) {
                 console.log(result);
                 history.push(`/chatroom/${_this.props.Item.listing_id}`);
@@ -58,7 +58,7 @@ export default class ListingItem extends React.Component {
             user_id: parseInt(window.localStorage.getItem('userid')),
         }*/
         let _this = this;
-        Axios.get(`http://recyclr.xyz/api/listing/delete/${this.props.Item.listing_id}`, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+        api.get(`/listing/delete/${this.props.Item.listing_id}`)
             .then(function (result) {
                 console.log(result);
                 window.history.go(0);

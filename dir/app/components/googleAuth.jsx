@@ -5,6 +5,7 @@ import history from './history.js'
 import Axios from 'axios';
 import urls from './Urls.js';
 import toastr from 'toastr';
+import api from './api.js'
 
 //TODO change ui
 /*Allows users to sign in with their Google account*/
@@ -70,7 +71,7 @@ export default class GoogleAuth extends React.Component {
             email: responce.profileObj.email,
             passwd: this.state.password,
         }
-        Axios.post('http://recyclr.xyz/api/signin', newObj).then(function (result) {
+        api.post('/signin', newObj).then(function (result) {
             console.log(result);
             let user = {
                 name: result.data.user_name,
@@ -105,7 +106,7 @@ export default class GoogleAuth extends React.Component {
             address: this.state.address,
         };
         let _this = this;
-        Axios.post('http://recyclr.xyz/api/user', newObj).then(function (result) {
+        api.post('/user', newObj).then(function (result) {
             console.log(result);
             _this.setState({ signinTog: false });
         }).catch(function (error) {

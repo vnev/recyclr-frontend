@@ -6,6 +6,7 @@ import axios from 'axios'
 import urls from './Urls.js'
 import Autocomplete from 'react-google-autocomplete'
 import toastr from 'toastr'
+import api from './api.js'
 
 //TODO change ui
 
@@ -67,7 +68,7 @@ export default class AuthPage extends React.Component {
             passwd: this.state.password,
         }
         let _this = this;
-        axios.post(`http://recyclr.xyz/api/signin`, obj).then(function (result) {
+        api.post(`/signin`, obj).then(function (result) {
             console.log(result);
             let user = {
                 email: _this.state.email,
@@ -79,7 +80,7 @@ export default class AuthPage extends React.Component {
             window.localStorage.setItem('username', user.name);
             window.localStorage.setItem('useremail', user.email);
             window.localStorage.setItem('token', result.data.token);
-            axios.get(`http://recyclr.xyz/api/user/${window.localStorage.getItem('userid')}`, { headers: { 'Access-Control-Allow-Origin': '*', 'Authorization': 'Bearer ' + window.localStorage.getItem('token') } })
+            api.get(`/user/${window.localStorage.getItem('userid')}`)
                 .then(function (result) {
                     window.localStorage.setItem('is_company', result.data.is_company);
                     // history.push('/settings');
@@ -110,7 +111,7 @@ export default class AuthPage extends React.Component {
         let _this = this;
         //call create user
         if (this.state.accountType === 'f') {
-            axios.post(`http://recyclr.xyz/api/user`, newObj)
+            api.post(`/user`, newObj)
                 .then(function (result) {
                     _this.setState({ signinTog: false });
                     toastr.options.closeButton = true;
@@ -124,7 +125,7 @@ export default class AuthPage extends React.Component {
                 });
         }
         else {
-            axios.post(`http://recyclr.xyz/api/company`, newObj)
+            api.post(`/company`, newObj)
                 .then(function (result) {
                     _this.setState({ signinTog: false });
                     toastr.options.closeButton = true;

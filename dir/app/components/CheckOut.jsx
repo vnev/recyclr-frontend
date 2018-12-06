@@ -4,6 +4,7 @@ import CardSection from './CardSection.jsx';
 import Axios from 'axios';
 import toastr from 'toastr';
 import history from './history.js';
+import api from './api.js'
 
 class CheckOutPage extends Component {
 
@@ -26,7 +27,7 @@ class CheckOutPage extends Component {
             // console.log(token.token);
             bodyFormData.set('token', token.token.id);
             bodyFormData.set('listing_id', window.localStorage.getItem('currID'));
-            Axios.post(`http://recyclr.xyz/api/charge`, bodyFormData, { headers: { 'Content-Type': 'multipart/form-data' } })
+            api.post(`/charge`, bodyFormData)
                 .then(function (response) {
                     //handle success
                     console.log(response);

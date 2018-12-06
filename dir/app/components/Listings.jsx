@@ -3,6 +3,7 @@ import ListingItem from './listingItem'
 import history from './history.js'
 import axios from 'axios'
 import { CheckBox } from 'react'
+import api from './api.js'
 
 /*Listings component is a browse/search page for all currently unfrozen listings*/
 export default class Listings extends React.Component {
@@ -134,7 +135,7 @@ export default class Listings extends React.Component {
             history.push('/auth');
         }
         let _this = this;
-        axios.get(`http://recyclr.xyz/api/user/${window.localStorage.getItem('userid')}`, { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+        api.get(`/user/${window.localStorage.getItem('userid')}`)
             .then(function (result) {
                 if (result.data.is_company === false) {
                     //history.push('/auth');
@@ -144,7 +145,7 @@ export default class Listings extends React.Component {
                         userAddr: `${result.data.address}, ${result.data.city} ${result.data.state}`,
                     });
                 }
-                axios.get("http://recyclr.xyz/api/listings", { headers: { 'Authorization': 'Bearer ' + window.localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*' } })
+                api.get("/listings")
                     .then(function (result) {
                         console.log(result);
                         _this.setState({ list: result.data }, () => {
