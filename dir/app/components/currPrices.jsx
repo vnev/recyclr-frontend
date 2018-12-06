@@ -60,11 +60,11 @@ export default class CurrPrices extends React.Component {
                     <div className="card">
                         <div className="card-body text-center">
                             <h3 className="card-title">Current Material Prices</h3>
-                            <p>Copper: ${this.state.copperPrice} per Pound</p>
-                            <p>Tin: ${this.state.steelPrice} per Pound</p>
-                            <p>Aluminum: ${this.state.aluminumPrice} per Pound</p>
-                            <p>Textiles: ${this.state.textilePrice} per Pound</p>
-                            <p>Rubber: ${this.state.rubberPrice} per Pound</p>
+                            <p><b>Copper</b>: ${this.state.copperPrice} per Pound</p>
+                            <p><b>Tin</b>: ${this.state.steelPrice} per Pound</p>
+                            <p><b>Aluminum</b>: ${this.state.aluminumPrice} per Pound</p>
+                            <p><b>Textiles</b>: ${this.state.textilePrice} per Pound</p>
+                            <p><b>Rubber</b>: ${this.state.rubberPrice} per Pound</p>
                         </div>
                     </div>
                 </div>

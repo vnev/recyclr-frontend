@@ -107,7 +107,7 @@ export default class ListingItem extends React.Component {
                 <button style={{ display: "block", width: "100%" }} className="btn btn-primary margin-bottom-2" onClick={this.freezeListing}>Freeze</button>
             </div>;
         }
-        else {
+        else if (this.props.Item.frozen_by != 0) {
             rightSide = <div><button className='btn btn-primary' onClick={() => this.unfreeze(this.props.Item.listing_id)}> Unfreeze Listing</button> <br></br> <br></br>
                 <button className="btn btn-primary" onClick={() => history.push(`/chatroom/${this.props.Item.listing_id}`)}>Enter Chat</button>
                 {frozen}</div>
