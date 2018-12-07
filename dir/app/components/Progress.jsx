@@ -110,7 +110,7 @@ export default class Progress extends Component {
 
               <div className="row">
                 {this.state.list.map((item, key) => {
-                  return <ListingItem key={key} Item={item} ButBool={false} />
+                  return <ListingItem key={key} Item={item} ButBool={false} isProgress={true}/>
                 })}
               </div>
             </div>

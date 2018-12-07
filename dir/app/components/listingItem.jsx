@@ -71,8 +71,14 @@ export default class ListingItem extends React.Component {
         }
         api.post(`/invoice/create`, obj).then(function (result) {
             console.log(result);
+            toastr.options.closeButton = true;
+            toastr.success('Transaction completed', 'Success');
+            window.history.go(0);
         }).catch(function (error) {
             console.log(error);
+            toastr.options.closeButton = true;
+            toastr.error('Problem occured. Please try again later', 'Failed');
+            
         })
 
     }
@@ -92,7 +98,7 @@ export default class ListingItem extends React.Component {
         if (this.props.Item.frozen_by === 0 && (this.props.Item.user_id === parseInt(window.localStorage.getItem('userid')))) {
             console.log(this.props.Item.frozen_by);
             frozen = <div><br></br><button id="dBtn" className="btn btn-danger" onClick={this.deleteListing}>Delete Listing</button></div>;
-        } else if (this.props.frozen_by != 0 && window.localStorage.getItem('is_company') === 'false' && this.props.Item.company_name === ''){
+        } else if (this.props.frozen_by != 0 && window.localStorage.getItem('is_company') === 'false' && this.props.isProgress === false){
             frozen = <div>
                 <p style={{ overflowX: "scroll", whiteSpace: "nowrap" , marginTop: "10px"}}>Frozen By: <b>{this.props.Item.company_name}</b></p>
                <p>Company Rating: <b>{this.props.Item.company_rating.toFixed(2)} / 5</b></p>
