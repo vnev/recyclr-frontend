@@ -4,6 +4,7 @@ import history from './history.js'
 import axios from 'axios'
 import { CheckBox } from 'react'
 import api from './api.js'
+import toastr from 'toastr';
 
 /*Listings component is a browse/search page for all currently unfrozen listings*/
 export default class Listings extends React.Component {

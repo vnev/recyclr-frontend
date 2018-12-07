@@ -35,7 +35,32 @@ describe('Tests for the Authentication components', () => {
             state: "Indiana",
         }
         wrapper.find('#signUpBtn').simulate('click');
-        expect(mockAxios.post).toHaveBeenCalledWith('http://recyclr.xyz/api/user', data);
+        expect(mockAxios.post).toHaveBeenCalledWith('/user', data);
+        mockAxios.mockResponse();
+    });
+    it('Testing error response for sign up ', () => {
+        const wrapper = shallow(<Auth/>);
+        wrapper.setState({
+            signinTog: false, 
+            email: "1@gmail.com", 
+            password:"1", 
+            address:"202 S river rd", 
+            city: "West Lafayette", 
+            state:"Indiana", 
+            username: "jon",
+            accountType:"f", 
+        });
+        let data = {
+            address:"202 S river rd", 
+            user_name:"jon", 
+            email: "1@gmail.com",
+            passwd: "1",
+            is_company:"f",
+            city: "West Lafayette",
+            state: "Indiana",
+        }
+        wrapper.find('#signUpBtn').simulate('click');
+        mockAxios.mockError();
     });
     it('Correct Axios call from sign in', () => {
         const wrapper = shallow(<Auth/>);
@@ -48,7 +73,26 @@ describe('Tests for the Authentication components', () => {
             passwd: "1",
         };
         wrapper.find('#loginBtn').simulate('click');
-        expect(mockAxios.post).toHaveBeenCalledWith(`http://recyclr.xyz/api/signin`, data);
+        expect(mockAxios.post).toHaveBeenCalledWith(`/signin`, data);
+        mockAxios.mockResponse();
+    });
+    it('Company signup', () => {
+        const wrapper = shallow(<Auth/>);
+        wrapper.setState({
+            accountType: 't',
+            signinTog: false,
+        });
+        wrapper.find('#signUpBtn').simulate('click');
+        mockAxios.mockResponse();
+    });
+    it('Company signup error', () => {
+        const wrapper = shallow(<Auth/>);
+        wrapper.setState({
+            accountType: 't',
+            signinTog: false,
+        });
+        wrapper.find('#signUpBtn').simulate('click');
+        mockAxios.mockError();
     });
     it('Testing navLinks', () => {
         const wrapper = shallow(<Auth/>);

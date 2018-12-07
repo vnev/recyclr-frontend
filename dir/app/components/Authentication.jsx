@@ -27,7 +27,6 @@ export default class AuthPage extends React.Component {
             state: '',
             alert: false,
         };
-        //this.toggleAuthForm = toggleAuthForm.bind(this);
         this.emailHandle = this.emailHandle.bind(this);
         this.passwordHandle = this.passwordHandle.bind(this);
         this.userHandle = this.userHandle.bind(this);

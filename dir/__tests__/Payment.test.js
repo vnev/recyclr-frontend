@@ -25,7 +25,22 @@ describe('Testing for the payment page and pages associated with it', () => {
             incentivePoints: 5,
         });
         wrapper.find('#incetBtn').simulate('click');
-        expect(mockAxios.put).toHaveBeenCalledWith(`http://recyclr.xyz/api/user/null`, requestObj ,  { headers: { 'Authorization': 'Bearer null', } })
+        expect(mockAxios.put).toHaveBeenCalledWith(`/user/null`, requestObj);
+        mockAxios.mockResponse();
+    });
+    it('Applys incentive points error', () => {
+        let requestObj = {
+            points: 10,
+        };
+        let userObj = {
+            points: 15,
+        };
+        wrapper.setState({
+            userObj: userObj,
+            incentivePoints: 5,
+        });
+        wrapper.find('#incetBtn').simulate('click');
+        mockAxios.mockError(requestObj);
     });
     it('CardSec renders properly', () => {
         const w = shallow(<CardSec/>);
@@ -42,7 +57,7 @@ describe('Testing for the payment page and pages associated with it', () => {
 
     it('Component did mount is called', () => {
         const wrapp = shallow(<Payment/>);
-        expect(mockAxios.get).toHaveBeenCalledWith('http://recyclr.xyz/api/user/null', { headers: { 'Authorization': 'Bearer null', 'Access-Control-Allow-Origin': '*' } });
+        expect(mockAxios.get).toHaveBeenCalledWith('/user/null');
     });
 });
 
@@ -50,5 +65,9 @@ describe('Testing for the current prices page', () => {
     const wrap = shallow(<CurrPrices/>);
     it('renders properly', () => {
         expect(wrap.find('#card').exists()).toBe(true);
+    });
+    it('Mock response', () => {
+        expect(mockAxios.get).toHaveBeenCalledWith('http://www.quandl.com/api/v3/datasets/ODA/PCOTTIND_USD.json?rows=1&api_key=ys7nkx9UoefECmStXx8G');
+        mockAxios.mockResponse();
     });
 });

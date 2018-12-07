@@ -43,7 +43,7 @@ export default class Admin extends React.Component {
                             <div className="row">
                                 <div className="col-md-4 offset-md-4">
                                     <form>
-                                        <input type="text" className="form-control" placeholder="bob@recyclr.xyz" value={this.state.userToBan} onChange={this.handleChange}></input>
+                                        <input id="change" type="text" className="form-control" placeholder="bob@recyclr.xyz" value={this.state.userToBan} onChange={this.handleChange}></input>
                                         <button id="banBtn" className="btn btn-primary formButton" onClick={this.banUser}>Ban User</button>
                                     </form>
                                 </div>

@@ -135,7 +135,7 @@ export default class Settings extends React.Component {
                                 <h5 className="card-text">Change Your Account Username</h5>
                                 <div className="row">
                                     <div className="col-md-4 offset-md-4">
-                                        <input type="text" className="form-control" placeholder="recyclingman1" value={this.state.newUsername} onChange={this.usernameHandle}></input>
+                                        <input id="uH" type="text" className="form-control" placeholder="recyclingman1" value={this.state.newUsername} onChange={this.usernameHandle}></input>
                                     </div>
                                 </div>
                                 <button id="usernBtn" className="btn btn-primary formButton" onClick={this.changeUsername}>Change Username</button>
@@ -146,7 +146,7 @@ export default class Settings extends React.Component {
                                 <h5 className="card-text">Change Your Account Email</h5>
                                 <div className="row">
                                     <div className="col-md-4 offset-md-4">
-                                        <input type="email" className="form-control" placeholder="recyclingman1@gmail.com" value={this.state.newEmail} onChange={this.emailHandle}></input>
+                                        <input id="eH" type="email" className="form-control" placeholder="recyclingman1@gmail.com" value={this.state.newEmail} onChange={this.emailHandle}></input>
                                     </div>
                                 </div>
                                 <button id="emailBtn" className="btn btn-primary formButton" onClick={this.changeEmail}>Change Email</button>
@@ -155,7 +155,7 @@ export default class Settings extends React.Component {
                                 <h5 className="card-text">Change Your Account Password</h5>
                                 <div className="row">
                                     <div className="col-md-4 offset-md-4">
-                                        <input type="password" className="form-control" placeholder="recyclingman1" value={this.state.newPass} onChange={this.passHandle}></input>
+                                        <input id="pH" type="password" className="form-control" placeholder="recyclingman1" value={this.state.newPass} onChange={this.passHandle}></input>
                                     </div>
                                 </div>
                                 <button id="passBtn" className="btn btn-primary formButton" onClick={this.changePassword}>Change Password</button>

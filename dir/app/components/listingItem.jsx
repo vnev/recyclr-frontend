@@ -100,7 +100,7 @@ export default class ListingItem extends React.Component {
             </div>;
         }
         if (window.localStorage.getItem('is_company') === 'true' && this.props.Item.frozen_by) {
-            button = <button className="btn btn-primary" onClick={this.createInvoice}>Transaction Complete</button>
+            button = <button id="completeBtn" className="btn btn-primary" onClick={this.createInvoice}>Transaction Complete</button>
         }
         if (!this.props.Item.frozen_by && window.localStorage.getItem('is_company') === 'true') {
             rightSide = <div className="col-3 text-right">

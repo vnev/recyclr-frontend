@@ -3,6 +3,7 @@ import api from './api.js'
 import history from './history.js'
 import CurrPrices from "./currPrices"
 import Autocomplete from 'react-google-autocomplete'
+import toastr from 'toastr';
 
 
 //uncomment file when database is updated
