@@ -56,8 +56,9 @@ export default class Navigation extends React.Component {
                     <li className="nav-item">
                         <a className="nav-link" href="/settings">My Settings</a>
                     </li>
+                    {but}
                 </ul>
-                {but}
+                
             </div>;
         }
         else if (window.localStorage.getItem('is_company') === 'false') {

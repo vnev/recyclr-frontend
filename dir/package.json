@@ -22,6 +22,7 @@
     "enzyme-adapter-react-16": "^1.5.0",
     "enzyme-to-json": "^3.3.4",
     "history": "^4.7.2",
+    "jest-mock-axios": "^2.1.11",
     "json-loader": "^0.5.7",
     "lodash": "^4.17.4",
     "moment": "^2.17.1",
@@ -37,6 +38,7 @@
     "react-star-rating-component": "^1.4.1",
     "react-stripe-checkout": "^2.6.3",
     "react-stripe-elements": "^2.0.1",
+    "sinon": "^7.1.1",
     "toastr": "^2.1.4"
   },
   "devDependencies": {
