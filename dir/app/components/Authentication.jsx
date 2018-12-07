@@ -82,10 +82,14 @@ export default class AuthPage extends React.Component {
             api.get(`/user/${window.localStorage.getItem('userid')}`)
                 .then(function (result) {
                     window.localStorage.setItem('is_company', result.data.is_company);
-                    // history.push('/settings');
                     toastr.options.closeButton = true;
                     toastr.success("Successfully signed in", "Success!");
-                    history.push('/progress');
+                    if (result.data.is_company) {
+                        history.push('/listings');
+                    }
+                    else {
+                        history.push('/progress')
+                    }
                 });
 
         }).catch(function (error) {

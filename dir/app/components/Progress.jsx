@@ -89,7 +89,7 @@ export default class Progress extends Component {
             <div className="text-center">
               <p>Total number of Recyclr listings created: <b>{this.state.list.length}</b></p>
               <p>Total weight of Recyclr listings: <b>{this.state.totalWeight} lbs</b></p>
-              <p>Total space saved in a landfill: <b>{this.state.totalWeight * .01} ft<sup>3</sup></b></p>
+              <p>Total space saved in a landfill: <b>{this.state.totalWeight * .1} ft<sup>3</sup></b></p>
               <p>Total amount of Incentive Points: <b>{this.state.userObj.points}</b></p>
               <p>Total points to next incentive level: <b>{this.state.nextToIncentive}</b></p>
             </div>
@@ -110,7 +110,7 @@ export default class Progress extends Component {
 
               <div className="row">
                 {this.state.list.map((item, key) => {
-                  return <ListingItem key={key} Item={item} ButBool={false} />
+                  return <ListingItem key={key} Item={item} ButBool={false} isProgress={true}/>
                 })}
               </div>
             </div>

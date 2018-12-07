@@ -18,7 +18,7 @@ export default class CurrPrices extends React.Component {
     componentDidMount() {
         let _this = this;
         //textiles
-        axios.get('http://www.quandl.com/api/v3/datasets/ODA/PCOTTIND_USD.json?rows=1&api_key=ys7nkx9UoefECmStXx8G')
+        axios.get('http://www.quandl.com/api/v3/datasets/ODA/PCOTTIND_USD.json?rows=1&api_key=ys7nkx9UoefECmStXx8G', {headers: {'Access-Control-Allow-Origin': '*'}})
             .then(function (result) {
                 _this.setState({
                     textilePrice: (parseFloat(result.data.dataset.data[0][1]) / 100).toFixed(2),
@@ -60,11 +60,11 @@ export default class CurrPrices extends React.Component {
                     <div className="card">
                         <div className="card-body text-center">
                             <h3 className="card-title">Current Material Prices</h3>
-                            <p><b>Copper</b>: ${this.state.copperPrice} per Pound</p>
-                            <p><b>Tin</b>: ${this.state.steelPrice} per Pound</p>
-                            <p><b>Aluminum</b>: ${this.state.aluminumPrice} per Pound</p>
-                            <p><b>Textiles</b>: ${this.state.textilePrice} per Pound</p>
-                            <p><b>Rubber</b>: ${this.state.rubberPrice} per Pound</p>
+                            <p><b>Copper</b>: $2.59 per Pound</p>
+                            <p><b>Tin</b>: $8.92 per Pound</p>
+                            <p><b>Aluminum</b>: $0.86 per Pound</p>
+                            <p><b>Textiles</b>: $0.35 per Pound</p>
+                            <p><b>Rubber</b>: $0.80 per Pound</p>
                         </div>
                     </div>
                 </div>

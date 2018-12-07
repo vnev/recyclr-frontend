@@ -149,6 +149,9 @@ export default class Listings extends React.Component {
                 api.get("/listings")
                     .then(function (result) {
                         console.log(result);
+                        if (result.data === null) {
+                            return;
+                        }
                         _this.setState({ list: result.data }, () => {
                             _this.filterList()
                         });

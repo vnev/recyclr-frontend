@@ -60,7 +60,7 @@ export default class Settings extends React.Component {
                 _this.setState({ newUsername: '' });
                 toastr.options.closeButton = true;
                 toastr.success("Successfully updated username", "Success");
-            }).then(function (error) {
+            }).catch(function (error) {
                 console.log(error);
                 toastr.options.closeButton = true;
                 toastr.error("Failed to update username. Please try again", "Error");
@@ -81,7 +81,7 @@ export default class Settings extends React.Component {
                 console.log(result);
                 toastr.options.closeButton = true;
                 toastr.success("Successfully updated email", "Success");
-            }).then(function (error) {
+            }).catch(function (error) {
                 console.log(error);
                 toastr.options.closeButton = true;
                 toastr.error("Error updating email. Please try again", "Error");
