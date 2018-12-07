@@ -2,7 +2,7 @@ import axios from 'axios'
 
 
 export default axios.create({
-    baseURL: 'http://recyclr.xyz/api',
+    baseURL: 'http://localhost:8080',
     headers: {
         'Authorization': 'Bearer ' + window.localStorage.getItem('token'),
     }

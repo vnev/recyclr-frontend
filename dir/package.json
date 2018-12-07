@@ -64,19 +64,18 @@
     "testPathIgnorePatterns": [
       "<rootDir>/__tests__/Setup/"
     ],
-    "collectCoverageFrom": [ 
-      "app/components/*.{js,jsx}", 
-      "!app/components/**/CheckOut.jsx" ,
+    "collectCoverageFrom": [
+      "app/components/*.{js,jsx}",
+      "!app/components/**/CheckOut.jsx",
       "!app/components/**/App.jsx",
-      "!app/components/**/ChatRoom.jsx" , 
-      "!app/components/**/Invoices.jsx" ,
-      "!app/components/**/InvoiceItem.jsx" ,
-      "!app/components/**/Mission.jsx" ,
-      "!app/components/**/Navigation.jsx" ,
+      "!app/components/**/ChatRoom.jsx",
+      "!app/components/**/Invoices.jsx",
+      "!app/components/**/InvoiceItem.jsx",
+      "!app/components/**/Mission.jsx",
+      "!app/components/**/Navigation.jsx",
       "!app/components/**/Stripe.jsx",
       "!app/components/**/chatSelect.jsx",
-      "!app/components/**/indMessage.jsx" 
-
-  ]
+      "!app/components/**/indMessage.jsx"
+    ]
   }
 }
