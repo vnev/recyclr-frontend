@@ -21,7 +21,7 @@ export default class Admin extends React.Component {
 /*Removes user from database*/
     banUser(event) {
         console.log(this.state.userToBan)
-        Axios.get('http://recyclr.xyz/user/' + this.state.userToBan + '/ban').then(function (result) {
+        Axios.get('http://recyclr.xyz/api/user/' + this.state.userToBan + '/ban').then(function (result) {
             console.log(result);
         }).catch(function (error) {
             console.log(error);
