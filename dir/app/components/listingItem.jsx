@@ -90,27 +90,28 @@ export default class ListingItem extends React.Component {
         } else {
             dist = <p><b>Distance</b>: {this.props.Item.distance} miles</p>
         }
-        if (!this.props.Item.company_name) {
+        if (this.props.Item.frozen_by === 0 && (this.props.Item.user_id === parseInt(window.localStorage.getItem('userid')))) {
+            console.log(this.props.Item.frozen_by);
             frozen = <div><br></br><button id="dBtn" className="btn btn-danger" onClick={this.deleteListing}>Delete Listing</button></div>;
-        } else {
+        } else if (this.props.frozen_by != 0){
             frozen = <div>
                 <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>Frozen By: <b>{this.props.Item.company_name}</b></p>
-                <p>Company Rating: <b>{this.props.Item.company_rating.toFixed(2)} / 5</b></p>
+               <p>Company Rating: <b>{this.props.Item.company_rating.toFixed(2)} / 5</b></p>
             </div>;
         }
         if (window.localStorage.getItem('is_company') === 'true' && this.props.Item.frozen_by) {
             button = <button className="btn btn-primary" onClick={this.createInvoice}>Transaction Complete</button>
         }
-        if (this.props.ButBool === true) {
+        if (!this.props.Item.frozen_by && window.localStorage.getItem('is_company') === 'true') {
             rightSide = <div className="col-3 text-right">
-                <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>By: <b>{this.props.Item.username}</b></p>
+                <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>By: <b>{this.props.Item.username}</b></p> 
                 <button style={{ display: "block", width: "100%" }} id="freezeBtn" className="btn btn-primary margin-bottom-2" onClick={this.freezeListing}>Freeze</button>
             </div>;
         }
-        else if (this.props.Item.frozen_by != 0) {
+        if (this.props.Item.frozen_by != 0) {
             rightSide = <div><button className='btn btn-primary' onClick={() => this.unfreeze(this.props.Item.listing_id)}> Unfreeze Listing</button> <br></br> <br></br>
                 <button id="unfreezeBtn" className="btn btn-primary" onClick={() => history.push(`/chatroom/${this.props.Item.listing_id}`)}>Enter Chat</button>
-                {frozen}</div>
+                </div>
         }
         let pickup_date_time;
         if (this.props.Item.pickup_date_time) {
@@ -138,6 +139,7 @@ export default class ListingItem extends React.Component {
                                     <p>Type: {this.props.Item.material_type}</p>
                                 </div> */}
                                 {rightSide}
+                                {frozen}
                                 {button}
                             </div>
                         </div>
