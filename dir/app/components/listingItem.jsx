@@ -137,12 +137,12 @@ export default class ListingItem extends React.Component {
                                     <p>Weight: {this.props.Item.material_weight} lbs</p>
                                     <p>Type: {this.props.Item.material_type}</p>
                                 </div> */}
-                                <div className="col-3">
+                                
                                 {rightSide}
                                 
                                 {button}
                                 {frozen}
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
