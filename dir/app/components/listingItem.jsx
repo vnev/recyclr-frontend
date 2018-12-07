@@ -123,7 +123,7 @@ export default class ListingItem extends React.Component {
             pickup_date_time = <p>{"Desired Pick Up Date: " + (new Date(this.props.Item.pickup_date_time)).toDateString()}</p>
         }
         return (
-            <div id="opverallC" className="row" style={{ marginBottom: "5px" }}>
+            <div id="overallC" className="row" style={{ marginBottom: "5px" }}>
                 <div className="col-md-12">
                     <div className="card">
                         <div className="card-body">

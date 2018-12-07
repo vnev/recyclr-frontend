@@ -23,11 +23,8 @@
     "enzyme-adapter-react-16": "^1.5.0",
     "enzyme-to-json": "^3.3.4",
     "history": "^4.7.2",
-<<<<<<< HEAD
     "jest-localstorage-mock": "^2.3.0",
-=======
     "jest-mock-axios": "^2.1.11",
->>>>>>> c12af9f3b05fb93456fd1d54a9ab4a943e48067f
     "json-loader": "^0.5.7",
     "lodash": "^4.17.4",
     "moment": "^2.17.1",
