@@ -74,7 +74,6 @@ export default class ListingItem extends React.Component {
         }).catch(function (error) {
             console.log(error);
         })
-        console.log(obj);
 
     }
 
@@ -95,12 +94,12 @@ export default class ListingItem extends React.Component {
             frozen = <div><br></br><button id="dBtn" className="btn btn-danger" onClick={this.deleteListing}>Delete Listing</button></div>;
         } else if (this.props.frozen_by != 0){
             frozen = <div>
-                <p style={{ overflowX: "scroll", whiteSpace: "nowrap" }}>Frozen By: <b>{this.props.Item.company_name}</b></p>
+                <p style={{ overflowX: "scroll", whiteSpace: "nowrap" , marginTop: "10px"}}>Frozen By: <b>{this.props.Item.company_name}</b></p>
                <p>Company Rating: <b>{this.props.Item.company_rating.toFixed(2)} / 5</b></p>
             </div>;
         }
         if (window.localStorage.getItem('is_company') === 'true' && this.props.Item.frozen_by) {
-            button = <button className="btn btn-primary" onClick={this.createInvoice}>Transaction Complete</button>
+            button = <button className="btn btn-primary" style={{marginTop: "10px"}} onClick={this.createInvoice}>Transaction Complete</button>
         }
         if (!this.props.Item.frozen_by && window.localStorage.getItem('is_company') === 'true') {
             rightSide = <div className="col-3 text-right">
@@ -109,8 +108,8 @@ export default class ListingItem extends React.Component {
             </div>;
         }
         if (this.props.Item.frozen_by != 0) {
-            rightSide = <div><button className='btn btn-primary' onClick={() => this.unfreeze(this.props.Item.listing_id)}> Unfreeze Listing</button> <br></br> <br></br>
-                <button id="unfreezeBtn" className="btn btn-primary" onClick={() => history.push(`/chatroom/${this.props.Item.listing_id}`)}>Enter Chat</button>
+            rightSide = <div><button className='btn btn-primary' onClick={() => this.unfreeze(this.props.Item.listing_id)}> Unfreeze Listing</button> <br></br>
+                <button id="unfreezeBtn" className="btn btn-primary" style={{marginTop: "10px"}} onClick={() => history.push(`/chatroom/${this.props.Item.listing_id}`)}>Enter Chat</button>
                 </div>
         }
         let pickup_date_time;
@@ -118,7 +117,7 @@ export default class ListingItem extends React.Component {
             pickup_date_time = <p>{"Desired Pick Up Date: " + (new Date(this.props.Item.pickup_date_time)).toDateString()}</p>
         }
         return (
-            <div id="overallC" className="row" style={{ marginBottom: "5px" }}>
+            <div id="opverallC" className="row" style={{ marginBottom: "5px" }}>
                 <div className="col-md-12">
                     <div className="card">
                         <div className="card-body">
@@ -138,9 +137,12 @@ export default class ListingItem extends React.Component {
                                     <p>Weight: {this.props.Item.material_weight} lbs</p>
                                     <p>Type: {this.props.Item.material_type}</p>
                                 </div> */}
+                                <div className="col-3">
                                 {rightSide}
-                                {frozen}
+                                
                                 {button}
+                                {frozen}
+                                </div>
                             </div>
                         </div>
                     </div>
