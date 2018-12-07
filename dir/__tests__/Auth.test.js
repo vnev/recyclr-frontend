@@ -144,4 +144,22 @@ describe('Tests for google auth', () => {
     it('Google Auth renders properly', () => {
         expect(g.find('#authRow').exists()).toBe(true);
     });
+    it('Handler check', () => {
+        const spy = sinon.spy(GoogleA.prototype, 'addressHandle');
+        const wrapper = shallow(<GoogleA/>);
+        wrapper.setState({
+            signinTog: false,
+        });
+        wrapper.find('#adH').simulate('change', {target: {value: 't'}}); 
+        expect(spy.calledOnce).toBe(true);
+    });
+    it('Type check', () => {
+        const spy = sinon.spy(GoogleA.prototype, 'typeHandle');
+        const wrapper = shallow(<GoogleA/>);
+        wrapper.setState({
+            signinTog: false,
+        });
+        wrapper.find('#acH').simulate('change', {target: {value: 't'}}); 
+        expect(spy.calledOnce).toBe(true);
+    });
 });

@@ -27,6 +27,7 @@ describe('Testing for the payment page and pages associated with it', () => {
         wrapper.find('#incetBtn').simulate('click');
         expect(mockAxios.put).toHaveBeenCalledWith(`/user/null`, requestObj);
         mockAxios.mockResponse();
+        mockAxios.mockResponse();
     });
     it('Applys incentive points error', () => {
         let requestObj = {
@@ -40,7 +41,7 @@ describe('Testing for the payment page and pages associated with it', () => {
             incentivePoints: 5,
         });
         wrapper.find('#incetBtn').simulate('click');
-        mockAxios.mockError(requestObj);
+        mockAxios.mockError();
     });
     it('CardSec renders properly', () => {
         const w = shallow(<CardSec/>);
@@ -67,7 +68,7 @@ describe('Testing for the current prices page', () => {
         expect(wrap.find('#card').exists()).toBe(true);
     });
     it('Mock response', () => {
-        //expect(mockAxios.get).toHaveBeenCalledWith('http://www.quandl.com/api/v3/datasets/ODA/PCOTTIND_USD.json?rows=1&api_key=ys7nkx9UoefECmStXx8G');
+        expect(mockAxios.get).toHaveBeenCalledWith('http://www.quandl.com/api/v3/datasets/ODA/PCOPP_USD.json?rows=1&api_key=ys7nkx9UoefECmStXx8G');
         mockAxios.mockResponse();
     });
 });

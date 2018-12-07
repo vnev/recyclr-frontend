@@ -99,7 +99,7 @@ export default class PaymentPage extends Component {
                                 <button id="incetBtn" className="btn btn-info" onClick={this.applyIncentive}>Apply Incentive</button>
                             }
                             {this.state.incentiveUsed &&
-                                <button id="incetBtn" className="btn btn-info" onClick={this.applyIncentive} disabled>Apply Incentive</button>
+                                <button className="btn btn-info" onClick={this.applyIncentive} disabled>Apply Incentive</button>
                             }
                         </div>
                     </div>
