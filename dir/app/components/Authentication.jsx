@@ -86,10 +86,10 @@ export default class AuthPage extends React.Component {
                     toastr.options.closeButton = true;
                     toastr.success("Successfully signed in", "Success!");
                     if (result.data.is_company) {
-                        history.push('/progress');
+                        history.push('/listings');
                     }
                     else {
-                        history.push('/listings')
+                        history.push('/progress')
                     }
                 });
 
